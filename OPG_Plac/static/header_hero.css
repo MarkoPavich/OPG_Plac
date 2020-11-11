@@ -1,0 +1,98 @@
+.main-hero-container{
+    position: relative;
+    height: 500px;
+
+}
+
+.main-hero-container::before{  /* Used here in order to apply background image brightness filter without affecting the rest of hero content */
+    position: absolute;
+
+    content: "";  /* Pseudo elements need some content in order to appear */
+    filter: brightness(0.85);
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-image: url('resources/images/main_hero_img_small.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: 40%;
+
+    -webkit-background-size: cover;  /* lines to ensure background position on multiple browsers, supposedly.. */
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.hero-content-container{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    top: 50%;      /* Next few lines center content in responsive manner  */
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.hero-content-container h1{
+    color: white;
+    font-size: 36px;
+    line-height: 48px;
+    margin: 0;
+    margin-bottom: 21px;
+}
+
+.search-box{
+    height: 58px;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 9px;
+
+    display: flex;
+    vertical-align: center;
+}
+
+#search_bar_input{
+    margin-left: 16px;
+    width: 100%;
+}
+
+.search-bar-input{
+    border: none;
+    font-size: 16px;
+}
+
+.search-bar-input:focus{
+    outline: none;
+}
+
+.search-icon-button{
+    background: transparent;
+    border: none;
+    margin-right: 10px;
+    margin-left:10px;
+}
+
+.search-icon-button:focus{
+    outline: none;
+}
+
+.search-icon-button:hover{
+    cursor: pointer;
+}
+
+.hero-content{
+    max-width: 538px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.hero-content > span{
+    color: white;
+    font-size: 16px;
+    opacity: 0.85;
+    font-weight: 200;
+}

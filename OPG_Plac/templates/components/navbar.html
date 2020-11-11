@@ -1,0 +1,78 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
+  
+  <!-- Responsive Navbar -->
+
+   <nav id="navbar" class="navbar">
+    
+    <div class="logo-nav-container">
+
+        <div class="logo">
+
+            <img src="{% static 'resources/icons/logo_icn.svg' %}" alt="" width=47 height=41.58>
+            <span class="media-width" id="logo-span">OPG_Plac</span>
+
+        </div>
+
+        <div id="nav-search-bar" class="hide">
+            <input placeholder="pretraži OPG blizu tebe" id="search_bar_input" class="search-bar-input" type="text" name="search_bar_input">
+
+            <button class="search-icon-button">
+                    <img src="{% static 'resources/icons/magnifier_icon.svg' %}" alt="magnifier_icon" height=15 width=15>
+            </button>
+        </div>
+
+    </div>
+
+    <a id="toggle" href="#" class="toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </a>
+
+    <ul id="nav-menu" class="nav-menu">
+        <li class="media-width" id="nav-link-01">Istraži</li>
+        <li class="media-width">O nama</li>
+        <li>•••</li>
+
+        <li>
+            <button class="join-btn">Pridruži se</button>
+        </li>
+    </ul>
+
+</nav>
+
+    <!-- JavaScript -->
+
+<script>
+    window.addEventListener("scroll", () =>{
+        let navbar = document.querySelector("#navbar")
+        let search_bar = document.querySelector("#nav-search-bar")
+
+        if(window.scrollY >= 10){
+            navbar.className = "navbar navbar-top";
+            search_bar.className = "nav-search-bar";
+        }
+        
+        else{
+            navbar.className = "navbar";
+            search_bar.className = "hide"
+        }
+    })
+
+    window.addEventListener("DOMContentLoaded", adjust_navbar)
+    window.addEventListener("resize", adjust_navbar)
+
+    function adjust_navbar(){
+        if(window.innerWidth < 500){
+            document.querySelector("#nav-menu").className = "hide"
+            document.querySelector("#toggle").className = "toggle"
+        }
+
+        else{
+            document.querySelector("#nav-menu").className = "nav-menu"
+            document.querySelector("#toggle").className = "hide"
+        }
+    }
+</script>
