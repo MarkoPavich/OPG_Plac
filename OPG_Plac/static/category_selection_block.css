@@ -8,7 +8,7 @@
 	width: 90%;
 	max-width:1320px;
 
-	height: 2px;
+	height: 0px;
 
 	background: lightgrey;
 }
@@ -70,26 +70,68 @@
 	}
 }
 
-		/* Block with most popular products */
+		/* Top-picks block container */
 
 .top-picks-container{
 	margin-left: 19px;
 	width: 100%;
 	
+	border: solid 2px black;
 
-	border: solid 1px red;
-	height: 500px;
+	border-radius: 10px;
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
 }
 				
-@media(max-width: 1100px) and (min-width: 800px){
+@media(max-width: 1000px) and (min-width: 800px){
 	.top-picks-container{
 		max-width: 159px;
+		max-height: 400px;
 	}
+
+	.top-pick-unit-container{
+		flex-direction: column;
+		height: 180px;
+	}
+	.top-pick-unit-img{
+		height: 60%;
+	}
+
+	.top-picks-unit-text-container{
+		height: 40%;
+	}
+
+
 }
 
-@media(min-width: 1100px){
+@media(min-width: 1000px){
 	.top-picks-container{
-		max-width: 317px;
+		max-width: 337px;
+	}
+
+	.top-pick-unit-container{
+		height: 100px;
+
+		padding-left: 11px;
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
+
+	.top-pick-unit-img{
+		width: 40%;
+	}
+	.top-picks-unit-text-container{
+		width: 60%;
+	}
+
+	.top-picks-unit-text-container{
+		margin-left: 8px;
+	}
+
+	.top-picks-product-name{
+		border-bottom: solid 1px lightgrey;
 	}
 }
 
@@ -99,7 +141,85 @@
 		margin-top: 10px;
 
 		max-width: 100%;
+		max-height: 200px;
+
+		flex-direction: row;
 	}
+}
+
+.top-picks-container{
+	overflow-y: scroll;
+
+	scrollbar-width: none;
+}
+
+.top-picks-header-box{
+	height: 35px;
+	background-color: #C4C4C4;
+
+	border-bottom: solid 1px;
+
+	display: flex;
+	align-items: center;
+
+	padding-left: 15px;
+}
+
+.top-picks-header-box span{
+	letter-spacing: 0.7px;
+	font-weight: 600;
+}
+
+/* Top-picks unit container */
+
+.top-pick-unit-container{
+	display: flex;
+
+	padding: 5px;
+
+	border-bottom: solid 1px lightgrey;
+	border-top: solid 1px lightgrey;
+}
+
+.top-pick-unit-img img{
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.top-picks-unit-text-container{
+
+	display: flex;
+	flex-direction: column;
+
+	overflow: hidden;
+}
+
+.top-picks-product-name{
+	height: 50%;
+
+	margin-bottom: 7px;
+}
+
+.top-picks-product-name span{
+	display: block;
+	line-height: 1.65;
+
+	font-size: 12px;
+
+	color: #F25D07;
+}
+
+.top-picks-product-description{
+	height: 50%;
+}
+
+.top-picks-product-description span{
+	display: block;
+
+	font-size: 10px;
+	line-height: 1.6;
 }
 
 			/* Category option container */
@@ -149,3 +269,7 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
+
+
+
+
