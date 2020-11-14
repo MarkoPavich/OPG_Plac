@@ -106,7 +106,7 @@
     border-radius: 5px;
 }
 
-#search_bar_input{
+#search_bar_input, #nav_search_bar_input{
     margin-left: 16px;
     width: 100%;
 }

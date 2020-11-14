@@ -7,7 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    <!-- Load Poppins font -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">  
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">  <!-- Index style -->
+    <link rel="shortcut icon" type="image/svg" href="{% static 'resources/icons/logo_icn.svg' %}"/>  <!-- Favicon -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">    <!-- navbar component style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'header_hero.css' %}">   <!-- header_hero style-->
+    <link rel="stylesheet" href="{% static 'category_selection_block.css' %}">      <!-- category_selection_block style-->
+    <link rel="stylesheet" href="{% static 'guarantee_banner.css' %}">
 
     <title>OPG_Plac</title>
 </head>
@@ -17,6 +24,7 @@
     {% include 'components/navbar.html' %}
     {% include 'components/header_hero.html' %}
     {% include 'components/category_selection_block.html' %}
+    {% include 'components/guarantee_banner.html' %}
     
 </body>
 
