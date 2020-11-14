@@ -1,0 +1,125 @@
+.guarantee-banner-container{  /* Banner frame */
+	margin-top: 50px;
+	box-sizing: border-box;
+
+	background-color: #081226;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	overflow: hidden;
+}
+
+.guarantee-items-box{    /* group items container */     
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	width: 100%;
+	max-width: 1320px;
+}
+
+.guarantee-item-container{   /* individual item container */
+	display: flex;
+}
+
+.guarantee-item-icon-box{   /* Circular icon frame */
+	width: 100px;
+	height: 100px;
+	min-width: 100px;
+	min-height: 100px;
+
+	background-color: white;
+
+	border: solid 4px #07F2F1;
+	border-radius: 50%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.guarantee-item-text-box{
+	margin-left: 11px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.guarantee-item-text-header h3, .guarantee-item-text-span span{
+	color: white;
+	font-style: italic;
+}
+
+.guarantee-item-text-header h3{
+	margin: 0;
+	margin-bottom: 20px;
+}
+
+.guarantee-item-text-span{
+	opacity: 0.75;
+}
+
+@media(min-width: 700px) and (max-width: 1000px){
+	.guarantee-banner-container{
+		height: 320px;
+	}
+
+	.guarantee-item-container{
+		height: 100%;
+		flex-direction: column;
+		align-items: center;
+
+		padding-top: 80px;
+	}
+
+	.guarantee-items-box{
+		height: 100%;
+	}
+
+	.guarantee-item-text-header h3{
+		text-align: center;
+		width: 100%;
+	}
+
+	.guarantee-item-text-header{
+		margin-top: 10px;
+	}
+
+	.guarantee-item-text-span{
+		text-align: center;
+	}
+}
+
+@media(max-width: 700px){
+	.guarantee-banner-container{
+		height: 520px;
+	}
+
+	.guarantee-items-box{
+		flex-direction: column;
+		height: 100%;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
+	.guarantee-item-container{
+		width: 100%;
+		align-items: center;
+	}
+}	
+
+@media(min-width: 1000px){
+	.guarantee-item-container{
+		min-height: 160px;
+		max-height: 160px;
+	}
+	.guarantee-banner-container{
+		height: 266px;
+	}
+
+	.guarantee-item-text-box{
+		max-width: 233px;
+	}
+}
