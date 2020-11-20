@@ -23,21 +23,54 @@
 
     </div>
 
-    <a id="toggle" href="#" class="toggle">
+    <a onclick="openSidebar(event)" id="toggle" href="#" class="toggle">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
     </a>
 
     <ul id="nav-menu" class="nav-menu">
-        <li class="media-width" id="nav-link-01">Istraži</li>
-        <li class="media-width">O nama</li>
-        <li>•••</li>
+        <li class="media-width navitem" id="nav-link-01">Istraži</li>
+        <li class="media-width navitem">O nama</li>
+        <li id="three-dot-menu-button">
+            <div class="navitem">•••</div>
+            
+            <div class="nav-3dots-menu-container">
+                <ul class="nav-3dots-menu-options">
+                    <li><a href="#">Naslovna</a> </li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Proizvodi</a></li>
+                    <li><a href="#">O Nama</a></li>
+                    <li>
+                        <a href="#">Prijava</a>
+                        <span>/</span>
+                        <a href="#">Registracija</a>
+                    </li>
+                </ul>
+
+                <ul class="nav-3dots-social-options">
+                    <li><i class="fab fa-facebook-f fa-lg"></i></li>
+                    <li><i class="fab fa-twitter fa-lg"></i></li>
+                    <li><i class="fab fa-linkedin-in fa-lg"></i></li>
+                    <li><i class="fab fa-instagram fa-lg"></i></li>
+                </ul>
+
+            </div>
+        </li>
 
         <li>
             <button class="join-btn">Pridruži se</button>
         </li>
     </ul>
+
+    <aside style="display: none" class="nav-hamburger-sidebar">
+        <hr>
+        <ul class="sidebar-menu">
+            <li>Option one</li>
+            <li>Option Two</li>
+            <li>Option Three</li>
+        </ul>
+    </aside>
 
 </nav>
 
@@ -72,5 +105,9 @@
             document.querySelector("#nav-menu").className = "nav-menu"
             document.querySelector("#toggle").className = "hide"
         }
+    }
+
+    function openSidebar(event){
+        event.preventDefault()
     }
 </script>
