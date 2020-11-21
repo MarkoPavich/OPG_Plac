@@ -6,3 +6,6 @@ from django.shortcuts import HttpResponse, render
 
 def index(request):
     return render(request, "index.html", {})
+
+def render_about(request):
+    return render(request, "about.html", {})

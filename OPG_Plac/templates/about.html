@@ -1,0 +1,14 @@
+{% extends 'components/site_frame.html' %}
+{% load static %}
+
+{% block body %}
+
+    {% include 'components/navbar.html' %}
+
+    <script src="{% static 'navbar.js' %}" ></script>
+
+    <script>
+        load_navbar_listeners('noscroll')
+    </script>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/b95dcaf24e.js" crossorigin="anonymous"></script>  <!-- Font Awesome CDN -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    <!-- Load Poppins font -->
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">  <!-- Index style -->
+    <link rel="shortcut icon" type="image/svg" href="{% static 'resources/icons/logo_icn.svg' %}"/>  <!-- Favicon -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">    <!-- navbar component style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'header_hero.css' %}">   <!-- header_hero style-->
+    <link rel="stylesheet" href="{% static 'category_selection_block.css' %}">      <!-- category_selection_block style-->
+    <link rel="stylesheet" href="{% static 'guarantee_banner.css' %}">          <!-- guarantees_banner style-->
+    <link rel="stylesheet" href="{% static 'blog_highlights.css' %}">           <!-- blog_cards style-->
+    <link rel="stylesheet" href="{% static 'footer.css' %}">                    <!-- footer style -->
+    {% block head %}
+    {% endblock %}
+
+    <title>OPG_Plac</title>
+</head>
+
+<body>
+
+    {% block body %}
+    {% endblock %}
+    
+</body>
+
+</html>
