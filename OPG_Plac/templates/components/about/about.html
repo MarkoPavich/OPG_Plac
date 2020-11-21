@@ -6,12 +6,16 @@
 
     <link rel="stylesheet" href="{% static 'subpages/about/header_hero.css' %}">
 
+    <link rel="stylesheet" href="{% static 'subpages/about/text_content.css' %}">
+
 {% endblock %}
 
 {% block body %}
 
     {% include '../navbar.html' %}
     {% include './header_hero.html' %}
+    {% include '../divider_hr_title.html' with title="O Nama" %}
+    {% include './text_content.html' %}
 
     {% include '../footer.html' %}
 
