@@ -1,6 +1,10 @@
 {% extends 'components/site_frame.html' %}
 {% load static %}
 
+{% block head %}
+    <script src="{% static 'navbar.js' %}" ></script>
+{% endblock %}
+
 {% block body %}
 
     {% include 'components/navbar.html' %}
@@ -9,8 +13,6 @@
     {% include 'components/guarantee_banner.html' %}
     {% include 'components/blog_highlights.html' %}
     {% include 'components/footer.html' %}
-
-    <script src="{% static 'navbar.js' %}"></script>
 
     <script>
         load_navbar_listeners()
