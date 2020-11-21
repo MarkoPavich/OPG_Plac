@@ -208,7 +208,15 @@
 
 	transform: translate(-100%, -44%);
 
-	background: #081226;
+	background-color: #081226;
+}
+
+.sidebar-hidden{
+    visibility: hidden;
+}
+
+.sidebar-open{
+    visibility: visible;
 }
 
 .sidebar-menu li{
@@ -221,10 +229,6 @@
 	padding-bottom: 10px;
 	margin-top: 10px;
 	transition: opacity 0.15s ease-in;
-}
-
-.sidebar-hidden{
-	transition: opacity 3s ease-in
 }
 
 .sidebar-menu li:hover{
