@@ -1,0 +1,54 @@
+.about-header-hero-container{
+	position: relative;
+	box-sizing: border-box;
+
+	height: 300px;
+	width: 100%;
+}
+
+.about-header-hero-container::before{
+	content: '';
+	position: absolute;
+
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	background-image: url('/static/resources/images/blog/pexels-photo-4099237.jpeg');
+	background-size: cover;
+	background-position-y: 60%;
+
+	filter: brightness(0.7);
+
+	-webkit-background-size: cover;  /* lines to ensure background position on multiple browsers, supposedly.. */
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.about-header-hero-text-box{
+	position: absolute;
+
+	left: 50%;
+	top: 50%;
+
+	transform: translate(-50%, -50%);
+}
+
+.about-header-hero-text-box h4{
+	color: white;
+	font-size: 24px;
+
+	margin-bottom: 0px;
+}
+
+.about-header-hero-text-box span{
+	color: white;
+	font-size: 16px;
+
+	opacity: 0.8;
+
+	margin-left: 10px;
+
+	font-style: italic;
+}

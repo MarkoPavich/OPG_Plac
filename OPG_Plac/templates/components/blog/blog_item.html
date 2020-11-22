@@ -1,0 +1,19 @@
+{% load static %}
+{% static "" as baseurl %}
+
+<div class="blog-card-container">
+
+    <div class="blog-item-image-box">
+        <img class="blog-item-img-content" src="{{baseurl}}{{img_url}}" alt="blog_img">
+    </div>
+
+    <div class="blog-item-text-content-container">
+        <div class="blog-item-text-headline">
+            <h2>{{title}}</h2>
+        </div>
+
+        <div class="blog-item-content-snip">
+            <span>{{content}}</span><a class="blog-item-lnk" href="#"> ... Pročitaj više</a>
+        </div>
+    </div>
+</div>

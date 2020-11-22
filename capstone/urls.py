@@ -20,5 +20,6 @@ from OPG_Plac.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
-    path('about', render_about, name="about")
+    path('about', render_about, name="about"),
+    path('blog/', render_blog, name="blog")
 ]
