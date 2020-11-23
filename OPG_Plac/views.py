@@ -14,3 +14,9 @@ def render_about(request):
 
 def render_blog(request):
     return render(request, "components/blog/blog.html", {})
+
+
+def view_blog_item(request):
+    print(request.GET)
+
+    return render(request, 'components/blog/view_article/view_article.html', {})

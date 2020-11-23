@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('about', render_about, name="about"),
-    path('blog/', render_blog, name="blog")
+    path('blog/', render_blog, name="blog"),
+    path('blog/viewitem', view_blog_item, name="blogitem")
 ]

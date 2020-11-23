@@ -28,7 +28,7 @@
 
     <div class="blog-items-top-conteiner">
 
-        {% include './blog_item.html' with title="Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja" content="Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt labore et dolor aliqua" img_url="resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg" %}
+        {% include './blog_item.html' with title="Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja" content="Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do " img_url="resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg" %}
 
         {% include './blog_item.html' with title="Recept: Kraljevska Torta s Čokoladnom Glazurom" content="Recept ove torte poznat je od davnina kada se ista posluživala samo u krugovima visokog statusa, a sada.. Lorem ipsum - dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor aliqua" img_url="resources/images/blog/pexels-photo-2680603.jpeg" %}
         
@@ -72,7 +72,11 @@
     {% include '../footer.html' %}
 
     <script>
-        load_navbar_listeners('noscroll')
+        load_navbar_listeners('noscroll');
+
+        function viewItem(item_url){
+            window.open(item_url, "window");
+        }
     </script>
 
 {% endblock %}
