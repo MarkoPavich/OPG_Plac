@@ -5,6 +5,7 @@
     <script src="{% static 'navbar.js' %}"></script>
     <link rel="stylesheet" href="{% static 'subpages/blog/header_hero.css' %}">
     <link rel="stylesheet" href="{% static 'subpages/blog/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'subpages/blog/blog_item.css' %}">
 
 {% endblock %}
 
@@ -45,6 +46,27 @@
 
         {% include './blog_item.html' with title="Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja" content="Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt labore et dolor aliqua" img_url="resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg" %}
         
+    </div>
+
+    <div class="blog-pagination-bar">
+
+        <div class="blog-pagination-previous">
+            <span>Previous</span>
+        </div>
+
+        <div class="pagination-numeration">
+            <ul>
+                <li>1</li>
+                <li class="pagination-page-current">2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+
+        <div class="blog-pagination-next">
+            <span>Next</span>
+        </div>
+
     </div>
     
     {% include '../footer.html' %}

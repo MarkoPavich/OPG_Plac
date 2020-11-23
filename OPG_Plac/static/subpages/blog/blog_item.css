@@ -1,0 +1,34 @@
+/* Blog cards */
+
+.blog-card-container{ /* item units constraint */
+	max-width: 492px;
+	margin-bottom: 120px;
+}
+
+.blog-item-image-box{
+	max-width: 492px;
+	max-height: 277px;
+
+	overflow: hidden;
+
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+}
+
+.blog-item-img-content{
+	width: 100%;
+}
+
+.blog-item-text-headline h2{
+	color: #F23207;
+	font-size: 23px;
+
+	text-align: center;
+}
+
+.blog-item-lnk{
+	text-decoration: none;
+	color: #F23207;
+}
