@@ -1,7 +1,96 @@
 {% extends 'components/site_frame.html' %}
+{% load static %}
+
+{% block head %}
+
+    <script src="{% static 'navbar.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'subpages/blog/view_article.css' %}">
+
+{% endblock %}
 
 {% block body %}
 
-    <h1>Working</h1>
+    {% include 'components/navbar.html' %}
+
+    <header class="blog_article_container">
+
+        <hr>
+
+        <nav class="secondary-nav-location-bar">
+            <a href="/">Naslovna</a>
+            <span>/</span>
+            <a href="/blog">Blog</a>
+            <span>/</span>
+            <span>Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja</span>
+        </nav>
+
+        <div class="blog-article-header">
+            <img src="{% static 'resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg' %}" alt="">
+
+            <h1>Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja</h1>
+
+            <span class="blog-article-date-stamp">21.listopada.2020</span>
+        </div>
+
+    </header>
+
+    <article class="blog-article-container">
+
+        <hr class="blog-article-start-divider">
+
+        <section class="blog-article-body">
+            <p>Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt labore et dolor aliqua"Sed ut perspiciatis unde omnis iste natus err"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro</p>
+                
+            <p>quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+
+            <div class="article-image-container">
+                <div class="blog-article-img-box">
+                    <img src="https://images.pexels.com/photos/4109913/pexels-photo-4109913.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+                    <img src="https://images.pexels.com/photos/4109909/pexels-photo-4109909.jpeg?cs=srgb&dl=pexels-polina-tankilevitch-4109909.jpg&fm=jpg" alt="">
+                </div>
+
+                <span>Lorem ipsum dolor sit amet consectetur.</span>
+            </div>
+
+        </section>
+
+        <section class="blog-article-body">
+            <hr>
+            <h1 class="paragraph-title">5 situacija kada ne smijete koristiti maslinovo ulje</h1>
+
+            <p>incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+
+            <p>
+                Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Leo vel orci porta non. Vitae auctor eu augue ut. Libero justo laoreet sit amet. Elementum nibh tellus molestie nunc. Habitant morbi tristique senectus et netus et. Magnis dis parturient montes nascetur. Elementum sagittis vitae et leo. Eget aliquet nibh praesent tristique. Egestas purus viverra accumsan in. Eu consequat ac felis donec. Faucibus purus in massa tempor nec feugiat. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum. Posuere lorem ipsum dolor sit amet consectetur adipiscing elit duis. Eu tincidunt tortor aliquam nulla facilisi cras. Libero nunc consequat interdum varius. Morbi leo urna molestie at elementum eu facilisis sed odio.
+            </p>
+
+            <div class="article-image-container">
+                <div class="blog-article-img-box">
+                    <img src="https://images.unsplash.com/photo-1527756898251-203e9ce0d9c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2708&q=80" alt="">
+                </div>
+
+                <span>Eget aliquet nibh praesent.</span>
+            </div>
+
+            <p>Cibo neglegentur an nec. Qui mollis mnesarchum dissentiunt ea, et falli insolens cum, sumo laudem voluptua id eam. No natum recusabo eleifend sit, per ut vocent impedit, quo no mucius omnium. Pro vide eripuit ne. Sit hinc gubergren an, eam ut vivendum erroribus. Ad eum veritus docendi accusam, quo id omnium corpora accusata.</p>
+
+            <p>Ad sea laudem vidisse sententiae, fierent pertinacia eloquentiam ne eam, vis iisque accommodare an. Eu tota sapientem euripidis qui. Pri an munere nonumes albucius. Cetero tamquam verterem at nam. 
+            </p>
+
+            <div class="blog-article-keyword">
+                <span># Maslinovo ulje</span>
+            </div>
+        </section>
+
+    </article>
+
+
+    {% include 'components/footer.html' %}
+
+    <script>
+        load_navbar_listeners('noscroll');
+
+    </script>
 
 {% endblock %}
