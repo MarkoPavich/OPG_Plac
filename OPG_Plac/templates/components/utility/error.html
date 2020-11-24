@@ -1,0 +1,18 @@
+{% extends 'components/site_frame.html' %}
+{% load static %}
+
+{% block head %}
+
+    <link rel="stylesheet" href="{% static 'error.css' %}">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="error-msg-container">
+    <h1>{{status}}</h1>
+    <h1>{{error}}</h1>
+    <span>{{message}}</span>
+</div>
+
+{% endblock %}

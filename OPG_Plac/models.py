@@ -10,6 +10,7 @@ class User(AbstractUser):
 
 class BlogCategory(models.Model):
     category = models.CharField(max_length=20, unique=True)
+    position_index = models.IntegerField(null=True, max_length=2)
 
     def __str__(self):
         return self.category

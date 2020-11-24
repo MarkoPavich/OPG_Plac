@@ -15,12 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
 from OPG_Plac.views import *
+from OPG_Plac import APIs
 
 urlpatterns = [
+
+    # Render pipeline
+
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('about', render_about, name="about"),
     path('blog/', render_blog, name="blog"),
-    path('blog/viewitem', view_blog_item, name="blogitem")
+    path('blog/viewitem', view_blog_item, name="blogitem"),
+
+    # API pipeline
+
+    path('blog/get_article_previews', APIs.get_blog_previews)
 ]

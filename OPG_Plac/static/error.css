@@ -1,0 +1,39 @@
+body{
+	height: 100vh;
+
+	background-color: lightgrey;
+}
+
+.error-msg-container{
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+
+	color: white;
+}
+
+.error-msg-container::before{
+	content: "";
+	position: absolute;
+	z-index: -1;
+
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	background-image: url("resources/images/error.jpg");
+
+	background-position: center;
+	background-size: contain;
+
+	background-repeat: no-repeat;
+
+	filter: brightness(0.8);
+}
+

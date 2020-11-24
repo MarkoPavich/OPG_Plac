@@ -3,6 +3,7 @@
 
 {% block head %}
     <script src="{% static 'navbar.js' %}"></script>
+    <script src="{% static 'subpages/blog/blog.js' %}" ></script>
     <link rel="stylesheet" href="{% static 'subpages/blog/header_hero.css' %}">
     <link rel="stylesheet" href="{% static 'subpages/blog/blog.css' %}">
     <link rel="stylesheet" href="{% static 'subpages/blog/blog_item.css' %}">
@@ -18,15 +19,18 @@
 
     <div class="blog-category-menu-container">
         <ul class="blog-category-filter-menu">
-            <li id="blog-category-00" class="active">Svi Članci</li>
-            <li id="blog-category-01">Novosti</li>
-            <li id="blog-category-02">Recepti</li>
-            <li id="blog-category-03">Savjeti</li>
-            <li id="blog-category-04">Ostalo</li>
+
+            <li onclick="filter_categories('all')" id="blog-category-filter-all" class="filter-category-option active">Svi Članci</li>
+
+            {% for category in categories %}
+
+                <li class="filter-category-option" id="blog-category-filter-{{category}}" onclick="filter_categories('{{category}}')">{{category}}</li>
+
+            {% endfor %}
         </ul>
     </div>
 
-    <div class="blog-items-top-conteiner">
+    <div id="blog-previews-container" class="blog-items-top-conteiner">
 
         {% include './blog_item.html' with title="Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja" content="Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do " img_url="resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg" %}
 
@@ -74,9 +78,12 @@
     <script>
         load_navbar_listeners('noscroll');
 
-        function viewItem(item_url){
-            window.open("/blog/viewitem", "window");
+        function viewItem(seo_url){
+            window.open(`/blog/viewitem?article=${seo_url}`, "window");
         }
+
+        window.addEventListener("DOMContentLoaded", () => get_blog_previews("all"))
+        
     </script>
 
 {% endblock %}

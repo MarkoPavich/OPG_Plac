@@ -5,12 +5,14 @@
 
 	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
-	<script type="text/javascript">
+	<script type="text/javascript">  // TinyMCE
 		window.addEventListener("DOMContentLoaded", () =>{
 		   	tinymce.init({
-        	selector: '#id_Article_content'
+			selector: '#id_Article_content',
+			plugins: ['image', 'hr'],
       		});
 		})
+
 	</script>
 
 {% endblock %}

@@ -50,13 +50,16 @@
 /* Article */
 
 .content-body-start-divider{
-	margin-bottom: 70px;
+	margin-bottom: 50px;
 }
 
 .blog-article-container{
+	box-sizing: border-box;
 	max-width: 1000px;
 
 	margin: 0 auto;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .blog-article-keyword{
