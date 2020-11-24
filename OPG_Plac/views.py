@@ -20,6 +20,22 @@ def render_blog(request):
 
 def view_blog_item(request):
 
-    article = models.BlogArticle.objects.all()[0]
+    article = models.BlogArticle.objects.all()[1]
 
-    return render(request, 'components/blog/view_article/view_article.html', {"article": article})
+    author = article.author.username
+    category = article.category.category
+    title = article.title
+    content = article.Article_content
+    keywords = article.seo_keywords
+    timestamp = article.timestamp
+    img = article.title_image
+
+    return render(request, 'components/blog/view_article/view_article.html', {
+        "author": author,
+        "category": category,
+        "title": title,
+        "content": content,
+        "keywords": keywords,
+        "timestamp": timestamp,
+        "img": img
+    })

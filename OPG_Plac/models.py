@@ -19,7 +19,7 @@ class BlogArticle(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="articles")
     category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, related_name="articles")
     title = models.CharField(max_length=150)
-    title_img = models.URLField(name="Title image")
+    title_img = models.URLField(name="title_image")
     content = models.TextField(name="Article_content")
     seo_url = models.SlugField(max_length=120)
     timestamp = models.DateTimeField(auto_now_add=True)
