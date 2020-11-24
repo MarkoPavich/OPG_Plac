@@ -1,0 +1,24 @@
+{% extends 'admin/base.html' %} 
+{% load static %}
+
+{% block extrahead %}
+
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+	<script type="text/javascript">
+		window.addEventListener("DOMContentLoaded", () =>{
+		   	tinymce.init({
+        	selector: '#id_Article_content'
+      		});
+		})
+	</script>
+
+{% endblock %}
+
+
+{% block branding %}
+
+	<h1>OPG_Plac Administration</h1>
+
+{% endblock %}
+
