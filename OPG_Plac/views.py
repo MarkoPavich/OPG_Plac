@@ -16,6 +16,7 @@ def render_about(request):
 
 # render blog overview page -- returns blog categories from db and sends them as a list to template
 def render_blog(request):
+    category_filter = request.GET.get("filter", "all")
 
     blog_categories = models.BlogCategory.objects.all().order_by('position_index')
 
@@ -23,7 +24,10 @@ def render_blog(request):
     for category in blog_categories:
         categories.append(category.category)
 
-    return render(request, "components/blog/blog.html", {"categories": categories})
+    return render(request, "components/blog/blog.html", {
+        "categories": categories,
+        "category_filter": category_filter
+    })
 
 
 def view_blog_item(request):

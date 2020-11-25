@@ -58,10 +58,10 @@
         load_navbar_listeners('noscroll');
 
         function viewItem(seo_url){
-            window.open(`/blog/viewitem?article=${seo_url}`, "window");
+            window.location.href = `/blog/viewitem?article=${seo_url}`;
         }
 
-        window.addEventListener("DOMContentLoaded", () => get_blog_previews("all", 1));
+        window.addEventListener("DOMContentLoaded", () => filter_categories("{{category_filter}}"));
         
     </script>
 

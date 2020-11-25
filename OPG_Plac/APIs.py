@@ -51,13 +51,3 @@ def get_blog_previews(request):
         safe=False,
         json_dumps_params={'ensure_ascii': False}
         )
-
-
-def make_unique():
-    qset = models.BlogArticle.objects.all()
-
-    i = 0
-    for article in qset:
-        article.seo_url = f"{article.seo_url }-{i}"
-        article.save()
-        i = i+1

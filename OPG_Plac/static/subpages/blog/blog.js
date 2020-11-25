@@ -41,8 +41,7 @@ function get_blog_previews(category_filter, page_num){  // API call -- server re
     })
 }
 
-function filter_categories(category_filter){
-    current_filter = category_filter
+function filter_categories(category_filter){  // Applies active classname for selected category, and removes it from other options. 
 
     const all_filters = document.getElementsByClassName("filter-category-option")
     
@@ -53,14 +52,14 @@ function filter_categories(category_filter){
         }
 
         else{
-            all_filters[i].className="filter-category-option"
+            all_filters[i].className="filter-category-option";
         }
     }
 
-    get_blog_previews(category_filter, 1);
+    get_blog_previews(category_filter, 1);  // Get previews with selected category
 }
 
-function pagination(total_pages, category_filter, current_page){
+function pagination(total_pages, category_filter, current_page){  // Handles 'next' 'previous' and pagination page_numbers at the bottom of the page
     const pagination_nums_ul = document.querySelector("#pagination-numeration");
 
     pagination_nums_ul.innerHTML = "";
@@ -74,21 +73,21 @@ function pagination(total_pages, category_filter, current_page){
     }
 
     const option_previous = document.querySelector("#blog-pagination-previous");
-    const option_next = document.querySelector("#blog-pagination-next")
+    const option_next = document.querySelector("#blog-pagination-next");
 
-    if(current_page == 1) option_previous.className = "hide"
+    if(current_page == 1) option_previous.className = "hide";
 
     else{
         option_previous.className = "";
-        option_previous.setAttribute("onclick", `get_blog_previews("${category_filter}", "${parseInt(current_page) - 1}")`)
+        option_previous.setAttribute("onclick", `get_blog_previews("${category_filter}", "${parseInt(current_page) - 1}")`);
     }
 
     if(current_page < total_pages){
         option_next.className = ""
-        option_next.setAttribute("onclick", `get_blog_previews("${category_filter}", "${parseInt(current_page) + 1}")`)
+        option_next.setAttribute("onclick", `get_blog_previews("${category_filter}", "${parseInt(current_page) + 1}")`);
     }
 
-    else option_next.className = "hide"
+    else option_next.className = "hide";
 
     if(window.scrollY > 700){  // Return view to top of previews if scrolled down
 

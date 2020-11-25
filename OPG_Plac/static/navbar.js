@@ -11,6 +11,8 @@ function adjust_navbar_width(){  // Switches between mobile (hamburger_menu) nav
         document.querySelector("#nav-menu").className = "nav-menu";
         document.querySelector("#toggle").className = "hide";
     }
+
+    if(document.querySelector("#nav_hamburger_sidebar").className === "nav-hamburger-sidebar sidebar-open") openSidebar();
 }
 
 function adjust_navbar_scroll(){  // Switches between navbar with transparent background without search, and vice versa. based on scroll position. 
@@ -30,7 +32,8 @@ function adjust_navbar_scroll(){  // Switches between navbar with transparent ba
 }
 
 function openSidebar(event){  // Opens, and closes mobile hamburger menu. Disables navbar scroll listener and forces opaque layout while active.
-    event.preventDefault();
+    
+    if(event != undefined) event.preventDefault();
 
     const sidebar = document.querySelector("#nav_hamburger_sidebar");
     const navbar = document.querySelector("#navbar");
@@ -46,6 +49,7 @@ function openSidebar(event){  // Opens, and closes mobile hamburger menu. Disabl
         if(navbar_scroll === "scroll"){
             window.removeEventListener("scroll", adjust_navbar_scroll);
         }
+
     }
 
     else{
