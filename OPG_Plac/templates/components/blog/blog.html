@@ -41,11 +41,8 @@
         </div>
 
         <div class="pagination-numeration">
-            <ul>
-                <li class="pagination-page-current" value=1>1</li>
-                {% for num in page_num_list %}
-                <li value={{num}} onclick=view_res_page(this.value) >{{num}}</li>
-                {% endfor %}
+            <ul id="pagination-numeration">
+                
             </ul>
         </div>
 

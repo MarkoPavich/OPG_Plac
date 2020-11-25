@@ -1,7 +1,7 @@
 
-function get_blog_previews(cateroy_filter, page_num){  // API call -- server returns paginated blog previews for rendering in blog overview page
+function get_blog_previews(category_filter, page_num){  // API call -- server returns paginated blog previews for rendering in blog overview page
 
-    const request = new Request(`get_article_previews?filter=${cateroy_filter}&page=${page_num}`)
+    const request = new Request(`get_article_previews?filter=${category_filter}&page=${page_num}`)
 
     fetch(request)
     .then(response => response.json())
@@ -36,11 +36,10 @@ function get_blog_previews(cateroy_filter, page_num){  // API call -- server ret
 
         })
 
+        pagination(res.total_pages, category_filter, page_num);  // Draw paginagion nums on page
+
     })
 }
-
-let current_filter = "all"
-let current_page = 1
 
 function filter_categories(category_filter){
     current_filter = category_filter
@@ -61,6 +60,25 @@ function filter_categories(category_filter){
     get_blog_previews(category_filter, 1);
 }
 
-function view_res_page(page){
-    alert(page);
+function pagination(total_pages, category_filter, current_page){
+    const pagination_nums_ul = document.querySelector("#pagination-numeration");
+
+    pagination_nums_ul.innerHTML = "";
+
+    for(let i=1; i<total_pages + 1; i++){
+        let elem_className = (i == current_page) ? "class='pagination-page-current'" : "";
+
+        const pagination_num = `<li ${elem_className} onclick="get_blog_previews('${category_filter}', ${i})">${i}</li>`;
+
+        pagination_nums_ul.innerHTML = pagination_nums_ul.innerHTML + pagination_num;
+    }
+
+    if(window.scrollY > 700){  // Return view to top of previews if scrolled down
+
+        const subNav = document.querySelector("body > div.blog-intro-header-divider > div");
+        subNav.scrollIntoView();
+
+    }
+
+ 
 }

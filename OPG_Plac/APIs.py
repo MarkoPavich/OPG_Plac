@@ -42,12 +42,11 @@ def get_blog_previews(request):
 
     previews = serialize_previews(articles)
 
-    page_num_list = []
-    for num in range(2, total_pages + 1):
-        page_num_list.append(num)
-
     return JsonResponse(
-        {"previews": previews, "total_pages": page_num_list},
+        {
+            "previews": previews,
+            "total_pages": total_pages,
+        },
         status=200,
         safe=False,
         json_dumps_params={'ensure_ascii': False}
