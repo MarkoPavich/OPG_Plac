@@ -1,5 +1,7 @@
+import math
 from django.http import JsonResponse
 from django.utils.html import strip_tags
+from django.core.paginator import Paginator, EmptyPage
 
 from OPG_Plac import models
 
@@ -19,16 +21,33 @@ def get_blog_previews(request):
 
         return serialized_previews
 
+    page_num = int(request.GET["page"])
+
     if request.GET["filter"] == "all":   # Filter articles by category
-        articles = models.BlogArticle.objects.all()
+        qset = models.BlogArticle.objects.all()
+
+        total_pages = math.ceil(len(qset)/8)
+
     else:
         category_filter = models.BlogCategory.objects.get(category=request.GET["filter"])
-        articles = models.BlogArticle.objects.filter(category=category_filter)
+        qset = models.BlogArticle.objects.filter(category=category_filter)
+
+        total_pages = math.ceil(len(qset) / 8)
+
+    try:
+        p = Paginator(qset, 8,)
+        articles = p.page(page_num)
+    except EmptyPage:
+        articles = []
 
     previews = serialize_previews(articles)
 
+    page_num_list = []
+    for num in range(2, total_pages + 1):
+        page_num_list.append(num)
+
     return JsonResponse(
-        {"previews": previews},
+        {"previews": previews, "total_pages": page_num_list},
         status=200,
         safe=False,
         json_dumps_params={'ensure_ascii': False}

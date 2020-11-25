@@ -20,35 +20,17 @@
     <div class="blog-category-menu-container">
         <ul class="blog-category-filter-menu">
 
-            <li onclick="filter_categories('all')" id="blog-category-filter-all" class="filter-category-option active">Svi Članci</li>
+            <li onclick="filter_categories('all', 1)" id="blog-category-filter-all" class="filter-category-option active">Svi Članci</li>
 
             {% for category in categories %}
 
-                <li class="filter-category-option" id="blog-category-filter-{{category}}" onclick="filter_categories('{{category}}')">{{category}}</li>
+                <li class="filter-category-option" id="blog-category-filter-{{category}}" onclick="filter_categories('{{category}}', 1)">{{category}}</li>
 
             {% endfor %}
         </ul>
     </div>
 
     <div id="blog-previews-container" class="blog-items-top-conteiner">
-
-        {% include './blog_item.html' with title="Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja" content="Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do " img_url="resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg" %}
-
-        {% include './blog_item.html' with title="Recept: Kraljevska Torta s Čokoladnom Glazurom" content="Recept ove torte poznat je od davnina kada se ista posluživala samo u krugovima visokog statusa, a sada.. Lorem ipsum - dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor aliqua" img_url="resources/images/blog/pexels-photo-2680603.jpeg" %}
-        
-
-        {% include './blog_item.html' with title="Recept: Kraljevska Torta s Čokoladnom Glazurom" content="Recept ove torte poznat je od davnina kada se ista posluživala samo u krugovima visokog statusa, a sada.. Lorem ipsum - dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor aliqua" img_url="resources/images/blog/pexels-photo-2680603.jpeg" %}
-
-        {% include './blog_item.html' with title="Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja" content="Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt labore et dolor aliqua" img_url="resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg" %}
-
-        {% include './blog_item.html' with title="Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja" content="Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt labore et dolor aliqua" img_url="resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg" %}
-
-        {% include './blog_item.html' with title="Recept: Kraljevska Torta s Čokoladnom Glazurom" content="Recept ove torte poznat je od davnina kada se ista posluživala samo u krugovima visokog statusa, a sada.. Lorem ipsum - dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor aliqua" img_url="resources/images/blog/pexels-photo-2680603.jpeg" %}
-        
-
-        {% include './blog_item.html' with title="Recept: Kraljevska Torta s Čokoladnom Glazurom" content="Recept ove torte poznat je od davnina kada se ista posluživala samo u krugovima visokog statusa, a sada.. Lorem ipsum - dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor aliqua" img_url="resources/images/blog/pexels-photo-2680603.jpeg" %}
-
-        {% include './blog_item.html' with title="Esencijalni Vodić za Maslinovo Ulje: Blagodati i Primjenja" content="Odavno znamo da maslinovo ulje pruža pregršt korisnih svojstava, no ono što nam je manje poznato jest da Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt labore et dolor aliqua" img_url="resources/images/blog/olive-oil-salad-dressing-cooking-olive.jpg" %}
         
     </div>
 
@@ -60,10 +42,10 @@
 
         <div class="pagination-numeration">
             <ul>
-                <li>1</li>
-                <li class="pagination-page-current">2</li>
-                <li>3</li>
-                <li>4</li>
+                <li class="pagination-page-current" value=1>1</li>
+                {% for num in page_num_list %}
+                <li value={{num}} onclick=view_res_page(this.value) >{{num}}</li>
+                {% endfor %}
             </ul>
         </div>
 
@@ -82,7 +64,7 @@
             window.open(`/blog/viewitem?article=${seo_url}`, "window");
         }
 
-        window.addEventListener("DOMContentLoaded", () => get_blog_previews("all"))
+        window.addEventListener("DOMContentLoaded", () => get_blog_previews("all", 1));
         
     </script>
 

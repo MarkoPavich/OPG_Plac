@@ -1,7 +1,7 @@
 
-function get_blog_previews(cateroy_filter){  // API call -- server returns paginated blog previews for rendering in blog overview page
+function get_blog_previews(cateroy_filter, page_num){  // API call -- server returns paginated blog previews for rendering in blog overview page
 
-    const request = new Request(`get_article_previews?filter=${cateroy_filter}`)
+    const request = new Request(`get_article_previews?filter=${cateroy_filter}&page=${page_num}`)
 
     fetch(request)
     .then(response => response.json())
@@ -39,7 +39,11 @@ function get_blog_previews(cateroy_filter){  // API call -- server returns pagin
     })
 }
 
+let current_filter = "all"
+let current_page = 1
+
 function filter_categories(category_filter){
+    current_filter = category_filter
 
     const all_filters = document.getElementsByClassName("filter-category-option")
     
@@ -54,5 +58,9 @@ function filter_categories(category_filter){
         }
     }
 
-    get_blog_previews(category_filter);
+    get_blog_previews(category_filter, 1);
+}
+
+function view_res_page(page){
+    alert(page);
 }
