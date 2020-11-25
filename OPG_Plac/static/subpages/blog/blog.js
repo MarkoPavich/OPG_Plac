@@ -73,6 +73,23 @@ function pagination(total_pages, category_filter, current_page){
         pagination_nums_ul.innerHTML = pagination_nums_ul.innerHTML + pagination_num;
     }
 
+    const option_previous = document.querySelector("#blog-pagination-previous");
+    const option_next = document.querySelector("#blog-pagination-next")
+
+    if(current_page == 1) option_previous.className = "hide"
+
+    else{
+        option_previous.className = "";
+        option_previous.setAttribute("onclick", `get_blog_previews("${category_filter}", "${parseInt(current_page) - 1}")`)
+    }
+
+    if(current_page < total_pages){
+        option_next.className = ""
+        option_next.setAttribute("onclick", `get_blog_previews("${category_filter}", "${parseInt(current_page) + 1}")`)
+    }
+
+    else option_next.className = "hide"
+
     if(window.scrollY > 700){  // Return view to top of previews if scrolled down
 
         const subNav = document.querySelector("body > div.blog-intro-header-divider > div");

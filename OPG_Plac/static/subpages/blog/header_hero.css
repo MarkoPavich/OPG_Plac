@@ -4,6 +4,16 @@
 
 	height: 300px;
 	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.about-header-hero-text-box{
+	z-index: 5;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 
 .about-header-hero-container::before{
@@ -24,15 +34,6 @@
 	-webkit-background-size: cover;  /* lines to ensure background position on multiple browsers, supposedly.. */
     -moz-background-size: cover;
     -o-background-size: cover;
-}
-
-.about-header-hero-text-box{
-	position: absolute;
-
-	left: 50%;
-	top: 50%;
-
-	transform: translate(-50%, -50%);
 }
 
 .about-header-hero-text-box h4{
