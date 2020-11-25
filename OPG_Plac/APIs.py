@@ -3,8 +3,6 @@ from django.utils.html import strip_tags
 
 from OPG_Plac import models
 
-# Helper functions
-
 
 def get_blog_previews(request):
 
@@ -35,3 +33,4 @@ def get_blog_previews(request):
         safe=False,
         json_dumps_params={'ensure_ascii': False}
         )
+

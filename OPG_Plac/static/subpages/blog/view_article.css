@@ -62,6 +62,10 @@
 	padding-right: 15px;
 }
 
+.blog-article-container img{
+	max-width: 100%;
+}
+
 .blog-article-keyword{
 	width: 100%;
 	margin-top: 20px;
