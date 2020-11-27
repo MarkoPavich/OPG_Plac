@@ -25,9 +25,10 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('', index, name="index"),
-    path('about', render_about, name="about"),
-    path('blog/', render_blog, name="blog"),
-    path('blog/viewitem', view_blog_item, name="blogitem"),
+    path('about', view_about, name="about"),
+    path('blog/', view_blog_previews, name="blog"),
+    path('blog/viewitem', view_blog_article, name="blogitem"),
+    path('proizvodi', view_proizvodi),
 
     # API pipeline
 

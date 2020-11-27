@@ -1,0 +1,47 @@
+{% extends 'components/site_frame.html' %}
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'navbar.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'subpages/products/products.css' %}">
+    <link rel="stylesheet" href="{% static 'subpages/products/products_category_filter_menu.css' %}">
+
+{% endblock %}
+
+    {% block body %}
+    {% include '../navbar.html' %}
+    {% include '../divider_hr_title.html' with title="Proizvodi" %}
+    
+    <nav class="secondary-nav-location-bar">
+        <a href="/">Naslovna</a>
+        <span>/</span>
+        <a href="/products">Proizvodi</a>
+        <span>/</span>
+        <a href="#">Zimnica</a>
+        <span>/</span>
+        <span>Kiseli krastavci</span>
+    </nav>
+
+    <div class="products-top-container">
+
+        <div class="products-category-options-container">
+            <div class="category-menu-header">
+                <span>Kategorije</span>
+            </div>
+
+        </div>
+
+        <div class="products-units-container">
+
+        </div>
+
+    </div>
+
+    {% include '../footer.html' %}
+
+    <script>
+        load_navbar_listeners('noscroll');
+    </script>
+
+{% endblock %}

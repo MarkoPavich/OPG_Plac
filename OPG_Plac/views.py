@@ -10,12 +10,12 @@ def index(request):
     return render(request, "index.html", {})
 
 
-def render_about(request):
+def view_about(request):
     return render(request, "components/about/about.html", {})
 
 
 # render blog overview page -- returns blog categories from db and sends them as a list to template
-def render_blog(request):
+def view_blog_previews(request):
     category_filter = request.GET.get("filter", "all")
 
     blog_categories = models.BlogCategory.objects.all().order_by('position_index')
@@ -30,7 +30,7 @@ def render_blog(request):
     })
 
 
-def view_blog_item(request):
+def view_blog_article(request):
 
     seo_url = request.GET["article"]
 
@@ -62,3 +62,7 @@ def view_blog_item(request):
         "img": img,
         "seo_url": seo_url
     })
+
+
+def view_proizvodi(request):
+    return render(request, "components/products/products.html", {})
