@@ -1,18 +1,12 @@
 .products-category-options-container{
 	width: 100%;
-
-	border: solid 2px green;
-}
-
-.products-units-container{
-	width: 50px;
-
-	border: solid 2px yellow;
-}
-
-.products-category-options-container{
-	width: 100%;
 	max-width: 272px;
+}
+
+@media(max-width: 900px){
+	.products-category-options-container{
+		display: none;
+	}
 }
 
 .category-menu-header{
@@ -79,7 +73,7 @@
 	opacity: 1;
 }
 
-.product-filter-active svg{
+.submenu-open svg{
 	transform: rotate(90deg);
 }
 

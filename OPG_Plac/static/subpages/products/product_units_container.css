@@ -1,0 +1,134 @@
+.products-units-top-container{
+	width: 100%;
+	max-width: 762px;
+
+	margin-left: 60px;
+	margin-right: 25px;
+}
+
+@media(max-width: 900px){
+	.products-units-top-container{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+}
+
+.product-units-container-header{
+	height: 36px;
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding-left: 15px;
+	padding-right: 15px;
+
+	border-bottom: solid 2px black;
+}
+
+@media(max-width: 520px){
+	.product-units-container-header > span{
+		display: none;
+	}
+}
+
+.product-units-container-header span, .product-units-container-header label{
+	color: #8B8B8B;
+	font-size: 16px;
+}
+
+.product-units-container-header select{
+	height: 25px;
+	font-size: 16px;
+}
+
+.product-units-container-header select:focus{
+	outline: none;
+}
+
+.products-results-container{
+	width: 100%;
+
+	display: grid;
+	grid-row-gap: 50px;
+}
+
+@media(min-width: 1100px){
+	.products-results-container{
+		grid-template-columns: 1fr 1fr 1fr;
+		justify-items: center;
+	}
+}
+
+@media(max-width: 1100px) and (min-width: 900px), (max-width: 730px){
+	.products-results-container{
+		grid-template-columns: 1fr 1fr;
+		justify-items: center;
+		grid-column-gap: 10px;
+	}
+}
+
+@media(max-width: 900px) and (min-width: 730px){
+	.products-results-container{
+		grid-template-columns: 1fr 1fr 1fr;
+		justify-items: center;
+	}
+}
+
+.product-overview-unit{
+
+	max-width: 222px;
+	max-height: 290px;
+
+	display: flex;
+	flex-direction: column;
+
+	justify-content: space-between;
+}
+
+.product-overview-item-img-box{
+	max-height: 160px;
+
+	overflow: hidden;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media(max-width: 480px){
+	.product-overview-item-img-box{
+		min-height: 160px;
+	}
+}
+
+.product-overview-item-img-box img{
+	display: block;
+	width: 100%;
+}
+
+.product-overview-item-txt-box h3{
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+	font-size: 13px;
+	text-align: center;
+
+	color: #F23207;
+}
+
+.product-overview-item-txt-box span{
+	font-size: 12px;
+	font-style: italic;
+
+	opacity: 0.75;
+}
+
+.product-overview-item-txt-box{
+	text-align: center;
+}
+.product-overview-item-price-cta-box{
+	margin-top: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+}

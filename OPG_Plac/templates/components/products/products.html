@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="{% static 'subpages/products/products.css' %}">
     <link rel="stylesheet" href="{% static 'subpages/products/products_category_filter_menu.css' %}">
+    <link rel="stylesheet" href="{% static 'subpages/products/product_units_container.css' %}">
 
 {% endblock %}
 
@@ -47,18 +48,18 @@
             
 
             
-                <li id="filter-option-id-2" class="category-filter-collapsable">
-                    <div class="product-category-option-container product-filter-active">
+                <li class="category-filter-collapsable">
+                    <div id="category-option-2" class="product-category-option-container product-filter-active">
                         <a href="#">Zimnica</a>
 
-                        <svg onclick="open_close_category_submenu(2)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        <svg onclick="open_close_category_submenu(2, this)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         width="552.611px" height="552.611px" viewBox="0 0 552.611 552.611" style="enable-background:new 0 0 552.611 552.611;"
                         xml:space="preserve">
                         <path d="M486.413,221.412L122.347,12.916c-52.938-30.318-95.852-5.44-95.852,55.563v415.652c0,61.004,42.914,85.882,95.852,55.563
                         l364.066-208.49C539.351,300.887,539.351,251.731,486.413,221.412z"/></svg>
                     </div>
 
-                    <div class="product-subfilter-container show_submenu">
+                    <div id="submenu-option-2" class="product-subfilter-container">
                         <ul class="product-cagetory-subfilter-menu">
                             <li>
                                 <a href="#">Ajvar</a>
@@ -138,7 +139,135 @@
             </ul>
         </div>
 
-        <div class="products-units-container">
+        <div class="products-units-top-container">
+
+            <div class="product-units-container-header">
+                <span>Broj rezultata: 24</span>
+                <div>
+                    <label for="sort_filter">Sortiraj po: </label>
+                    <select name="sort_filter" id="product-results-sort_filter">
+                        <option value="price">Cijeni - manje prema više</option>
+                        <option value="price">Cijeni - više prema manje</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products-results-container">
+
+                <div class="product-overview-unit">
+
+                    <div class="product-overview-item-img-box">
+                        <img src="{% static 'resources/images/products/slatka_mlevena_paprika_-_lek_za_rane_i_preventiva_od_srcanog_udara-1.jpg' %}" alt="product_img">
+                    </div>
+                    <div class="product-overview-item-txt-box">
+                        <h3>Slatka mljevena paprika</h3>
+                        <span>Slatka mljevena paprika od domaćih paprika, 250g</span>
+                    </div>
+
+                    <div class="product-overview-item-price-cta-box">
+                        <span>34.79 <strong>Kn</strong></span>
+                    </div>
+                    
+                </div>
+
+                
+                <div class="product-overview-unit">
+
+                    <div class="product-overview-item-img-box">
+                        <img src="{% static 'resources/images/products/krastavac-000073_1.jpg' %}" alt="product_img">
+                    </div>
+                    <div class="product-overview-item-txt-box">
+                        <h3>Svježi krastavac</h3>
+                        <span>Svježi krastavac od prirodnog domaćeg krastavca, 1kg</span>
+                    </div>
+
+                    <div class="product-overview-item-price-cta-box">
+                        <span>15.49 <strong>Kn</strong></span>
+                    </div>
+                    
+                </div>
+
+                <div class="product-overview-unit">
+
+                    <div class="product-overview-item-img-box">
+                        <img src="{% static 'resources/images/products/CM7PvFdWEAACiF9.jpg' %}" alt="product_img">
+                    </div>
+                    <div class="product-overview-item-txt-box">
+                        <h3>Ogulinski kiseli kupus</h3>
+                        <span>Ogulinski kiseli kupus, svježe uvezen iz mađarske, 1kg</span>
+                    </div>
+
+                    <div class="product-overview-item-price-cta-box">
+                        <span>34.12 <strong>Kn</strong></span>
+                    </div>
+                    
+                </div>
+
+                <div class="product-overview-unit">
+
+                    <div class="product-overview-item-img-box">
+                        <img src="{% static 'resources/images/products/krastavac-000073_1.jpg' %}" alt="product_img">
+                    </div>
+                    <div class="product-overview-item-txt-box">
+                        <h3>Svježi krastavac</h3>
+                        <span>Svježi krastavac od prirodnog domaćeg krastavca, 1kg</span>
+                    </div>
+
+                    <div class="product-overview-item-price-cta-box">
+                        <span>15.49 <strong>Kn</strong></span>
+                    </div>
+                    
+                </div>
+
+                
+                <div class="product-overview-unit">
+
+                    <div class="product-overview-item-img-box">
+                        <img src="{% static 'resources/images/products/CM7PvFdWEAACiF9.jpg' %}" alt="product_img">
+                    </div>
+                    <div class="product-overview-item-txt-box">
+                        <h3>Ogulinski kiseli kupus</h3>
+                        <span>Ogulinski kiseli kupus, 1kg</span>
+                    </div>
+
+                    <div class="product-overview-item-price-cta-box">
+                        <span>34.12 <strong>Kn</strong></span>
+                    </div>
+                    
+                </div>
+
+                
+                <div class="product-overview-unit">
+
+                    <div class="product-overview-item-img-box">
+                        <img src="{% static 'resources/images/products/slatka_mlevena_paprika_-_lek_za_rane_i_preventiva_od_srcanog_udara-1.jpg' %}" alt="product_img">
+                    </div>
+                    <div class="product-overview-item-txt-box">
+                        <h3>Slatka mljevena paprika</h3>
+                        <span>Slatka mljevena paprika od domaćih paprika, 250g</span>
+                    </div>
+
+                    <div class="product-overview-item-price-cta-box">
+                        <span>34.79 <strong>Kn</strong></span>
+                    </div>
+                    
+                </div>
+
+                <div class="product-overview-unit">
+                    
+                </div>
+
+                
+                <div class="product-overview-unit">
+                    
+                </div>
+
+                
+                <div class="product-overview-unit">
+                    
+                </div>
+
+            </div>
 
         </div>
 

@@ -19,6 +19,7 @@
 }
 
 .products-top-container{
+	box-sizing: border-box;
 	width: 100%;
 	max-width: 1350px;
 
@@ -27,8 +28,6 @@
 	padding-left: 15px;
 	padding-right: 15px;
 
-	border: solid 2px black;
-
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 }
