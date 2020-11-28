@@ -109,6 +109,25 @@
 
             </div>
 
+            <div class="pagination-bar">
+
+                <div class="pagination-previous">
+                    <span id="pagination-previous" >Previous</span>
+                </div>
+        
+                <div class="pagination-numeration">
+                    <ul id="pagination-numeration">
+                        
+                    </ul>
+                </div>
+        
+                <div class="pagination-next">
+                    <span id="pagination-next" >Next</span>
+                </div>
+        
+            </div>
+
+
         </div>
 
     </div>
@@ -117,6 +136,8 @@
 
     <script>
         load_navbar_listeners('noscroll');
+
+        do_pagination({{total_pages}}, {{current_page}}, "{{active_category}}", "{{active_subcategory}}")
 
     </script>
 

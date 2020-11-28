@@ -1,5 +1,7 @@
 from django.shortcuts import HttpResponse, render
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator, EmptyPage
+import math
 
 from OPG_Plac import models
 
@@ -84,6 +86,9 @@ def view_proizvodi(request):
     category_filter = request.GET.get("category", None)
     subcategory_filter = request.GET.get("subcategory", None)
 
+    page_num = request.GET.get("page", 1)
+    print(page_num)
+
     category_qset = models.ProductCategory.objects.all().order_by("position_index")  # Fetch category and subcategory qsets
     subcategory_qset = models.ProductSubCategory.objects.all().order_by("position_index")
 
@@ -111,12 +116,26 @@ def view_proizvodi(request):
 
         else:
             products = models.Product.objects.filter(category=category_obj)
-    products = serialize_products(products)  # Serialize products
+
+    # Calculate total pages
+    total_pages = math.ceil(len(products) / 15)
+
+    # Paginate
+    try:
+        p = Paginator(products, 15)
+        products_page = p.page(page_num)
+    except EmptyPage:
+        products_page = []
+
+    # Serialize
+    products_page = serialize_products(products_page)
 
     return render(request, "components/products/products.html", {
         "categories": categories_dict,
-        "products": products,
+        "products": products_page,
         "active_category": category_filter,
-        "active_subcategory": subcategory_filter
+        "active_subcategory": subcategory_filter,
+        "total_pages": total_pages,
+        "current_page": page_num
     })
 

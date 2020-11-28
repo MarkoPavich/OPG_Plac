@@ -31,3 +31,54 @@
 	display: flex;
 	justify-content: center;
 }
+
+/* Pagination bar */
+
+.pagination-bar{
+	width: 100%;
+	max-width: 1200px;
+
+	margin: auto;
+	margin-top: 80px;
+	margin-bottom: 80px;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+.pagination-numeration ul{
+	margin: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.pagination-numeration ul li{
+	list-style: none;
+
+	height: 23px;
+	width: 23px;
+
+	display: flex;
+	justify-content: center;
+
+	border: solid 1px transparent;
+
+	cursor: pointer;
+}
+
+#pagination-numeration a{
+	text-decoration: none;
+	color: black;
+}
+
+.pagination-page-current{
+	border: solid 1px black !important;
+
+	font-weight: bold;
+}
+
+.pagination-previous span, .pagination-next span{
+	color: #f23207;
+
+	cursor: pointer;
+}
