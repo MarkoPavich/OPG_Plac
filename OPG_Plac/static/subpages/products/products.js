@@ -22,7 +22,30 @@ function open_close_category_submenu(id){  // Flips submenu_options classnames -
     document.activeElement.getBoundingClientRect()
 }
 
+
 function mark_active(){
     const classNames = {
+    }
+}
+
+
+function populate_submenu(subcategories_array, elem_id, parent_id){
+    const elem = document.querySelector(`#${elem_id}`)
+
+    if(subcategories_array.length === 0){
+        const parent = document.querySelector(`#${parent_id}`)
+        parent.getElementsByTagName("svg")[0].style = "visibility: hidden";
+    }
+
+    else{
+        subcategories_array.forEach(subcategory => {
+            elem.firstElementChild.innerHTML = elem.firstElementChild.innerHTML + `
+            
+            <li>
+            <a href="${subcategory}">${subcategory}</a>
+            </li>
+
+            `
+        })
     }
 }
