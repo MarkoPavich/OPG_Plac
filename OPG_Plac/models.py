@@ -10,7 +10,7 @@ class User(AbstractUser):
 
 class BlogCategory(models.Model):
     category = models.CharField(max_length=20, unique=True)
-    position_index = models.IntegerField(null=True)
+    position_index = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.category
@@ -30,3 +30,18 @@ class BlogArticle(models.Model):
         return self.title
 
 
+class ProductCategory(models.Model):
+    category = models.CharField(max_length=30)
+    position_index = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.category
+
+
+class ProductSubCategory(models.Model):
+    parent_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="subcategories")
+    subcategory = models.CharField(max_length=30)
+    position_index = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.subcategory} - [{self.parent_category}]"

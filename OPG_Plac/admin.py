@@ -8,6 +8,8 @@ admin.site.register([
 
     models.User,
     models.BlogArticle,
-    models.BlogCategory
+    models.BlogCategory,
+    models.ProductCategory,
+    models.ProductSubCategory
 
 ])

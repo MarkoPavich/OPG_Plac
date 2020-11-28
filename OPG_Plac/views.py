@@ -65,4 +65,20 @@ def view_blog_article(request):
 
 
 def view_proizvodi(request):
-    return render(request, "components/products/products.html", {})
+
+    category_qset = models.ProductCategory.objects.all().order_by("position_index")  # Fetch category and subcategory qsets
+    subcategory_qset = models.ProductSubCategory.objects.all().order_by("position_index")
+
+    categories_dict = {}  # Build a dict with categories and their subcategories
+    for category in category_qset:
+        subcategories = []
+
+        for subcategory in subcategory_qset:
+            if subcategory.parent_category == category:
+                subcategories.append(subcategory.subcategory)
+        categories_dict[category.category] = subcategories
+
+    return render(request, "components/products/products.html", {
+        "categories": categories_dict
+    })
+
