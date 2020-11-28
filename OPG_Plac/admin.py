@@ -10,6 +10,7 @@ admin.site.register([
     models.BlogArticle,
     models.BlogCategory,
     models.ProductCategory,
-    models.ProductSubCategory
+    models.ProductSubCategory,
+    models.Product
 
 ])

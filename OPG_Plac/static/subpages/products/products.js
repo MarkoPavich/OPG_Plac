@@ -1,9 +1,11 @@
 
 function open_close_category_submenu(id){  // Flips submenu_options classnames - shows or hides the menu
 
+    console.log("function running")
+
     const classNames = {
         "submenu_active": "product-subfilter-container show_submenu",
-        "submenu_inactive": "product-subfilter-container",
+        "submenu_inactive": "product-subfilter-container ",
         "mark_menu_open": " submenu-open"
     };
 
@@ -23,13 +25,7 @@ function open_close_category_submenu(id){  // Flips submenu_options classnames -
 }
 
 
-function mark_active(){
-    const classNames = {
-    }
-}
-
-
-function populate_submenu(subcategories_array, elem_id, parent_id){
+function populate_submenu(subcategories_array, elem_id, parent_id, parent_category, active_subcategory){
     const elem = document.querySelector(`#${elem_id}`)
 
     if(subcategories_array.length === 0){
@@ -39,10 +35,12 @@ function populate_submenu(subcategories_array, elem_id, parent_id){
 
     else{
         subcategories_array.forEach(subcategory => {
+            let className = subcategory === active_subcategory ? "class=active-subfilter" : "";
+
             elem.firstElementChild.innerHTML = elem.firstElementChild.innerHTML + `
             
             <li>
-            <a href="${subcategory}">${subcategory}</a>
+            <a ${className} href="/proizvodi/filter?category=${parent_category}&subcategory=${subcategory}">${subcategory}</a>
             </li>
 
             `

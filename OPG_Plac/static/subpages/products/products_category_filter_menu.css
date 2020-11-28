@@ -73,6 +73,12 @@
 	opacity: 1;
 }
 
+.active-subfilter{
+	font-weight: bold;
+	color: #0f0f0f !important;
+	opacity: 0.8 !important;
+}
+
 .submenu-open svg{
 	transform: rotate(90deg);
 }

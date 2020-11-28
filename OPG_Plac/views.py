@@ -6,6 +6,21 @@ from OPG_Plac import models
 # Create your views here.
 
 
+def serialize_products(products_qset):
+
+    serialized_products = []
+    for product in products_qset:
+        serialized_products.append({
+            "name": product.name,
+            "seo_url": product.seo_url,
+            "image": product.product_image,
+            "price": product.price,
+            "short_desc": product.short_description
+        })
+
+    return serialized_products
+
+
 def index(request):
     return render(request, "index.html", {})
 
@@ -66,11 +81,14 @@ def view_blog_article(request):
 
 def view_proizvodi(request):
 
+    category_filter = request.GET.get("category", None)
+    subcategory_filter = request.GET.get("subcategory", None)
+
     category_qset = models.ProductCategory.objects.all().order_by("position_index")  # Fetch category and subcategory qsets
     subcategory_qset = models.ProductSubCategory.objects.all().order_by("position_index")
 
     categories_dict = {}  # Build a dict with categories and their subcategories
-    for category in category_qset:
+    for category in category_qset:  # Pass to view for categories_menu construction
         subcategories = []
 
         for subcategory in subcategory_qset:
@@ -78,7 +96,27 @@ def view_proizvodi(request):
                 subcategories.append(subcategory.subcategory)
         categories_dict[category.category] = subcategories
 
+    # Get products_qset
+    if category_filter is None:
+        products = models.Product.objects.all()
+        subcategory_filter = None  # ensure no active subfilter if main_category filter is None
+
+    else:
+        category_obj = models.ProductCategory.objects.get(category=category_filter)
+
+        if subcategory_filter is not None:
+            subcategory_obj = models.ProductSubCategory.objects.get(subcategory=subcategory_filter)
+
+            products = models.Product.objects.filter(category=category_obj, subcategory=subcategory_obj)
+
+        else:
+            products = models.Product.objects.filter(category=category_obj)
+    products = serialize_products(products)  # Serialize products
+
     return render(request, "components/products/products.html", {
-        "categories": categories_dict
+        "categories": categories_dict,
+        "products": products,
+        "active_category": category_filter,
+        "active_subcategory": subcategory_filter
     })
 

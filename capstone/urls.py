@@ -28,7 +28,8 @@ urlpatterns = [
     path('about', view_about, name="about"),
     path('blog/', view_blog_previews, name="blog"),
     path('blog/viewitem', view_blog_article, name="blogitem"),
-    path('proizvodi', view_proizvodi),
+    path('proizvodi/', view_proizvodi, name="proizvodi"),
+    path('proizvodi/filter', view_proizvodi, name="proizvodi"),
 
     # API pipeline
 
