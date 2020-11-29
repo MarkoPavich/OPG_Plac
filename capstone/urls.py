@@ -19,6 +19,9 @@ from django.urls import path
 from OPG_Plac.views import *
 from OPG_Plac import APIs
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
 
     # Render pipeline
@@ -34,4 +37,5 @@ urlpatterns = [
     # API pipeline
 
     path('blog/get_article_previews', APIs.get_blog_previews)
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

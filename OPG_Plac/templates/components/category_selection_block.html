@@ -6,77 +6,21 @@
 
     <div class="category-options-container">        <!-- categories container-->
 
-        <div class="main-category-option-container">
+        {% for category in categories %}
 
-            <div class="category-option-img-box">
-                <img src="{% static 'resources/images/12af91e6-3957-11e8-8aa5-05fdb8d0ae52-1527681042.jpg' %}" alt="product_img">
+            <div onclick="window.location.href='/proizvodi/filter?category={{category.name}}'" class="main-category-option-container">
+
+                <div class="category-option-img-box">
+                    <img src="{{category.image.url}}" alt="product_img">
+                </div>
+
+                <div class="category-option-footer">
+                    <span>{{category.name}}</span>
+                </div>
+
             </div>
 
-            <div class="category-option-footer">
-                <span>Sir i Mlijeko</span>
-            </div>
-
-        </div>
-
-        <div class="main-category-option-container">
-
-            <div class="category-option-img-box">
-                <img src="{% static 'resources/images/20180828150746_494789.jpg' %}" alt="product_img">
-            </div>
-
-            <div class="category-option-footer">
-                <span>Zimnica</span>
-            </div>
-
-        </div>
-
-        <div class="main-category-option-container">
-
-            <div class="category-option-img-box">
-                <img src="{% static 'resources/images/pexels-photo-3740196.jpeg' %}" alt="product_img">
-            </div>
-
-            <div class="category-option-footer">
-                <span>Torte i Kolači</span>
-            </div>
-
-        </div>
-
-        <div class="main-category-option-container">
-
-            <div class="category-option-img-box">
-                <img src="{% static 'resources/images/photo-1513553016575-0ccd93e15315.jfif' %}" alt="product_img">
-            </div>
-
-            <div class="category-option-footer">
-                <span>Brašno, Jaja, Tjestenina</span>
-            </div>
-
-        </div>
-
-        <div class="main-category-option-container">
-
-            <div class="category-option-img-box">
-                <img src="{% static 'resources/images/pexels-photo-434311.jpeg' %}" alt="product_img">
-            </div>
-
-            <div class="category-option-footer">
-                <span>Alkoholna pića</span>
-            </div>
-
-        </div>
-
-        <div class="main-category-option-container">
-
-            <div class="category-option-img-box">
-                <img src="{% static 'resources/images/pexels-photo-2255924.jpeg' %}" alt="product_img">
-            </div>
-
-            <div class="category-option-footer">
-                <span>Ostalo</span>
-            </div>
-
-        </div>
+        {% endfor %}
 
     </div>
 

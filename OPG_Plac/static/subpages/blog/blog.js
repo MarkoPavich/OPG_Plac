@@ -26,7 +26,7 @@ function get_blog_previews(category_filter, page_num){  // API call -- server re
                     </div>
             
                     <div class="blog-item-content-snip">
-                        <span>${preview.preview}</span><a class="blog-item-lnk" href="#">... Pročitaj više</a>
+                        <span>${preview.preview}</span><a class="blog-item-lnk" href="/blog/viewitem?article=${preview.seo_url}">... Pročitaj više</a>
                     </div>
                 </div>
             </div>

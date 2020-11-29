@@ -5,7 +5,7 @@ import math
 
 from OPG_Plac import models
 
-# Create your views here.
+# helpers
 
 
 def serialize_products(products_qset):
@@ -22,9 +22,26 @@ def serialize_products(products_qset):
 
     return serialized_products
 
+# views
+
 
 def index(request):
-    return render(request, "index.html", {})
+
+    categories_qset = models.ProductCategory.objects.filter(on_homepage=True).order_by("position_index")
+
+    # Get homepage_square categories
+    categories_list = []
+    for category in categories_qset:
+        categories_list.append({
+            "name": category.category,
+            "image": category.category_img
+        })
+
+    print(categories_list)
+
+    return render(request, "index.html", {
+        "categories": categories_list
+    })
 
 
 def view_about(request):
@@ -87,7 +104,6 @@ def view_proizvodi(request):
     subcategory_filter = request.GET.get("subcategory", None)
 
     page_num = request.GET.get("page", 1)
-    print(page_num)
 
     category_qset = models.ProductCategory.objects.all().order_by("position_index")  # Fetch category and subcategory qsets
     subcategory_qset = models.ProductSubCategory.objects.all().order_by("position_index")

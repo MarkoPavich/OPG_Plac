@@ -33,6 +33,8 @@ class BlogArticle(models.Model):
 class ProductCategory(models.Model):
     category = models.CharField(max_length=30)
     position_index = models.IntegerField(null=True, blank=True)
+    category_img = models.ImageField(null=True, blank=True, upload_to="images")
+    on_homepage = models.BooleanField(default=False)
 
     def __str__(self):
         return self.category
