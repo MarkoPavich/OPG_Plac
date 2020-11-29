@@ -77,8 +77,7 @@
 	font-weight: bold;
 }
 
-.pagination-previous span, .pagination-next span{
+.pagination-previous span a, .pagination-next span a{
 	color: #f23207;
-
-	cursor: pointer;
+	text-decoration: none;
 }
