@@ -37,8 +37,6 @@ def index(request):
             "image": category.category_img
         })
 
-    print(categories_list)
-
     return render(request, "index.html", {
         "categories": categories_list
     })
@@ -99,6 +97,7 @@ def view_blog_article(request):
 
 
 def view_proizvodi(request):
+    results_per_page = 12  # Controls the number of products per pagination page
 
     category_filter = request.GET.get("category", None)
     subcategory_filter = request.GET.get("subcategory", None)
@@ -134,11 +133,11 @@ def view_proizvodi(request):
             products = models.Product.objects.filter(category=category_obj)
 
     # Calculate total pages
-    total_pages = math.ceil(len(products) / 15)
+    total_pages = math.ceil(len(products) / results_per_page)
 
     # Paginate
     try:
-        p = Paginator(products, 15)
+        p = Paginator(products, results_per_page)
         products_page = p.page(page_num)
     except EmptyPage:
         products_page = []

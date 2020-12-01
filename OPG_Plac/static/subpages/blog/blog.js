@@ -60,11 +60,17 @@ function filter_categories(category_filter){  // Applies active classname for se
 }
 
 function pagination(total_pages, category_filter, current_page){  // Handles 'next' 'previous' and pagination page_numbers at the bottom of the page
+    const max_page_nums = 3  // Controls the max number of page_num buttons per range
+    const page_range = ((Math.ceil(current_page / max_page_nums) - 1) * max_page_nums) + 1;  // Calculates the first element of current page_range
+
     const pagination_nums_ul = document.querySelector("#pagination-numeration");
+
+    const option_previous = document.querySelector("#blog-pagination-previous");
+    const option_next = document.querySelector("#blog-pagination-next");
 
     pagination_nums_ul.innerHTML = "";
 
-    for(let i=1; i<total_pages + 1; i++){
+    for(let i=page_range; (i<page_range + max_page_nums && i<total_pages + 1); i++){
         let elem_className = (i == current_page) ? "class='pagination-page-current'" : "";
 
         const pagination_num = `<li ${elem_className} onclick="get_blog_previews('${category_filter}', ${i})">${i}</li>`;
@@ -72,8 +78,8 @@ function pagination(total_pages, category_filter, current_page){  // Handles 'ne
         pagination_nums_ul.innerHTML = pagination_nums_ul.innerHTML + pagination_num;
     }
 
-    const option_previous = document.querySelector("#blog-pagination-previous");
-    const option_next = document.querySelector("#blog-pagination-next");
+    if(page_range != 1) pagination_nums_ul.innerHTML = `<li onclick="get_blog_previews('${category_filter}', ${page_range - 1})"> ... </li>` + pagination_nums_ul.innerHTML;
+    if(page_range + max_page_nums < total_pages) pagination_nums_ul.innerHTML = pagination_nums_ul.innerHTML + `<li onclick="get_blog_previews('${category_filter}', ${page_range + max_page_nums})"> ... </li>`
 
     if(current_page == 1) option_previous.className = "hide";
 
@@ -95,6 +101,6 @@ function pagination(total_pages, category_filter, current_page){  // Handles 'ne
         subNav.scrollIntoView();
 
     }
-
- 
 }
+
+// ToDo redo this via classic href get request
