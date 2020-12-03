@@ -154,3 +154,7 @@ def view_proizvodi(request):
         "current_page": page_num
     })
 
+
+def view_proizvod_artikl(request):
+    return render(request, "components/products/product_view/view_artikl.html")
+
