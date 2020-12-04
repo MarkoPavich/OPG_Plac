@@ -15,6 +15,11 @@
 	justify-content: center;
 }
 
+.blog-category-filter-menu li a{
+	text-decoration: none;
+	color: rgba(0,0,0,0.9);
+}
+
 .blog-category-filter-menu li{
 	list-style: none;
 }

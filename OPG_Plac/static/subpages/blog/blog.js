@@ -56,7 +56,6 @@ function filter_categories(category_filter){  // Applies active classname for se
         }
     }
 
-    get_blog_previews(category_filter, 1);  // Get previews with selected category
 }
 
 function pagination(total_pages, category_filter, current_page){  // Handles 'next' 'previous' and pagination page_numbers at the bottom of the page

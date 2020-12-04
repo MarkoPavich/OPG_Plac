@@ -20,17 +20,38 @@
     <div class="blog-category-menu-container">
         <ul class="blog-category-filter-menu">
 
-            <li onclick="filter_categories('all', 1)" id="blog-category-filter-all" class="filter-category-option active">Svi Članci</li>
+            <li id="blog-category-filter-all" class="filter-category-option active"><a href="/blog">Svi Članci</a></li>
 
             {% for category in categories %}
 
-                <li class="filter-category-option" id="blog-category-filter-{{category}}" onclick="filter_categories('{{category}}', 1)">{{category}}</li>
+                <li class="filter-category-option" id="blog-category-filter-{{category}}"><a href="/blog/filter?category={{category}}">{{category}}</a></li>
 
             {% endfor %}
         </ul>
     </div>
 
     <div id="blog-previews-container" class="blog-items-top-conteiner">
+
+        {% for preview in article_previews %}
+
+            <div class="blog-card-container">
+
+                <div onclick="viewItem('{{preview.seo_url}}')" class="blog-item-image-box">
+                    <img class="blog-item-img-content" src="{{preview.img}}" alt="blog_img">
+                </div>
+            
+                <div class="blog-item-text-content-container">
+                    <div class="blog-item-text-headline">
+                        <h2 onclick="viewItem('{{preview.seo_url}}')">{{preview.title}}</h2>
+                    </div>
+            
+                    <div class="blog-item-content-snip">
+                        <span>{{preview.preview}}</span><a class="blog-item-lnk" href="/blog/viewitem?article=${preview.seo_url}">... Pročitaj više</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
         
     </div>
 

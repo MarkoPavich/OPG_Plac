@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse, render
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage
+from django.utils.html import strip_tags
 import math
 
 from OPG_Plac import models
@@ -48,7 +49,22 @@ def view_about(request):
 
 # render blog overview page -- returns blog categories from db and sends them as a list to template
 def view_blog_previews(request):
-    category_filter = request.GET.get("filter", "all")
+
+    def serialize_previews(queryset):
+        serialized_previews = []
+
+        for article in queryset:
+            serialized_previews.append({
+                "img": article.title_image,
+                "title": article.title,
+                "preview": strip_tags(article.Article_content)[0:223],
+                "seo_url": article.seo_url
+            })
+
+        return serialized_previews
+
+    category_filter = request.GET.get("category", "all")
+    page_num = int(request.GET.get("page", 1))
 
     blog_categories = models.BlogCategory.objects.all().order_by('position_index')
 
@@ -56,9 +72,29 @@ def view_blog_previews(request):
     for category in blog_categories:
         categories.append(category.category)
 
+
+    if category_filter == "all":   # Filter articles by category
+        qset = models.BlogArticle.objects.all()
+
+    else:
+        category_obj = models.BlogCategory.objects.get(category=category_filter)
+        qset = models.BlogArticle.objects.filter(category=category_obj)
+
+    total_pages = math.ceil(len(qset) / 8)
+
+    try:
+        p = Paginator(qset, 8,)
+        articles = p.page(page_num)
+    except EmptyPage:
+        articles = []
+
+    previews = serialize_previews(articles)
+    print(category_filter)
+
     return render(request, "components/blog/blog.html", {
         "categories": categories,
-        "category_filter": category_filter
+        "category_filter": category_filter,
+        "article_previews": previews
     })
 
 
