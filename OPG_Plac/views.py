@@ -94,7 +94,9 @@ def view_blog_previews(request):
     return render(request, "components/blog/blog.html", {
         "categories": categories,
         "category_filter": category_filter,
-        "article_previews": previews
+        "article_previews": previews,
+        "total_pages": total_pages,
+        "current_page": page_num
     })
 
 

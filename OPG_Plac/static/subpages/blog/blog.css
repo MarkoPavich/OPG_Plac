@@ -90,7 +90,7 @@
 
 /* Pagination bar */
 
-.blog-pagination-bar{
+.pagination-bar{
 	width: 100%;
 	max-width: 1200px;
 
@@ -122,14 +122,18 @@
 	cursor: pointer;
 }
 
+#pagination-numeration a{
+	text-decoration: none;
+	color: black;
+}
+
 .pagination-page-current{
 	border: solid 1px black !important;
 
 	font-weight: bold;
 }
 
-.blog-pagination-previous span, .blog-pagination-next span{
+.pagination-previous span a, .pagination-next span a{
 	color: #f23207;
-
-	cursor: pointer;
+	text-decoration: none;
 }

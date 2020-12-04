@@ -55,10 +55,10 @@
         
     </div>
 
-    <div class="blog-pagination-bar">
+    <div class="pagination-bar">
 
-        <div class="blog-pagination-previous">
-            <span id="blog-pagination-previous" >Previous</span>
+        <div class="pagination-previous">
+            <span id="pagination-previous" ><a>Previous</a></span>
         </div>
 
         <div class="pagination-numeration">
@@ -67,11 +67,12 @@
             </ul>
         </div>
 
-        <div class="blog-pagination-next">
-            <span id="blog-pagination-next" >Next</span>
+        <div class="pagination-next">
+            <span id="pagination-next" ><a>Next</a></span>
         </div>
 
     </div>
+
     
     {% include '../footer.html' %}
 
@@ -82,8 +83,8 @@
             window.location.href = `/blog/viewitem?article=${seo_url}`;
         }
 
-        window.addEventListener("DOMContentLoaded", () => filter_categories("{{category_filter}}"));
-        
+        filter_categories("{{category_filter}}");
+        do_pagination({{total_pages}}, "{{current_page}}", "{{category_filter}}")    
     </script>
 
 {% endblock %}
