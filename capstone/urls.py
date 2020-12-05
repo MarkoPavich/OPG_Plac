@@ -34,10 +34,8 @@ urlpatterns = [
     path('blog/viewitem', view_blog_article, name="blogitem"),
     path('proizvodi/', view_proizvodi, name="proizvodi"),
     path('proizvodi/filter', view_proizvodi, name="proizvodi"),
-    path('proizvodi/viewitem', view_proizvod_artikl, name="proizvod_artikl"),
+    path('proizvodi/viewitem/<slug:product_url>', view_proizvod_artikl, name="proizvod_artikl"),
 
     # API pipeline
-
-    path('blog/get_article_previews', APIs.get_blog_previews)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

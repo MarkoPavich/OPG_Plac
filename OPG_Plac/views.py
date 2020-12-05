@@ -72,7 +72,6 @@ def view_blog_previews(request):
     for category in blog_categories:
         categories.append(category.category)
 
-
     if category_filter == "all":   # Filter articles by category
         qset = models.BlogArticle.objects.all()
 
@@ -193,6 +192,29 @@ def view_proizvodi(request):
     })
 
 
-def view_proizvod_artikl(request):
-    return render(request, "components/products/product_view/view_artikl.html")
+def view_proizvod_artikl(request, product_url):
 
+    try:
+        product_obj = models.Product.objects.get(seo_url=product_url)
+    except ObjectDoesNotExist:
+        return render(request, "components/utility/error.html", {
+            "error": "Not Found",
+            "status": 404,
+            "message": "Maybe try again or check spelling ?"
+        })
+
+    product = {
+        "product_name": product_obj.name,
+        "item_id": product_obj.item_id,
+        "product_img": product_obj.product_image,
+        "alt_img1": product_obj.second_image,
+        "alt_img2": product_obj.third_image,
+        "alt_img3": product_obj.fourth_image,
+        "price": product_obj.price,
+        "short_description": product_obj.short_description,
+        "brand": product_obj.brand.name,
+        "banner_img": product_obj.brand.img,
+        "availability": product_obj.availability.status_name
+    }
+
+    return render(request, "components/products/product_view/view_artikl.html", product)

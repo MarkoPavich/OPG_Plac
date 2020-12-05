@@ -34,23 +34,23 @@
         <div class="article-view-image-social-container">
 
             <div class="article-image-big">
-                <img id="article-image-big" src="{% static 'resources/images/products/slatka_mlevena_paprika_-_lek_za_rane_i_preventiva_od_srcanog_udara-1.jpg' %}" alt="product_img">
+                <img id="article-image-big" src="{{product_img.url}}" alt="product_img">
             </div>
 
             <div class="article-alternate-images-container">
 
                 <div onclick="flip_imgs(this)" class="article-alternate-image-frame">
-                    <img src="{% static 'resources/images/products/slatka_mlevena_paprika_-_lek_za_rane_i_preventiva_od_srcanog_udara-1.jpg' %}" alt="product_img">
+                    <img src="{{product_img.url}}" alt="product_img">
                 </div>
 
                 
                 <div onclick="flip_imgs(this)" class="article-alternate-image-frame">
-                    <img src="{% static 'resources/images/products/ankerkraut-ground-cayenne-pepper-65-g-374578-en.jpg' %}" alt="">
+                    <img src="{{alt_img1.url}}" alt="">
                 </div>
 
                 
                 <div onclick="flip_imgs(this)" class="article-alternate-image-frame">
-                    <img src="{% static 'resources/images/products/ground_cayenne-1.jpg' %}" alt="">
+                    <img src="{{alt_img2.url}}" alt="">
                 </div>
 
             </div>
@@ -94,21 +94,21 @@
         <div class="article-view-text-cta-container">
 
             <div class="article-name-desc-box">
-                <h1>Slatka mljevena paprika, 250g</h1>
+                <h1>{{product_name}}</h1>
 
-                <p>Slatka mljevena   od domaćih paprika, 250g At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.</p>
+                <p>{{short_description}}</p>
             </div>
 
             <div class="article-details-cta-box">
 
                 <div class="article-details-info-box">
                     <ul>
-                        <li>Marka proizvoda: <strong>Franck</strong></li>
-                        <li>Šifra artikla: <strong>324423</strong></li>
-                        <li>Dostupnost: <strong>Dostupno</strong></li>
+                        <li>Marka proizvoda: <strong>{{brand}}</strong></li>
+                        <li>Šifra artikla: <strong>{{item_id}}</strong></li>
+                        <li>Dostupnost: <strong>{{availability}}</strong></li>
                     </ul>
 
-                    <span>Cijena: <strong>34.29 Kn</strong></span>
+                    <span>Cijena: <strong>{{price}} Kn</strong></span>
 
                 </div>
 
@@ -131,7 +131,7 @@
 
 
             <div class="article-brand-banner-box">
-                <img src="{% static 'resources/images/franck_hr.png' %}" alt="">
+                <img src="{{banner_img.url}}" alt="">
             </div>
 
         </div>

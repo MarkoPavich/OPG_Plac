@@ -40,6 +40,14 @@ class ProductCategory(models.Model):
         return self.category
 
 
+class ProductBrand(models.Model):
+    name = models.CharField(max_length=50)
+    img = models.ImageField(upload_to="banners")
+
+    def __str__(self):
+        return self.name
+
+
 class ProductSubCategory(models.Model):
     parent_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="subcategories")
     subcategory = models.CharField(max_length=30)
@@ -49,25 +57,31 @@ class ProductSubCategory(models.Model):
         return f"{self.subcategory} - [{self.parent_category}]"
 
 
+class ProductAvailability(models.Model):
+    status_name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.status_name
+
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     seo_url = models.SlugField(unique=True)
     item_id = models.SlugField(unique=True)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="products")
     subcategory = models.ForeignKey(ProductSubCategory, on_delete=models.CASCADE, related_name="products")
-    product_image = models.URLField()
-    second_image = models.URLField(blank=True)
-    third_image = models.URLField(blank=True)
-    fourth_image = models.URLField(blank=True)
+    product_image = models.ImageField(blank=True, null=True, upload_to="images/products")
+    second_image = models.ImageField(blank=True, null=True, upload_to="images/products")
+    third_image = models.ImageField(blank=True, null=True, upload_to="images/products")
+    fourth_image = models.ImageField(blank=True, null=True, upload_to="images/products")
     price = models.DecimalField(max_digits=12, decimal_places=2)
     short_description = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
+    brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, related_name="products", blank=True, null=True)
+    availability = models.ForeignKey(ProductAvailability, on_delete=models.CASCADE, related_name="products")
 
     def __str__(self):
         return self.name
-
-
-
 
 
 

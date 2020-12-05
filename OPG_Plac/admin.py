@@ -11,6 +11,8 @@ admin.site.register([
     models.BlogCategory,
     models.ProductCategory,
     models.ProductSubCategory,
-    models.Product
+    models.Product,
+    models.ProductBrand,
+    models.ProductAvailability
 
 ])
