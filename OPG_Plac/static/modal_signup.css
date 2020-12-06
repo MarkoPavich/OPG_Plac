@@ -1,0 +1,102 @@
+.modal-bg{
+	position: fixed;
+
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100vh;
+
+	background-color: rgba(0,0,0, 0.5);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	z-index: 200;
+
+	visibility: hidden;
+	opacity: 0;
+
+	transition: visibility 0s, opacity 0.5s;
+}
+
+.modal-active{
+	visibility: visible;
+	opacity: 1;
+}
+
+.modal-signup-form-container{
+	width: 500px;
+	height: 305px;
+
+	padding: 15px;
+
+	background-color: white;
+
+	-webkit-box-shadow: -1px 0px 5px 2px rgba(0,0,0,0.52);
+	-moz-box-shadow: -1px 0px 5px 2px rgba(0,0,0,0.52);
+	box-shadow: -1px 0px 5px 2px rgba(0,0,0,0.52);
+}
+
+.modal-signup-header{
+	text-align: center;
+
+	padding-bottom: 15px;
+
+	font-size: 24px;
+
+	border-bottom: solid 1px black;
+}
+
+.modal-signup-form-item{
+	display: flex;
+	justify-content: space-between;
+
+	margin-bottom: 15px;
+}
+
+.modal-signup-form-item input{
+	width: 70%;
+	padding-left: 10px;
+}
+
+.modal-signup-form-body{
+	padding-top: 20px;
+
+	border-bottom: solid 1px black;
+}
+
+.modal-signup-form-controls-box{
+	display: flex;
+	justify-content: flex-end;
+
+	margin-top: 15px;
+}
+
+.modal-signup-form-controls-box button{
+	margin-left: 20px;
+}
+
+.modal-signup-confirm-btn{
+	font-size: 16px;
+	color: white;
+	font-weight: bold;
+
+	background-color: #f2360b;
+
+	border-radius: 6px;
+
+	height: 30px;
+
+	border: none;
+}
+
+.modal-signup-confirm-btn:focus{
+	outline: none;
+}
+
+.modal-signup-confirm-btn:hover{
+	cursor: pointer;
+	transform: translate(0, -1px);
+}

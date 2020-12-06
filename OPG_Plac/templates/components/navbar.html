@@ -2,6 +2,8 @@
   
   <!-- Responsive Navbar -->
 
+  {% include 'components/utility/modal_signup.html' %}
+
    <nav id="navbar" class="navbar">
     
     <div class="logo-nav-container">
@@ -59,7 +61,7 @@
         </li>
 
         <li>
-            <button class="join-btn">Pridruži se</button>
+            <button onclick="open_modal_signup_form()" class="join-btn">Pridruži se</button>
         </li>
     </ul>
 

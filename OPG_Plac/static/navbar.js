@@ -83,3 +83,17 @@ function load_navbar_listeners(mode){
     }
 }
 
+
+function open_modal_signup_form(){
+    const modal = document.querySelector("#modal_signup_form");
+
+    modal.className = modal.className + " modal-active";
+}
+
+
+function close_modal_signup_form(){
+    const modal = document.querySelector("#modal_signup_form");
+
+    modal.className = "modal-bg"
+}
+
