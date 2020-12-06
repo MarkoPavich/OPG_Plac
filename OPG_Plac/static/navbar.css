@@ -200,17 +200,17 @@
 /* 3dots menu */
 
 .nav-3dots-menu-container{
-	visibility: hidden;
+	visibility: hidden; 
 	position: absolute;
 	width: 300px;
-	height: 360px;
+	height: 320px;
 
 	right: 0%;
 	top: 0%;
 	margin-top: 55px;
 	margin-right: 146px;
 
-	background-color: rgba(248, 248, 255, 0.98); /* ghostwhite with transparency */
+	background-color: rgba(249, 246, 254, 0.96); /* ghostwhite with transparency */
 
 	-webkit-transition-delay: 0.2s;
     -moz-transition-delay: 0.2s;
@@ -239,7 +239,7 @@
 	left: 90%;
 	top: -1%;
 
-	background-color: rgba(248, 248, 255, 0.98);
+	background-color: rgba(249, 246, 254, 0.96);
 
 	transform: rotate(45deg);
 }
@@ -258,17 +258,14 @@
 }
 
 .nav-3dots-menu-container ul li{
-	margin-left: 15px;
 	color: black;
 }
 
 .nav-3dots-social-options{
-	margin-left: 5px;
-	margin-right: 5px;
 	margin-bottom: 10px;
 	padding: 0;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
 .nav-3dots-social-options li{
@@ -314,7 +311,7 @@
 
 .nav-3dots-menu-options li:last-child{
 	width: 100%;
-	margin-top: 40px;
+	margin-top: 25px;
 	margin-left: 0px;
 
 	display: inline-flex;

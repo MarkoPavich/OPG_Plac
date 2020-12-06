@@ -31,6 +31,63 @@
 
     </nav>
 
+        <div onclick="open_side_filter_menu()" class="hamburger-toggle">
+            <span class="ham-bar"></span>
+            <span class="ham-bar"></span>
+            <span class="ham-bar"></span>
+        </div>
+
+        <div id="category-filter-mobile-side-menu-container" class="category-filter-mobile-side-menu-container">
+            
+            <nav class="category-filter-mobile-side-panel">
+
+                <div class="side-filter-menu-options-container">
+                    <div class="category-menu-header">
+                        <span>Kategorije</span>
+                    </div>
+
+
+                    <ul class="category-main-filters">
+
+                        {% for category in categories %}
+        
+                            <li class="category-filter-collapsable">
+                                <div id="sidebar-category-option-{{ forloop.counter }}" class="product-category-option-container{% if category == active_category %} product-filter-active submenu-open{% endif %}">
+                                    <a href="/proizvodi/filter?category={{category}}">{{category}}</a>
+        
+                                    <svg onclick="open_close_category_submenu({{ forloop.counter }}, true)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    width="552.611px" height="552.611px" viewBox="0 0 552.611 552.611" style="enable-background:new 0 0 552.611 552.611;"
+                                    xml:space="preserve">
+                                    <path d="M486.413,221.412L122.347,12.916c-52.938-30.318-95.852-5.44-95.852,55.563v415.652c0,61.004,42.914,85.882,95.852,55.563
+                                    l364.066-208.49C539.351,300.887,539.351,251.731,486.413,221.412z"/></svg>
+                                </div>
+        
+                                <div id="sidebar-submenu-option-{{ forloop.counter }}" class="product-subfilter-container {% if category == active_category%} show_submenu{% endif %}">
+                                    <ul class="product-cagetory-subfilter-menu">
+                                    </ul>
+        
+                                    <script>
+                                        populate_submenu({{categories|safe}}["{{category}}"], "sidebar-submenu-option-{{ forloop.counter }}", "category-option-{{ forloop.counter }}", '{{category}}', '{{active_subcategory}}')
+                                    </script>
+                                    
+                                </div>
+        
+                            </li>
+        
+                        {% endfor %}
+        
+                    </ul>
+
+        
+                </div>
+
+
+            </nav>
+
+            <div onclick="close_side_filter_menu()" id="sidebar-active-background" class=""></div>
+
+        </div>
+
                 <!-- ToDo Create hamburger nav for mobile -->
 
     <div class="products-top-container">
@@ -48,7 +105,7 @@
                         <div id="category-option-{{ forloop.counter }}" class="product-category-option-container{% if category == active_category %} product-filter-active submenu-open{% endif %}">
                             <a href="/proizvodi/filter?category={{category}}">{{category}}</a>
 
-                            <svg onclick="open_close_category_submenu({{ forloop.counter }})" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            <svg onclick="open_close_category_submenu({{ forloop.counter }}, false)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                             width="552.611px" height="552.611px" viewBox="0 0 552.611 552.611" style="enable-background:new 0 0 552.611 552.611;"
                             xml:space="preserve">
                             <path d="M486.413,221.412L122.347,12.916c-52.938-30.318-95.852-5.44-95.852,55.563v415.652c0,61.004,42.914,85.882,95.852,55.563
@@ -96,7 +153,7 @@
                                 <img src="{{product.image.url}}" alt="product_img">
                             </div>
                         </a>
-                        
+
                         <div class="product-overview-item-txt-box">
                             <a href="/proizvodi/viewitem/{{product.seo_url}}" ><h3>{{product.name}}</h3></a>
                             <a href="/proizvodi/viewitem/{{product.seo_url}}">{{product.short_desc}}</a>

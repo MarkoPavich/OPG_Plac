@@ -148,6 +148,8 @@
 	font-weight: 500;
 
 	margin-bottom: 25px;
+
+	line-height: 1.2;
 }
 
 .article-name-desc-box h1::first-letter{
@@ -288,7 +290,8 @@
 }
 
 .article-brand-banner-box img{
-	height: 100%;
+	max-width: 100%;
+	max-height: 144px;
 }
 
 @media(max-width: 1050px) and (min-width:950px){
@@ -310,9 +313,16 @@
 
 	.article-name-desc-box{
 		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 	.article-brand-banner-box{
 		margin-top: 40px;
+	}
+
+	.article-details-cta-box{
+		justify-content: flex-end;
 	}
 }
 

@@ -65,7 +65,7 @@ class ProductAvailability(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=67)
     seo_url = models.SlugField(unique=True)
     item_id = models.SlugField(unique=True)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="products")
@@ -73,10 +73,9 @@ class Product(models.Model):
     product_image = models.ImageField(blank=True, null=True, upload_to="images/products")
     second_image = models.ImageField(blank=True, null=True, upload_to="images/products")
     third_image = models.ImageField(blank=True, null=True, upload_to="images/products")
-    fourth_image = models.ImageField(blank=True, null=True, upload_to="images/products")
     price = models.DecimalField(max_digits=12, decimal_places=2)
-    short_description = models.CharField(max_length=200, blank=True)
-    description = models.TextField(blank=True)
+    short_description = models.CharField(max_length=75, blank=True)
+    description = models.TextField(blank=True, max_length=435)
     brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, related_name="products", blank=True, null=True)
     availability = models.ForeignKey(ProductAvailability, on_delete=models.CASCADE, related_name="products")
 

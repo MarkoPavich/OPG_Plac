@@ -1,5 +1,7 @@
 
-function open_close_category_submenu(id){  // Flips submenu_options classnames - shows or hides the menu
+function open_close_category_submenu(id, is_sidebar){  // Flips submenu_options classnames - shows or hides the menu
+
+    const sidebar_prefix = is_sidebar ? "sidebar-" : "";
 
     const classNames = {
         "submenu_active": "product-subfilter-container show_submenu",
@@ -7,8 +9,8 @@ function open_close_category_submenu(id){  // Flips submenu_options classnames -
         "mark_menu_open": " submenu-open"
     };
 
-    const target_block_element = document.querySelector(`#category-option-${id}`);
-    const target_submenu_element = document.querySelector(`#submenu-option-${id}`);
+    const target_block_element = document.querySelector(`#${sidebar_prefix}category-option-${id}`);
+    const target_submenu_element = document.querySelector(`#${sidebar_prefix}submenu-option-${id}`);
 
     if(target_submenu_element.className === classNames["submenu_inactive"]){
         target_submenu_element.className = classNames["submenu_active"];
@@ -86,4 +88,20 @@ function do_pagination(total_pages, current_page, active_filter, active_subfilte
     if(current_page == total_pages) option_next.className = "hide";
     else option_next.firstElementChild.setAttribute("href", `${href_slug}${parseInt(current_page) + 1}`);
 
+}
+
+function open_side_filter_menu(){
+    const sidebar = document.querySelector("#category-filter-mobile-side-menu-container");
+    const sidebar_background = document.querySelector("#sidebar-active-background");
+
+        sidebar.className = "category-filter-mobile-side-menu-container category_filter_active";
+        sidebar_background.className = "active-close-background";
+}
+
+function close_side_filter_menu(){
+    const sidebar = document.querySelector("#category-filter-mobile-side-menu-container");
+    const sidebar_background = document.querySelector("#sidebar-active-background");
+
+    sidebar.className = "category-filter-mobile-side-menu-container";
+    sidebar_background.className = "";
 }
