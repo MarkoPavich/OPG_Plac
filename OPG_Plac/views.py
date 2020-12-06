@@ -18,7 +18,7 @@ def serialize_products(products_qset):
             "seo_url": product.seo_url,
             "image": product.product_image,
             "price": product.price,
-            "short_desc": product.short_description
+            "short_desc": product.short_description[:75]
         })
 
     return serialized_products
@@ -214,7 +214,9 @@ def view_proizvod_artikl(request, product_url):
         "short_description": product_obj.short_description,
         "brand": product_obj.brand.name,
         "banner_img": product_obj.brand.img,
-        "availability": product_obj.availability.status_name
+        "availability": product_obj.availability.status_name,
+        "category": product_obj.category,
+        "subcategory": product_obj.subcategory.subcategory
     }
 
     return render(request, "components/products/product_view/view_artikl.html", product)

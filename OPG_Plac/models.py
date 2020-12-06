@@ -30,6 +30,14 @@ class BlogArticle(models.Model):
         return self.title
 
 
+class ProductBrand(models.Model):
+    name = models.CharField(max_length=50)
+    img = models.ImageField(upload_to="banners")
+
+    def __str__(self):
+        return self.name
+
+
 class ProductCategory(models.Model):
     category = models.CharField(max_length=30)
     position_index = models.IntegerField(null=True, blank=True)
@@ -38,14 +46,6 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return self.category
-
-
-class ProductBrand(models.Model):
-    name = models.CharField(max_length=50)
-    img = models.ImageField(upload_to="banners")
-
-    def __str__(self):
-        return self.name
 
 
 class ProductSubCategory(models.Model):

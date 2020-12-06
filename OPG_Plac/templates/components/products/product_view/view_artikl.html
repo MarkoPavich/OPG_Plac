@@ -14,19 +14,15 @@
     {% include 'components/divider_hr_title.html' with title="Proizvodi" %}
 
     <nav class="secondary-nav-location-bar">
-        <a href="/">Naslovna</a>
-        <span>/</span>
         <a href="/proizvodi">Proizvodi</a>
-
-        {% if active_category is not none %}
-            <span>/</span>
-            <a href="/proizvodi/filter?category={{active_category}}">{{active_category}}</a>
-        {% endif %}
-        {% if active_subcategory is not none %}
         <span>/</span>
-        <span>{{active_subcategory}}</span>
+        <a href="/proizvodi/filter?category={{category}}">{{category}}</a>
+        {% if subcategory is not none %}
+        <span>/</span>
+        <a href="/proizvodi/filter?category={{category}}&subcategory={{subcategory}}">{{subcategory}}</a>
         {% endif %}
-
+        <span>/</span>
+        <span>{{product_name}}</span>
     </nav>
 
     <div class="article-view-top-frame">   <!-- content top frame -->
@@ -43,15 +39,27 @@
                     <img src="{{product_img.url}}" alt="product_img">
                 </div>
 
-                
+                {% if alt_img1 != '' %}
                 <div onclick="flip_imgs(this)" class="article-alternate-image-frame">
+                    
                     <img src="{{alt_img1.url}}" alt="">
+                    
                 </div>
-
+                {% else %}
+                <div class="article-alternate-image-frame" style="visibility: hidden">
+                    
+                </div>
+                {% endif %}
                 
+                {% if alt_img2 != '' %}
                 <div onclick="flip_imgs(this)" class="article-alternate-image-frame">
                     <img src="{{alt_img2.url}}" alt="">
                 </div>
+                {% else %}
+                <div class="article-alternate-image-frame" style="visibility: hidden">
+                    
+                </div>
+                {% endif %}
 
             </div>
 
