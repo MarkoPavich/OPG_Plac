@@ -1,11 +1,58 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-
-# Create your models here.
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
-class User(AbstractUser):
-    pass
+##### User Models ########
+
+
+# Custom User_Manager, per django documentation
+class UserManager(BaseUserManager):
+    def create_user(self, email, password, name):
+        user = self.model(email=self.normalize_email(email), name=name)
+        user.set_password(password)
+
+        user.save(using=self._db)
+
+        return user
+
+    def create_superuser(self, email, password, name):
+        user = self.create_user(email, password, name)
+
+        user.is_staff = True  # Admins are staff
+        user.is_admin = True
+
+        user.save(using=self._db)
+
+        return user
+
+
+# Defined Custom User model, per django documentation
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True, verbose_name="email_address", max_length=200)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=150)
+    is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    USERNAME_FIELD = 'email'  # Login via email
+    REQUIRED_FIELDS = ['name']
+
+    objects = UserManager()  # Assign custom user_manager to a custom_user
+
+    def __str__(self):
+        return self.email
+
+    def get_short_name(self):
+        return self.first_name
+
+    def has_perm(self, perm, obj=None):
+        return self.is_admin
+
+    def has_module_perms(self, app_label):
+        return self.is_admin
+
+##### Blog Models ########
 
 
 class BlogCategory(models.Model):
@@ -28,6 +75,9 @@ class BlogArticle(models.Model):
 
     def __str__(self):
         return self.title
+
+
+##### Product Models ########
 
 
 class ProductBrand(models.Model):

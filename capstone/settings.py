@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'OPG_Plac',
 ]
 
+AUTH_USER_MODEL = 'OPG_Plac.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
