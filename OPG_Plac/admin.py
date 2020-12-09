@@ -21,7 +21,6 @@ class UserAdminConfig(UserAdmin):
 
 admin.site.register([
 
-    models.User,
     models.BlogArticle,
     models.BlogCategory,
     models.ProductCategory,
@@ -30,5 +29,6 @@ admin.site.register([
     models.ProductBrand,
     models.ProductAvailability
 
-], UserAdminConfig)
+])
 
+admin.site.register(models.User, UserAdminConfig)
