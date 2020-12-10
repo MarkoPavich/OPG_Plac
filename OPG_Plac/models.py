@@ -8,16 +8,26 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 
 # Custom User_Manager, per django documentation
 class UserManager(BaseUserManager):
-    def create_user(self, email, password, name):
-        user = self.model(email=self.normalize_email(email), name=name)
+    def create_user(self, email, password, first_name="", last_name=""):
+        if email is None:
+            raise ValueError("User must have an email")
+        if not password:
+            raise ValueError("User must provide a password")
+
+        user = self.model(
+            email=self.normalize_email(email),
+            first_name=first_name,
+            last_name=last_name
+        )
+
         user.set_password(password)
 
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, password, name):
-        user = self.create_user(email, password, name)
+    def create_superuser(self, email, password, first_name="", last_name=""):
+        user = self.create_user(email, password, first_name, last_name)
 
         user.is_staff = True  # Admins are staff
         user.is_admin = True
@@ -38,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'email'  # Login via email
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['first_name', "last_name"]
 
     objects = UserManager()  # Assign custom user_manager to a custom_user
 
@@ -63,6 +73,9 @@ class BlogCategory(models.Model):
 
     def __str__(self):
         return self.category
+
+    class Meta:
+        verbose_name_plural = "Blog categories"
 
 
 class BlogArticle(models.Model):
@@ -99,6 +112,9 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.category
 
+    class Meta:
+        verbose_name_plural = "Product categories"
+
 
 class ProductSubCategory(models.Model):
     parent_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="subcategories")
@@ -108,12 +124,18 @@ class ProductSubCategory(models.Model):
     def __str__(self):
         return f"{self.subcategory} - [{self.parent_category}]"
 
+    class Meta:
+        verbose_name_plural = "Product subcategories"
+
 
 class ProductAvailability(models.Model):
     status_name = models.CharField(max_length=20)
 
     def __str__(self):
         return self.status_name
+
+    class Meta:
+        verbose_name_plural = "Product availabilities"
 
 
 class Product(models.Model):

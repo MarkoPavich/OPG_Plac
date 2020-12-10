@@ -38,4 +38,6 @@ urlpatterns = [
 
     # API pipeline
 
+    path('user_registration', APIs.create_user)
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

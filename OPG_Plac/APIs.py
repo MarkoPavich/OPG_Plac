@@ -1,9 +1,17 @@
-import math
 from django.http import JsonResponse
-from django.utils.html import strip_tags
-from django.core.paginator import Paginator, EmptyPage
-
 from OPG_Plac import models
+import json
+import time
+
+
+def create_user(request):
+    json_data = json.loads(request.body)
+
+    print(json_data)
+
+    return JsonResponse({
+        "message": "Mail already exists",
+    }, status=400)
 
 
 

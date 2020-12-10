@@ -83,6 +83,7 @@ function load_navbar_listeners(mode){
     }
 }
 
+ // Modal signup window
 
 function open_modal_signup_form(){
     const modal = document.querySelector("#modal_signup_form");
@@ -90,10 +91,106 @@ function open_modal_signup_form(){
     modal.className = modal.className + " modal-active";
 }
 
-
 function close_modal_signup_form(){
+
     const modal = document.querySelector("#modal_signup_form");
 
     modal.className = "modal-bg"
 }
 
+
+function submit_signup_form(event){  // Runs client-side form validation, and submits create_user
+    // Prevent default submit
+    event.preventDefault()
+
+    // flow and control variables
+    let submit = true;
+    const password_min_length = 8
+
+    // Get input elements
+
+    const inputs = {
+        first_name: document.querySelector("#signup_first_name"),
+        last_name: document.querySelector("#signup_last_name"),
+        email: document.querySelector("#signup_email"),
+        password: document.querySelector("#signup_password"),
+        pass_conf: document.querySelector("#signup_confirm_password")
+    }
+    
+    // Validate input data present
+    Object.keys(inputs).forEach(key =>{
+        if(inputs[key].value === ""){
+            submit = false;
+            inputs[key].style.border = "solid 2px red";
+        } 
+
+        else inputs[key].style.border = "";
+
+    })
+
+    // Validate passwords
+
+    if(inputs["password"].value != inputs["pass_conf"].value){
+        submit = false;
+
+        inputs["password"].style.border = "solid 2px red";
+        inputs["pass_conf"].style.border = inputs["password"].style.border;
+
+        inputs["password"].value = "";
+        inputs["pass_conf"].value = "";
+
+        inputs["password"].placeholder = "Lozinke se moraju podudarati !";
+        inputs["pass_conf"].placeholder = inputs["password"].placeholder;
+
+        submit = false;
+    }
+
+    else if(inputs["password"].value.length < password_min_length){
+        inputs["password"].value = "";
+        inputs["pass_conf"].value = "";
+
+        inputs["password"].style.border = "solid 2px red";
+        inputs["pass_conf"].style.border = inputs["password"].style.border;
+
+        inputs["password"].placeholder = `Minimalno ${password_min_length} znakova`;
+        inputs["pass_conf"].placeholder = inputs["password"].placeholder;
+
+        submit = false;
+    }
+
+    // If all checks out, submit user data via fetch
+    if(submit){
+        document.body.style.cursor = "wait";
+
+        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken').value;
+        const request = new Request(
+            "/user_registration", 
+            {headers: {"X-CSRFToken": csrf_token}})
+        
+        fetch(request,
+            {
+                method: "POST",
+                body: JSON.stringify(
+                    {
+                        first_name: inputs["first_name"].value,
+                        last_name: inputs["last_name"].value,
+                        email: inputs["email"].value,
+                        password: inputs["password"].value
+                    }
+                    
+                ), credentials: "same-origin"
+            })
+
+            .then(response => {
+                document.body.style.cursor = "";
+
+                if(response.status === 200){
+                    close_modal_signup_form();
+                    location.reload();
+                }
+
+            })
+
+    }
+
+}

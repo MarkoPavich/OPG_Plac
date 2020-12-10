@@ -1,10 +1,13 @@
 from django.shortcuts import HttpResponse, render
+from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage
 from django.utils.html import strip_tags
 import math
+import json
 
 from OPG_Plac import models
+
 
 # helpers
 
@@ -22,6 +25,7 @@ def serialize_products(products_qset):
         })
 
     return serialized_products
+
 
 # views
 
@@ -220,3 +224,4 @@ def view_proizvod_artikl(request, product_url):
     }
 
     return render(request, "components/products/product_view/view_artikl.html", product)
+

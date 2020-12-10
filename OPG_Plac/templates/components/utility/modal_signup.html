@@ -9,35 +9,44 @@
 
         <div class="modal-signup-form-body">
 
-            <div class="modal-signup-form-item">
-                <label for="name">Ime i prezime:</label>
-                <input name="name" type="text" placeholder="Ime i prezime ( ili naziv tvrtke )">
+            <form onsubmit="submit_signup_form(event)" method="POST">
+                {% csrf_token %}
+
+                <div class="modal-signup-form-item">
+                    <label for="first_name">Ime:</label>
+                    <input id="signup_first_name" name="first_name" type="text" placeholder="Ime">
+                </div>
+
+                <div class="modal-signup-form-item">
+                    <label for="last_name">Prezime:</label>
+                    <input id="signup_last_name" name="last_name" type="text" placeholder="Prezime">
+                </div>
+
+                
+                <div class="modal-signup-form-item">
+                    <label for="email">Email:</label>
+                    <input id="signup_email" type="email" name="email" placeholder="email adresa">
+                </div>
+
+                
+                <div class="modal-signup-form-item">
+                    <label for="">Lozinka:</label>
+                    <input id="signup_password" type="password" name="password" placeholder="lozinka">
+                </div>
+
+                
+                <div class="modal-signup-form-item">
+                    <label for="">Potvrdi lozinku:</label>
+                    <input id="signup_confirm_password" type="password" name="confirm_password" placeholder="Ponovi lozinku">
+                </div>
+
             </div>
 
-            
-            <div class="modal-signup-form-item">
-                <label for="email">Email:</label>
-                <input type="email" placeholder="email adresa">
-            </div>
-
-            
-            <div class="modal-signup-form-item">
-                <label for="">Lozinka:</label>
-                <input type="password" placeholder="lozinka">
-            </div>
-
-            
-            <div class="modal-signup-form-item">
-                <label for="">Potvrdi lozinku:</label>
-                <input type="password" placeholder="Ponovi lozinku">
-            </div>
-
-        </div>
-
-        <div class="modal-signup-form-controls-box">
-            <button onclick="close_modal_signup_form()" class="modal-signup-cancel-btn">Odustani</button>
-            <button class="modal-signup-confirm-btn">Završi prijavu</button>
-        </div>  
+            <div class="modal-signup-form-controls-box">
+                <button class="modal-signup-confirm-btn">Završi prijavu</button>
+                <button onclick="close_modal_signup_form()" class="modal-signup-cancel-btn">Odustani</button>
+            </div>  
+        </form>
 
     </div>
 
