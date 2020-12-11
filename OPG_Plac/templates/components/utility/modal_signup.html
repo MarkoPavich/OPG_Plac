@@ -9,7 +9,7 @@
 
         <div class="modal-signup-form-body">
 
-            <form onsubmit="submit_signup_form(event)" method="POST">
+            <form method="POST">
                 {% csrf_token %}
 
                 <div class="modal-signup-form-item">
@@ -43,8 +43,8 @@
             </div>
 
             <div class="modal-signup-form-controls-box">
-                <button class="modal-signup-confirm-btn">Završi prijavu</button>
-                <button onclick="close_modal_signup_form()" class="modal-signup-cancel-btn">Odustani</button>
+                <button onclick="submit_signup_form(event)" class="modal-signup-confirm-btn">Završi prijavu</button>
+                <button onclick="close_modal_signup_form(event)" class="modal-signup-cancel-btn">Odustani</button>
             </div>  
         </form>
 

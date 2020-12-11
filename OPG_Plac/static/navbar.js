@@ -31,7 +31,7 @@ function adjust_navbar_scroll(){  // Switches between navbar with transparent ba
     }
 }
 
-function openSidebar(event){  // Opens, and closes mobile hamburger menu. Disables navbar scroll listener and forces opaque layout while active.
+function openSidebar(event){  // Opens and closes mobile hamburger menu. Disables navbar scroll listener and forces opaque layout while active.
     
     if(event != undefined) event.preventDefault();
 
@@ -63,7 +63,7 @@ function openSidebar(event){  // Opens, and closes mobile hamburger menu. Disabl
 
 }
 
-// Enables selective load of listeners -- Pass 'noscroll' to disable navbar on top transparency 
+// Enables selective load of listeners -- Pass 'noscroll' to disable 'navbar on top' transparency 
 function load_navbar_listeners(mode){   
     window.addEventListener("DOMContentLoaded", adjust_navbar_width);
     window.addEventListener("resize", adjust_navbar_width);
@@ -91,15 +91,30 @@ function open_modal_signup_form(){
     modal.className = modal.className + " modal-active";
 }
 
-function close_modal_signup_form(){
+function close_modal_signup_form(event){
+	if(event != undefined) event.preventDefault()
 
     const modal = document.querySelector("#modal_signup_form");
+
+    const inputs = {
+        first_name: document.querySelector("#signup_first_name"),
+        last_name: document.querySelector("#signup_last_name"),
+        email: document.querySelector("#signup_email"),
+        password: document.querySelector("#signup_password"),
+        pass_conf: document.querySelector("#signup_confirm_password")
+    }
+
+    // clear inputs on close
+    Object.keys(inputs).forEach(key => {
+    	inputs[key].style.border = "";
+    	inputs[key].value = "";
+    })
 
     modal.className = "modal-bg"
 }
 
 
-function submit_signup_form(event){  // Runs client-side form validation, and submits create_user
+function submit_signup_form(event){  // Runs client-side form validation, and submits user registration data
     // Prevent default submit
     event.preventDefault()
 
@@ -128,7 +143,7 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
 
     })
 
-    // Validate passwords
+    // Validate passwords match
 
     if(inputs["password"].value != inputs["pass_conf"].value){
         submit = false;
@@ -145,6 +160,7 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
         submit = false;
     }
 
+    // Validate Passwords adhere to min length
     else if(inputs["password"].value.length < password_min_length){
         inputs["password"].value = "";
         inputs["pass_conf"].value = "";
@@ -158,19 +174,20 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
         submit = false;
     }
 
-    // If all checks out, submit user data via fetch
+    // If all checks OK, submit user data to backend
     if(submit){
-        document.body.style.cursor = "wait";
+        document.body.style.cursor = "wait";  // notify user an action is under way 
 
+        // Pack request with csrf_token
         const csrf_token = document.querySelector('[name=csrfmiddlewaretoken').value;
         const request = new Request(
             "/user_registration", 
             {headers: {"X-CSRFToken": csrf_token}})
         
-        fetch(request,
+        fetch(request,  
             {
                 method: "POST",
-                body: JSON.stringify(
+                body: JSON.stringify(  // Pack user registration data in JSON
                     {
                         first_name: inputs["first_name"].value,
                         last_name: inputs["last_name"].value,
@@ -184,9 +201,28 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
             .then(response => {
                 document.body.style.cursor = "";
 
-                if(response.status === 200){
-                    close_modal_signup_form();
-                    location.reload();
+                switch(response.status){
+                	case 200:
+	                	document.body.style.cursor = "";
+	                	close_modal_signup_form();
+	                	location.reload();
+	                	break;
+
+	                case 400:
+	                	document.body.style.cursor = "";
+
+	                	response.json()
+	                	.then(res => {
+
+	                		if(res.error === "mail_already_exists"){
+
+			                	inputs["email"].style.border = "solid 2px red";
+	                			inputs["email"].value = "";
+                				inputs["email"].placeholder = "email already exists !";
+
+	                		}
+	                	})
+
                 }
 
             })
