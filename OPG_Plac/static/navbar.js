@@ -192,7 +192,8 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
                         first_name: inputs["first_name"].value,
                         last_name: inputs["last_name"].value,
                         email: inputs["email"].value,
-                        password: inputs["password"].value
+                        password: inputs["password"].value,
+                        confirm_password: inputs["pass_conf"].value
                     }
                     
                 ), credentials: "same-origin"
@@ -220,13 +221,23 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
 	                			inputs["email"].value = "";
                 				inputs["email"].placeholder = "email already exists !";
 
-	                		}
-	                	})
+                            }
 
+                            else if(res.error === "not_matching_passwords"){
+                                alert("Passwords dont match, please try again");
+                                close_modal_signup_form();
+                            }
+                            
+                            else alert("Oops, Something went wrong, please try again, or later");
+                        })
+                        break;
+
+                    default:
+                        document.body.style.cursor = "";
+	                	close_modal_signup_form();
+                        alert("Oops, Something went wrong, please try again, or later from here");
                 }
-
-            })
-
+            }
+        )
     }
-
 }
