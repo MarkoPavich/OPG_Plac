@@ -43,8 +43,14 @@
             </div>
 
             <div class="modal-signup-form-controls-box">
-                <button onclick="submit_signup_form(event)" class="modal-signup-confirm-btn">Završi prijavu</button>
-                <button onclick="close_modal_signup_form(event)" class="modal-signup-cancel-btn">Odustani</button>
+                <div class="modal-signup-already-registered-not">
+                    <span>Registrirani korisnik ?</span>
+                    <span><a href="/prijava">Prijavite se</a></span>
+                </div>
+                <div class="modal-signup-buttons-box">
+                    <button onclick="submit_signup_form(event)" class="modal-signup-confirm-btn">Završi prijavu</button>
+                    <button onclick="close_modal_signup_form(event)" class="modal-signup-cancel-btn">Odustani</button>
+                </div>
             </div>  
         </form>
 

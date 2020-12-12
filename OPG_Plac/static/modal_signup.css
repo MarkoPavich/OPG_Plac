@@ -69,12 +69,12 @@
 
 .modal-signup-form-controls-box{
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 
 	margin-top: 15px;
 }
 
-.modal-signup-form-controls-box button{
+.modal-signup-buttons-box button{
 	margin-left: 20px;
 }
 
@@ -99,4 +99,14 @@
 .modal-signup-confirm-btn:hover{
 	cursor: pointer;
 	transform: translate(0, -1px);
+}
+
+.modal-signup-already-registered-not{
+	margin-top: -8px;
+}
+
+.modal-signup-already-registered-not span{
+	display: block;
+
+	font-style: italic !important;
 }

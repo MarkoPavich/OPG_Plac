@@ -76,10 +76,12 @@
 
     display: flex;
     align-items: center;
+
+    position: relative;
 }
 
-.nav_user_logged_profile_options:hover{
-    filter: brightness(0.8);
+.nav_userprof_ico_01:hover{
+    opacity: 0.8;
 }
 
 .nav_userprof_ico_01{
@@ -247,7 +249,7 @@
 	margin-top: 55px;
 	margin-right: 146px;
 
-	background-color: rgba(249, 246, 254, 0.96); /* ghostwhite with transparency */
+	background-color: #fff; /* ghostwhite with transparency */
 
 	-webkit-transition-delay: 0.2s;
     -moz-transition-delay: 0.2s;
@@ -276,11 +278,12 @@
 	position: absolute;
 
 	left: 90%;
-	top: -1%;
+	top: -2%;
 
-	background-color: rgba(249, 246, 254, 0.96);
+	background-color: #fff;
 
 	transform: rotate(45deg);
+
 }
 
 #three-dot-menu-button:hover > .nav-3dots-menu-container{

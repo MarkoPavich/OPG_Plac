@@ -1,5 +1,5 @@
 from django.shortcuts import HttpResponse, render, redirect
-from django.http import JsonResponse
+from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage
 from django.utils.html import strip_tags
@@ -231,4 +231,31 @@ def view_signin(request):
         return redirect("/")
     else:
         return render(request, "components/signin/signin.html", {})
+
+
+# Logout path
+def view_logout(request):
+    logout(request)
+    return redirect("/")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

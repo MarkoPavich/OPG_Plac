@@ -37,7 +37,9 @@ function submit_login(event){
         const request = new Request(
             "/login",
             {headers: {"X-CSRFtoken": csrf_token}}
-        )
+        );
+
+        document.body.style.cursor = "wait";  // Notify pending status to user
 
         fetch(request, {
             method: "POST",
@@ -66,10 +68,13 @@ function submit_login(event){
 
                     email_field.placeholder = "Neispravan email ili lozinka";
                     password_field.placeholder = email_field.placeholder;
+                    
+                    document.body.style.cursor = "";
                     break;
                 
                 default:
                     alert("Oops, nešto ne valja");
+                    document.body.style.cursor = "";
             }
         })
     }
