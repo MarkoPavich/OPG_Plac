@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, render, redirect
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage
@@ -224,4 +224,11 @@ def view_proizvod_artikl(request, product_url):
     }
 
     return render(request, "components/products/product_view/view_artikl.html", product)
+
+
+def view_signin(request):
+    if request.user.is_authenticated:
+        return redirect("/")
+    else:
+        return render(request, "components/signin/signin.html", {})
 

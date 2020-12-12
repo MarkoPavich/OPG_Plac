@@ -1,0 +1,67 @@
+{% extends 'components/site_frame.html' %}
+{% load static %}
+
+
+{% block head %}
+<script src="{% static 'navbar.js' %}"></script>
+<script src="{% static 'subpages/signin/signin.js' %}"></script>
+
+<link rel="stylesheet" href="{% static 'subpages/signin/signin.css' %}">
+
+
+
+{% endblock %}
+
+{% block body %}
+    {% include '../navbar.html' %}
+    {% include '../divider_hr_title.html' with title="Prijava Korisnika" %}
+
+    <div class="signin_register_content_container">
+
+        <div class="signin_form_container">
+
+            <form method="POST" class="signin_pg_form">
+                {% csrf_token %}
+                <h3>Prijava registriranih korisnika</h3>
+                <div class="signin_form_input_group">
+                    <label for="email">Email:</label>
+                    <input id="login_form_email" type="email" name="email">
+                </div>
+
+                <div class="signin_form_input_group">
+                    <label for="password">Lozinka:</label>
+                    <input id="login_form_password" name="password" type="password">
+                </div>
+
+                <div class="signin_pg_form_controls">
+                    <button onclick="submit_login(event)">Prijava</button>
+                    <div>
+                        <span>Zaboravljena lozinka ? </span>
+                        <a href="#">Zatražite novu.</a>
+                    </div>
+                    
+                </div>
+            </form>
+
+        </div>
+
+        <div class="registration_notification_container">
+            
+            <div class="registration_notification_inner_container">
+                <h3>Niste se još registrirali ?</h3>
+                <span>Registrirajte se i iskoristite sve mogućnosti i ponude dostupne samo za članove.</span>
+                <button onclick="open_modal_signup_form(event)">Registrirajte se</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% include '../footer.html' %}
+    <script>
+        load_navbar_listeners('noscroll');
+
+    </script>
+
+{% endblock %}

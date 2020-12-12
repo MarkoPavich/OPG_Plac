@@ -51,3 +51,36 @@ def create_user(request):
     return JsonResponse({  # If all checks out, send OK
         "message": "User created, and logged in"
         }, status=200)
+
+
+def login_user(request):
+    if request.method != "POST":
+        return JsonResponse({
+            "message": f"Expected POST request, got '{request.method}'",
+            "error": "bad_request_method"
+        }, status=400)
+
+    json_data = json.loads(request.body)
+
+    try:
+        email = json_data["email"]
+        password = json_data["password"]
+    except KeyError:
+        return JsonResponse({
+            "message": "Bad input data",
+            "error": "bad_data_format"
+        }, status=400)
+
+    user = authenticate(request, username=email, password=password)
+
+    if user is None:
+        return JsonResponse({
+            "message": "Email or password invalid",
+            "error": "invalid_credentials"
+        }, status=401)
+
+    else:
+        login(request, user)
+        return JsonResponse({
+            "message": "Credentials accepted, user signed in"
+        }, status=200)

@@ -1,0 +1,171 @@
+.blog-intro-header-divider{  /* Borrowed component, likely wont refactor anytime soon.. xD */
+	margin-top: 108px;
+}
+
+.signin_register_content_container{
+	max-width: 935px;
+	margin: 0 auto;
+	margin-top: 50px;
+	margin-bottom: 200px;
+
+	padding: 15px;
+
+	display: flex;
+}
+
+.signin_form_container{
+	width: 50%;
+
+	display: flex;
+	justify-content: center;
+
+	border-right: solid 2px #081226;
+}
+
+
+.signin_pg_form{
+	display: flex;
+	flex-direction: column;
+
+	width: 350px;
+
+}
+
+.signin_pg_form h3, .registration_notification_inner_container h3{
+	margin-top: 0px;
+	font-size: 20px;
+
+	color: #F23207;
+}
+
+.signin_form_input_group{
+	display: flex;
+	flex-direction: column;
+
+	margin-bottom: 20px;
+}
+
+.signin_form_input_group input{
+	height: 30px;
+
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.registration_notification_container{
+	width: 50%;
+
+	display: flex;
+	justify-content: center;
+}
+
+.signin_pg_form_controls{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.signin_pg_form_controls div span, .signin_pg_form_controls div a{
+	font-size: 14px;
+	font-style: italic;
+
+	opacity: 0.8;
+}
+
+.signin_pg_form_controls div span{
+	display: block;
+}
+
+.signin_pg_form_controls button{
+	margin: 0;
+	padding: 0;
+
+	width: 100px;
+	height: 40px;
+
+	border: none;
+	border-radius: 5px;
+
+	background: #F23207;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-size: 20px;
+	color: white;
+}
+
+.signin_pg_form_controls button:focus, .registration_notification_inner_container button:focus{
+	outline: none;
+}
+
+.signin_pg_form_controls button:hover, .registration_notification_inner_container button:hover{
+	cursor: pointer;
+
+	transform: translate(0, -1px);
+}
+
+.registration_notification_inner_container{
+	width: 350px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.registration_notification_inner_container button{
+	display: block;
+
+	margin: 0;
+	padding: 0;
+
+	margin-top: 15px;
+
+	width: 200px;
+	height: 40px;
+
+	border: none;
+	border-radius: 5px;
+
+	background: #F23207;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-size: 20px;
+	color: white;
+}
+
+@media(max-width: 800px){
+	.signin_register_content_container{
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.signin_form_container{
+		border: none;
+		margin-bottom: 40px;
+	}
+
+	.signin_form_container, .registration_notification_container{
+		width: 80%;
+	}
+
+	.signin_pg_form, .registration_notification_inner_container{
+		width: 100%;
+	}
+}
+
+@media(max-width: 450px){
+	.signin_form_container, .registration_notification_container{
+		width: 100%;
+	}
+}
+
+
+
+
+
+
+
