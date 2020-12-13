@@ -37,6 +37,7 @@ urlpatterns = [
     path('proizvodi/viewitem/<slug:product_url>', view_proizvod_artikl, name="proizvod_artikl"),
     path('prijava', view_signin, name="signin"),
     path('odjava', view_logout),
+    path("košarica", view_cart),
 
     # API pipeline
 

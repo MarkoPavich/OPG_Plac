@@ -239,6 +239,8 @@ def view_logout(request):
     return redirect("/")
 
 
+def view_cart(request):
+    return render(request, "components/cart/cart.html", {})
 
 
 

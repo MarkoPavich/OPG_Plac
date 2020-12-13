@@ -11,7 +11,7 @@
 
 {% endblock %}
 
-    {% block body %}
+{% block body %}
     {% include '../navbar.html' %}
     {% include '../divider_hr_title.html' with title="Proizvodi" %}
     
@@ -199,5 +199,4 @@
         do_pagination({{total_pages}}, {{current_page}}, "{{active_category}}", "{{active_subcategory}}")
         
     </script>
-
 {% endblock %}
