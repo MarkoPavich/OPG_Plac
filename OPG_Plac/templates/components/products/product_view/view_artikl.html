@@ -6,6 +6,8 @@
     <script src="{% static 'subpages/products/view_artikl.js' %}"></script>
 
     <link rel="stylesheet" href="{% static 'subpages/products/view_artikl.css' %}">
+
+    {% csrf_token %}
 {% endblock %}
 
 {% block body %}
@@ -126,12 +128,10 @@
                     <div class="product-count-options">
 
                         <button onclick="add_sub('sub')" class="product-count-add-sub">-</button>
-
-                        <div class="product-count-total"><span id="product-count-total">0</span></div>
-
+                        <div class="product-count-total"><input name="product-count-total" id="product-count-total" value="0"></div>
                         <button onclick="add_sub('add')" class="product-count-add-sub">+</button>
 
-                        <button class="product-cta-add-btn">Ubaci u košaricu</button>
+                        <button id="add-to-cart-btn" class="product-cta-add-btn"><span class="btn-loadin">Ubaci u košaricu</span></button>
                     </div>
 
                 </div>
@@ -151,6 +151,8 @@
 
     <script>
         load_navbar_listeners("noscroll")
+
+        set_item_id({{item_id}});
     </script>
 
 {% endblock %}

@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage
 from django.utils.html import strip_tags
+from django.contrib.auth.decorators import login_required
 import math
 import json
 
@@ -239,8 +240,10 @@ def view_logout(request):
     return redirect("/")
 
 
+@login_required(login_url="/prijava")
 def view_cart(request):
     return render(request, "components/cart/cart.html", {})
+
 
 
 

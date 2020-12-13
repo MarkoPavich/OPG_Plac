@@ -42,6 +42,7 @@ urlpatterns = [
     # API pipeline
 
     path('user_registration', APIs.create_user),
-    path('login', APIs.login_user)
+    path('login', APIs.login_user),
+    path('add_to_cart', APIs.add_to_cart)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

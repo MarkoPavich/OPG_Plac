@@ -49,8 +49,6 @@
                             <a href="/prijava">Prijava</a>
                             <span>/</span>
                             <a onclick="open_modal_signup_form(event)" href="#">Registracija</a>
-                        {% else %}
-                            <a href="/odjava">Odjava</a> <!-- ToDo - Rework this menu -->
                         {% endif %}
                     </li>
                 </ul>
@@ -121,7 +119,7 @@
                     S337.909,409.807,327.367,409.807z"/></svg>
                 </a>
 
-                <span class="nav_cart_item_count">0</span>
+                <span id="nav_cart_item_count" class="nav_cart_item_count">0</span>
 
             </li>
         {% else %}
