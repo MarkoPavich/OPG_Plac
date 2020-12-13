@@ -47,11 +47,10 @@
 
 
 .shoping_cart-top-content-container{
-	max-width: 1435px;
+	max-width: 1305px;
 	margin: 0 auto;
 
 	padding: 15px;
-	border: solid 1px black;
 
 	display: flex;
 	justify-content: space-between;
@@ -61,8 +60,6 @@
 	width: 100%;
 	max-width: 800px;
 
-	border: solid 2px red;
-
 	display: flex;
 	flex-direction: column;
 }
@@ -70,6 +67,8 @@
 .shopping_cart-product_item-container{
 	height: 120px;
 	width: 100%;
+
+	margin-bottom: -1px;
 
 	padding-left: 15px;
 	padding-right: 15px;
@@ -230,5 +229,115 @@
 
 
 .shopping-cart-order-info-container{
-	border: solid 2px cyan;
+	margin-left: 10px;
+
+	width: 100%;
+	max-width: 400px;
+	height: 320px;
+
+	background-color: #fff;
+}
+
+.shopping-cart-order-info-container header{
+	width: 100%;
+	height: 45px;
+
+	background-color: #081226;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	color: white;
+	font-size: 24px;
+}
+
+.shopping-cart-order-info-container ul{
+	margin: 0;
+	padding: 15px;
+}
+
+.shopping-cart-order-info-container ul li{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	border-top: solid 1px rgba(0,0,0,0.8);
+
+	height: 40px;
+
+	font-size: 16px;
+}
+
+.table-header{
+	opacity: 0.7;
+}
+
+.table-value{
+	font-weight: bold;
+}
+
+.table-total-header{
+	font-weight: bold;
+}
+
+.table-total{
+	font-weight: bold;
+	color: #f2360b;
+
+	font-size: 20px;
+}
+
+.shopping-cart-cta-container{
+	width: 100%;
+
+	padding-top: 20px;
+
+	border-top: solid 1px black;
+
+	display: flex;
+	justify-content: center;
+}
+
+.shopping-cart-cta-container button{
+	height: 35px;
+	width: 220px;
+
+	border: none;
+
+	border-radius: 5px;
+
+	background-color: #f2360b;
+
+	color: white;
+
+	font-size: 20px;
+}
+
+.shopping-cart-cta-container button:focus{
+	outline: none;
+}
+
+.shopping-cart-cta-container button:hover{
+	cursor: pointer;
+
+	transform: translate(0, -1px);
+}
+
+@media(max-width: 1200px){
+	.shoping_cart-top-content-container{
+		flex-direction: column;
+
+		align-items: center;
+	}
+
+	.shopping-cart-order-info-container{
+		max-width: 100%;
+
+		margin-top: 40px;
+	}
+
+	.shopping_cart-items-container{
+		max-width: 100%;
+	}
 }
