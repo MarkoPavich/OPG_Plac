@@ -53,7 +53,7 @@ def serialize_cart(cart_qset):
                 "seo_url": item.product.seo_url,
                 "price": item.product.price,
                 "quantity": item.quantity,
-                "sum": item.product.price + item.quantity
+                "sum": item.product.price * item.quantity
             })
         else:
             item.delete()  # Delete item if quantity is 0

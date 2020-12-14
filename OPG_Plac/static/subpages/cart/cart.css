@@ -123,6 +123,7 @@
 
 .cart-item-info-box{
 	width: 270px;
+
 }
 
 .cart-item-info-box span{
@@ -187,6 +188,7 @@
 
 
 .cart-item-price_info-box{
+	width: 100px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -291,6 +293,10 @@
 	height: 40px;
 
 	font-size: 16px;
+}
+
+.shopping-cart-order-info-container ul li:last-child{
+	padding-top: 20px;
 }
 
 .table-header{
