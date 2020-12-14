@@ -179,7 +179,7 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
         document.body.style.cursor = "wait";  // notify user an action is under way 
 
         // Pack request with csrf_token
-        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken').value;
+        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
         const request = new Request(
             "/user_registration", 
             {headers: {"X-CSRFToken": csrf_token}})
@@ -240,4 +240,43 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
             }
         )
     }
+}
+
+
+function pull_cart_count(){
+    const csrf_token = document.querySelector("[name=csrfmiddlewaretoken]").value;
+
+    const request = new Request("/pull_cart_count", 
+    {headers: {"X-CSRFtoken": csrf_token}}
+    )
+
+    fetch(request, {
+
+        method: "GET",
+        credentials: "same-origin",
+        mode: "same-origin"
+
+    })
+
+    .then(response => {
+
+        if(response.status === 200)
+        {
+            response.json()
+            .then(res => {
+
+                const cart_icon_count = document.querySelector("#nav_cart_item_count");
+                cart_icon_count.innerHTML = res.in_cart;
+
+            })
+        }
+
+        else
+        {
+            response.json()
+            .then(res => {
+                console.log(res.message)
+            })
+        }
+    })
 }

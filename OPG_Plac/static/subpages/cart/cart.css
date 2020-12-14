@@ -104,18 +104,25 @@
 	min-width: 130px;
 
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 }
 
-.cart-item-img-box img{
-	width: 100%;
-	min-width: 80px;
+.product_image_container{
+	height: 80px;
+	width: 80px;
+
+	display: flex;
+	justify-content: center;
+}
+
+.product_image_container img{
 	max-height: 80px;
+	max-width: 80px;
 }
 
 .cart-item-info-box{
-	max-width: 280px;
+	width: 270px;
 }
 
 .cart-item-info-box span{

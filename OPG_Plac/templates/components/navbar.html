@@ -3,6 +3,7 @@
   <!-- Responsive Navbar -->
 
   {% include 'components/utility/modal_signup.html' %}
+  {% csrf_token %}
 
    <nav id="navbar" class="navbar">
     
@@ -120,6 +121,12 @@
                 </a>
 
                 <span id="nav_cart_item_count" class="nav_cart_item_count">0</span>
+
+                {% if user.is_authenticated %}
+                    <script>
+                        pull_cart_count()
+                    </script>
+                {% endif %}
 
             </li>
         {% else %}

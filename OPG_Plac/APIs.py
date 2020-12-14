@@ -127,3 +127,24 @@ def add_to_cart(request):
         "message": "Item added",
         "items_in_cart": items_in_cart
     }, status=200)
+
+
+def get_cart_count(request):
+    if request.method != "GET":
+        return JsonResponse({"message": f"Expected POST request, got '{request.method}'"}, status=400)
+
+    if not request.user.is_authenticated:
+        return JsonResponse({"message": "User not authenticated"}, status=400)
+
+    try:
+        user = models.User.objects.get(email=request.user)
+    except ObjectDoesNotExist:
+        return JsonResponse({"message": "User not found, most likely bad request"}, status=400)
+
+    cart = user.cart.all()
+
+    items_in_cart = 0
+    for item in cart:
+        items_in_cart = items_in_cart + item.quantity
+
+    return JsonResponse({"in_cart": items_in_cart}, status=200)

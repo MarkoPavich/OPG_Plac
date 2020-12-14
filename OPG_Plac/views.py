@@ -12,6 +12,19 @@ from OPG_Plac import models
 
 # helpers
 
+def serialize_previews(queryset):
+    serialized_previews = []
+
+    for article in queryset:
+        serialized_previews.append({
+            "img": article.title_image,
+            "title": article.title,
+            "preview": strip_tags(article.Article_content)[0:223],
+            "seo_url": article.seo_url
+        })
+
+    return serialized_previews
+
 
 def serialize_products(products_qset):
 
@@ -22,11 +35,30 @@ def serialize_products(products_qset):
             "seo_url": product.seo_url,
             "image": product.product_image,
             "price": product.price,
-            "short_desc": product.short_description
+            "short_desc": product.short_description,
+            "item_id": product.item_id
         })
 
     return serialized_products
 
+
+def serialize_cart(cart_qset):
+
+    serialized_cart = []
+    for item in cart_qset:
+        if item.quantity != 0:
+            serialized_cart.append({
+                "name": item.product.name,
+                "img": item.product.product_image,
+                "seo_url": item.product.seo_url,
+                "price": item.product.price,
+                "quantity": item.quantity,
+                "sum": item.product.price + item.quantity
+            })
+        else:
+            item.delete()  # Delete item if quantity is 0
+
+    return serialized_cart
 
 # views
 
@@ -54,19 +86,6 @@ def view_about(request):
 
 # render blog overview page -- returns blog categories from db and sends them as a list to template
 def view_blog_previews(request):
-
-    def serialize_previews(queryset):
-        serialized_previews = []
-
-        for article in queryset:
-            serialized_previews.append({
-                "img": article.title_image,
-                "title": article.title,
-                "preview": strip_tags(article.Article_content)[0:223],
-                "seo_url": article.seo_url
-            })
-
-        return serialized_previews
 
     category_filter = request.GET.get("category", "all")
     page_num = int(request.GET.get("page", 1))
@@ -242,7 +261,23 @@ def view_logout(request):
 
 @login_required(login_url="/prijava")
 def view_cart(request):
-    return render(request, "components/cart/cart.html", {})
+
+    user = models.User.objects.get(email=request.user)
+    cart = serialize_cart(user.cart.all())
+
+    total = float(sum([item["sum"] for item in cart]))
+    base_sum = round(total/1.25, 2)
+    vat = round(total - base_sum)
+    shipping_cost = 20
+    total_sum = total + shipping_cost
+
+    return render(request, "components/cart/cart.html", {
+        "cart": cart,
+        "total": total_sum,
+        "base_sum": base_sum,
+        "vat": vat,
+        "shipping_cost": shipping_cost
+    })
 
 
 

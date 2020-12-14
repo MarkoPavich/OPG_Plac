@@ -43,6 +43,7 @@ urlpatterns = [
 
     path('user_registration', APIs.create_user),
     path('login', APIs.login_user),
-    path('add_to_cart', APIs.add_to_cart)
+    path('add_to_cart', APIs.add_to_cart),
+    path('pull_cart_count', APIs.get_cart_count)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
