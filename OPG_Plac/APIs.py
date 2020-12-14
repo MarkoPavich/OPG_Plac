@@ -118,7 +118,7 @@ def add_to_cart(request):
         cart_item = models.Cart(user=user, product=product, quantity=quantity)
         cart_item.save()
 
-    items_in_cart = quantity
+    items_in_cart = 0
 
     for item in cart:
         items_in_cart = items_in_cart + item.quantity
