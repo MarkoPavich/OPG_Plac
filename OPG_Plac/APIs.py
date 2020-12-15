@@ -148,3 +148,5 @@ def get_cart_count(request):
         items_in_cart = items_in_cart + item.quantity
 
     return JsonResponse({"in_cart": items_in_cart}, status=200)
+
+

@@ -78,7 +78,7 @@
 .product-overview-unit{
 
 	max-width: 222px;
-	max-height: 290px;
+	height: 350px;
 
 	display: flex;
 	flex-direction: column;

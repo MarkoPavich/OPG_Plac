@@ -132,5 +132,3 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'OPG_Plac/media')
-
-AUTH_USER_MODEL = 'OPG_Plac.User'  # NOTE TO SELF -- Study this and why it's needed
