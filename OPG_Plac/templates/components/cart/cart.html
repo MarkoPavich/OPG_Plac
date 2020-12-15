@@ -3,6 +3,7 @@
 
 {% block head %}
     <script src="{% static 'navbar.js' %}"></script>
+    <script src="{% static 'subpages/cart/cart.js' %}" ></script>
 
     <link rel="stylesheet" href="{% static 'subpages/cart/cart.css' %}">
 
@@ -32,9 +33,8 @@
             {% for item in cart %}
                 <div class="shopping_cart-product_item-container">   <!-- Item unit start-->
                     <div class="cart-item-img-box">
-                        <a class="cart-item-option_remove-ico" href="/proizvodi/viewitem/{{ item.seo_url }}">
+                        <a onclick="remove_item_from_cart(event, {{ item.item_id }})" class="cart-item-option_remove-ico" href="#">
                             <svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 512c-141.164062 0-256-114.835938-256-256s114.835938-256 256-256 256 114.835938 256 256-114.835938 256-256 256zm0-480c-123.519531 0-224 100.480469-224 224s100.480469 224 224 224 224-100.480469 224-224-100.480469-224-224-224zm0 0"/><path d="m176.8125 351.1875c-4.097656 0-8.195312-1.554688-11.308594-4.691406-6.25-6.25-6.25-16.382813 0-22.632813l158.398438-158.402343c6.253906-6.25 16.386718-6.25 22.636718 0s6.25 16.382812 0 22.636718l-158.402343 158.398438c-3.15625 3.136718-7.25 4.691406-11.324219 4.691406zm0 0"/><path d="m335.1875 351.1875c-4.09375 0-8.191406-1.554688-11.304688-4.691406l-158.398437-158.378906c-6.253906-6.25-6.253906-16.382813 0-22.632813 6.25-6.253906 16.382813-6.253906 22.632813 0l158.398437 158.398437c6.253906 6.25 6.253906 16.382813 0 22.632813-3.132813 3.117187-7.230469 4.671875-11.328125 4.671875zm0 0"/></svg>
-                        </a>
                         <div class="product_image_container">
                             <a href="/proizvodi/viewitem/{{ item.seo_url }}">
                                 <img src="{{ item.img.url }}" alt="product_in_cart-image">
@@ -50,9 +50,12 @@
 
                     <div class="cart-item-quantity-controls">
                         
-                        <button onclick="add_sub('add')" class="product-count-add-sub">+</button>
-                        <div class="product-count-total"><span id="product-count-total">{{ item.quantity }}</span></div>
-                        <button onclick="add_sub('sub')" class="product-count-add-sub">-</button>
+                        <button onclick="add_sub('add', {{forloop.counter0}})" class="product-count-add-sub">+</button>
+                        <div class="product-count-total">
+                            <input onchange="validate_input_quantity({{forloop.counter0}})" class="item-quantity-counter" name="item-quantity-counter-{{forloop.counter0}}" id="item-quantity-counter-{{forloop.counter0}}" value="{{ item.quantity }}">
+                            <input type="hidden" id="item-id-{{forloop.counter0}}" value={{ item.item_id }}>
+                        </div>
+                        <button onclick="add_sub('sub', {{forloop.counter0}})" class="product-count-add-sub">-</button>
 
                     </div>
 

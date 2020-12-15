@@ -102,6 +102,9 @@ def add_to_cart(request):
     except KeyError:
         return JsonResponse({"message": "bad request format"}, status=400)
 
+    if quantity == 0:
+        return JsonResponse({"message": "Bad request, cannot add 0 quantity to cart"}, status=400)
+
     try:
         user = models.User.objects.get(email=request.user)
         product = models.Product.objects.get(item_id=item_id)
@@ -131,7 +134,7 @@ def add_to_cart(request):
 
 def get_cart_count(request):
     if request.method != "GET":
-        return JsonResponse({"message": f"Expected POST request, got '{request.method}'"}, status=400)
+        return JsonResponse({"message": f"Expected GET request, got '{request.method}'"}, status=400)
 
     if not request.user.is_authenticated:
         return JsonResponse({"message": "User not authenticated"}, status=400)
@@ -150,3 +153,21 @@ def get_cart_count(request):
     return JsonResponse({"in_cart": items_in_cart}, status=200)
 
 
+def remove_item_from_cart(request):
+    if request.method != "DELETE" or not request.user.is_authenticated:
+        return JsonResponse({"message": "bad_request_method"}, status=400)
+
+    json_data = json.loads(request.body)
+
+    try:
+        user = models.User.objects.get(email=request.user)
+        item = models.Product.objects.get(item_id=json_data["item_id"])
+    except ObjectDoesNotExist or KeyError:
+        return JsonResponse({
+            "message": "User or item does not exist, or most likely -- bad request"
+        }, 400)
+
+    cart_item = user.cart.get(product=item)
+    cart_item.delete()
+
+    return JsonResponse({"message": "Item removed from cart"}, status=200)

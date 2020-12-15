@@ -34,7 +34,7 @@ function validate_input_quantity(){
     const input = document.querySelector("#product-count-total");
 
     if(input.value != parseInt(input.value) || parseInt(input.value) === 0){
-        input.value = 0;
+        input.value = 1;
         input.style.border = "solid 3px red";
     }
 
