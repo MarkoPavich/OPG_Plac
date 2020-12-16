@@ -25,7 +25,18 @@ function update_item_quantity(index){
         credentials: "same-origin"
     })
 
-    .then(response => location.reload())
+    .then(response => {
+        if (response.status === 200) location.reload();
+        else
+        {
+            response.json()
+            .then(res => {
+                console.log(res.message);
+                view_overlay.style.visibility = "";
+                alert("Oops, nešto ne valja");
+            })
+        }
+    })
 
 }
 
