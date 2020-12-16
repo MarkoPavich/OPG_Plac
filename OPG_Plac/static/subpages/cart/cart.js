@@ -1,8 +1,31 @@
 let timer;
 
-function modify_item_quantity(index){
+function update_item_quantity(index){
     const item_id = document.querySelector(`#item-id-${index}`).value;
-    document.body.className = "no-tamper"
+    const quantity = document.querySelector(`#item-quantity-counter-${index}`).value;
+
+    const view_overlay = document.querySelector("#overlay");
+
+    view_overlay.style.visibility = "visible"; // Prevent further user input
+
+    const csrf_token = document.querySelector("[name=csrfmiddlewaretoken]").value;
+
+    const request = new Request("/update_cart_item_quantity", {
+        headers: {"X-CSRFtoken": csrf_token}
+    });
+
+
+    fetch(request, {
+        method: "PUT",
+        mode: "same-origin",
+        body: JSON.stringify({
+            item_id: item_id,
+            quantity: quantity
+        }),
+        credentials: "same-origin"
+    })
+
+    .then(response => location.reload())
 
 }
 
@@ -58,6 +81,6 @@ function validate_input_quantity(index){
     else
     {
         input.style.border = "";
-        timer = window.setTimeout(() => modify_item_quantity(index), 2000);
+        timer = window.setTimeout(() => update_item_quantity(index), 500);
     }
 }

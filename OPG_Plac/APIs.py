@@ -162,12 +162,45 @@ def remove_item_from_cart(request):
     try:
         user = models.User.objects.get(email=request.user)
         item = models.Product.objects.get(item_id=json_data["item_id"])
-    except ObjectDoesNotExist or KeyError:
+    except ObjectDoesNotExist:
         return JsonResponse({
-            "message": "User or item does not exist, or most likely -- bad request"
-        }, 400)
+            "message": "User does not exist, most likely bad request"
+        }, status=400)
+    except KeyError:
+        return JsonResponse({
+            "message": "Item does not exist, most likely bad request"
+            }, status=400)
 
     cart_item = user.cart.get(product=item)
     cart_item.delete()
 
     return JsonResponse({"message": "Item removed from cart"}, status=200)
+
+
+def update_cart_item_quantity(request):
+    if request.method != "PUT" or not request.user.is_authenticated:
+        return JsonResponse({"message": "bad_request_method"}, status=400)
+
+    json_data = json.loads(request.body)
+
+    try:
+        user = models.User.objects.get(email=request.user)
+        item = models.Product.objects.get(item_id=json_data["item_id"])
+        cart_item = user.cart.get(product=item)
+        quantity = int(json_data["quantity"])
+    except ObjectDoesNotExist:
+        return JsonResponse({
+            "message": "object does not exist, most likely bad request"
+        }, status=400)
+    except KeyError:
+        return JsonResponse({
+            "message": "Item does not exist, most likely bad request"
+            }, status=400)
+
+    if quantity != int(quantity) or quantity <= 0:
+        return JsonResponse({"message": "Illegal quantity value"}, status=400)
+
+    cart_item.quantity = quantity
+    cart_item.save()
+
+    return JsonResponse({"message": "cart_item quantity updated"}, status=200)
