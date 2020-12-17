@@ -1,6 +1,7 @@
 
 let navbar_scroll = "scroll";  // State variable
 
+
 function adjust_navbar_width(){  // Switches between mobile (hamburger_menu) navbar, and regular navbar
     if(window.innerWidth < 500){
         document.querySelector("#nav-menu").className = "hide";
@@ -14,6 +15,7 @@ function adjust_navbar_width(){  // Switches between mobile (hamburger_menu) nav
 
     if(document.querySelector("#nav_hamburger_sidebar").className === "nav-hamburger-sidebar sidebar-open") openSidebar();
 }
+
 
 function adjust_navbar_scroll(){  // Switches between navbar with transparent background without search, and vice versa. based on scroll position. 
 
@@ -30,6 +32,7 @@ function adjust_navbar_scroll(){  // Switches between navbar with transparent ba
         search_bar.className = "hide";
     }
 }
+
 
 function openSidebar(event){  // Opens and closes mobile hamburger menu. Disables navbar scroll listener and forces opaque layout while active.
     
@@ -63,6 +66,7 @@ function openSidebar(event){  // Opens and closes mobile hamburger menu. Disable
 
 }
 
+
 // Enables selective load of listeners -- Pass 'noscroll' to disable 'navbar on top' transparency 
 function load_navbar_listeners(mode){   
     window.addEventListener("DOMContentLoaded", adjust_navbar_width);
@@ -83,13 +87,16 @@ function load_navbar_listeners(mode){
     }
 }
 
+
  // Modal signup window
+
 
 function open_modal_signup_form(){
     const modal = document.querySelector("#modal_signup_form");
 
     modal.className = modal.className + " modal-active";
 }
+
 
 function close_modal_signup_form(event){
 	if(event != undefined) event.preventDefault()
@@ -205,7 +212,8 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
                 switch(response.status){
                 	case 200:
 	                	document.body.style.cursor = "";
-	                	close_modal_signup_form();
+                        close_modal_signup_form();
+                        window.localStorage.removeItem("cart_count")
 	                	location.reload();
 	                	break;
 
@@ -244,39 +252,46 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
 
 
 function pull_cart_count(){
-    const csrf_token = document.querySelector("[name=csrfmiddlewaretoken]").value;
+    const cart_icon_count = document.querySelector("#nav_cart_item_count");
 
-    const request = new Request("/pull_cart_count", 
-    {headers: {"X-CSRFtoken": csrf_token}}
-    )
+    if(localStorage.getItem("cart_count") != null) cart_icon_count.innerHTML = localStorage.getItem("cart_count");
 
-    fetch(request, {
+    else
+    {
+        const csrf_token = document.querySelector("[name=csrfmiddlewaretoken]").value;
 
-        method: "GET",
-        credentials: "same-origin",
-        mode: "same-origin"
+        const request = new Request("/pull_cart_count", 
+        {headers: {"X-CSRFtoken": csrf_token}}
+        )
 
-    })
+        fetch(request, {
 
-    .then(response => {
+            method: "GET",
+            credentials: "same-origin",
+            mode: "same-origin"
 
-        if(response.status === 200)
-        {
-            response.json()
-            .then(res => {
+        })
 
-                const cart_icon_count = document.querySelector("#nav_cart_item_count");
-                cart_icon_count.innerHTML = res.in_cart;
+        .then(response => {
 
-            })
-        }
+            if(response.status === 200)
+            {
+                response.json()
+                .then(res => {
 
-        else
-        {
-            response.json()
-            .then(res => {
-                console.log(res.message)
-            })
-        }
-    })
+                    cart_icon_count.innerHTML = res.in_cart;
+                    window.localStorage.setItem("cart_count", res.in_cart);
+
+                })
+            }
+
+            else
+            {
+                response.json()
+                .then(res => {
+                    console.log(res.message);
+                })
+            }
+        })
+    }
 }

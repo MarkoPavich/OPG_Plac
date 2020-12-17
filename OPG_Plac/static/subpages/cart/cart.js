@@ -26,7 +26,12 @@ function update_item_quantity(index){
     })
 
     .then(response => {
-        if (response.status === 200) location.reload();
+        if (response.status === 200)
+        {
+            location.reload();
+            window.localStorage.removeItem("cart_count");
+        }
+
         else
         {
             response.json()

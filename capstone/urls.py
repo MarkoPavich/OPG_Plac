@@ -38,6 +38,7 @@ urlpatterns = [
     path('prijava', view_signin, name="signin"),
     path('odjava', view_logout),
     path("košarica", view_cart),
+    path("dostava", view_delivery, name="dostava"),
 
     # API pipeline
 

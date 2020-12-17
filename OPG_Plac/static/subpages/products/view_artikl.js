@@ -91,6 +91,7 @@ function add_to_cart(){
                         btn.firstChild.className = btn_txt_cn_before;
     
                         cart_icon_count.innerHTML = res.items_in_cart;
+                        window.localStorage.setItem("cart_count", res.items_in_cart)
     
                         btn.addEventListener("click", add_to_cart);
 

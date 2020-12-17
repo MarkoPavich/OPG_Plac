@@ -33,7 +33,7 @@ function submit_login(event){
     }
 
     if(submit){
-        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken').value;
+        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
         const request = new Request(
             "/login",
             {headers: {"X-CSRFtoken": csrf_token}}
@@ -43,12 +43,14 @@ function submit_login(event){
 
         fetch(request, {
             method: "POST",
+            mode: "same-origin",
             body: JSON.stringify(
                 {
                     email: email_field.value,
                     password: password_field.value
                 }
-            )
+            ),
+            credentials: "same-origin"
         })
         .then(response => {
             switch (response.status)
@@ -56,11 +58,11 @@ function submit_login(event){
                 case 200:
                     email_field.value = "";
                     password_field.value = "";
+                    window.localStorage.removeItem("cart_count")
                     location.reload();
                     break;
                 
                 case 401:
-                    email_field.value = "";
                     password_field.value = "";
 
                     email_field.style.border = "solid 2px red";

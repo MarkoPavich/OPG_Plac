@@ -92,7 +92,7 @@
             </ul>
 
             <div class="shopping-cart-cta-container">
-                <button>Dovrši kupovinu</button>
+                <a href="/dostava"><button>Nastavi</button></a>
             </div>
 
         </div>
@@ -103,6 +103,11 @@
 
     <script>
         load_navbar_listeners('noscroll');
+
+        window.addEventListener("DOMContentLoaded", () => {
+            window.localStorage.setItem("cart_count", {{cart_count}});
+            document.querySelector("#nav_cart_item_count").innerHTML = {{cart_count}};
+        })
 
     </script>
 {% endblock %}
