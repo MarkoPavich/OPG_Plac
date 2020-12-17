@@ -1,0 +1,157 @@
+/* Subnav */
+
+.shopping-cart-order_process-nav{  /* Borrowed from cart, bad practice, but too lazy to reimplement xD -- Will probably use for order confirmation aswell.. :/; */
+	width: 100%; 
+
+	display: flex;
+	justify-content: center;
+
+	margin-top: 90px;
+}
+
+.shopping-cart-subnav{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	list-style: none;
+
+	padding: 0;
+
+	text-align: center;
+}
+
+.shopping-cart-subnav li{
+	padding: 10px;
+}
+
+.shopping-cart-subnav li a{
+	text-decoration: none;
+
+	color: black;
+	opacity: 0.7;
+
+	font-style: italic;
+
+	font-size: 16px;
+}
+
+.cart-subnav-divider span{
+	opacity: 0.7;
+
+	font-size: 24px;
+}
+
+.cart-subnav-active a{
+	opacity: 1 !important;
+	color: #f2360b !important;
+}
+
+/* Subnav end */
+
+.deliver-form-top-container{
+	width: 100%;
+	max-width: 1100px;
+
+	margin: auto;
+}
+
+.deliver-form-top-container h2{
+	color: #f2360b;
+
+	padding-left: 15px;
+}
+
+.delivery-data-form{
+	width: 100%;
+}
+
+.delivery-form-input-group{
+	display: flex;
+	justify-content: space-between;
+}
+
+.delivery-form-input-group div{
+	width: 50%;
+
+	padding: 15px;
+}
+
+.delivery-form-input-group label{
+	display: block;
+
+	color: rgba(0,0,0,0.7);
+}
+
+.delivery-form-input-group input{
+	height: 50px;
+	width: 100%;
+
+	transition: outline 0.3s ease;
+
+	border-color: rgba(0,0,0,0.4);
+
+	padding-left: 10px;
+	padding-right: 10px;
+
+	font-size: 18px;
+}
+
+.delivery-form-input-group input:focus{
+	outline-color: #f2360b;
+	border: none;
+}
+
+
+.delivery-form-notice-textarea-container{
+	margin-top: 30px;
+	width: 100% !important;
+}
+
+#notice{
+	width: 100%;
+	height: 100px;
+
+	resize: none;
+
+	font-size: 18px;
+	padding: 10px;
+}
+
+#notice:focus{
+	outline-color: #f2360b;
+}
+
+.delivery-data-form-checkbox-box{
+	padding-left: 15px;
+
+	margin-bottom: 15px;
+
+	display: flex;
+	align-items: center;
+}
+
+.delivery-data-form-checkbox-box input{
+	width: 20px;
+	height: 20px;
+
+	margin-right: 15px;
+}
+
+@media(max-width: 800px){
+	.delivery-form-input-group{
+		flex-direction: column;
+	}
+
+	.delivery-form-input-group div{
+		width: 100%;
+	}
+}
+
+.delivery-block-blanket{
+	display: none;
+}
+
+.blanket-visible{
+	display: block;
+}

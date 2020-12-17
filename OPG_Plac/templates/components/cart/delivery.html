@@ -2,10 +2,143 @@
 {% load static %}
 
 {% block head %}
+    <script src="{% static 'navbar.js' %}"></script>
+    <script src="{% static 'subpages/cart/delivery.js' %}" ></script>
+
+    <link rel="stylesheet" href="{% static 'subpages/cart/delivery.css' %}">
+
 {% endblock %}
 
 {% block body %}
     {% include '../navbar.html' %}
+
+        <nav class="shopping-cart-order_process-nav">
+            <ul class="shopping-cart-subnav">
+                <li><a href="/košarica">Pregled Košarice</a></li>
+                <li class="cart-subnav-divider"><span>></span></li>
+                <li class="cart-subnav-active"><a href="#">Podatci za dostavu</a></li>
+                <li class="cart-subnav-divider"><span>></span></li>
+                <li><a href="#">Potvrda narudžbe</a></li>
+            </ul>
+        </nav>
+
+        <div class="deliver-form-top-container">
+            <h2>Podatci o kupcu</h2>
+            <form class="delivery-data-form">
+
+                <div class="delivery-form-input-group">
+                    <div>
+                        <label for="name">Ime:</label>
+                        <input type="text" name="name">
+                    </div>
+                    <div>
+                        <label for="surname">Prezime:</label>
+                        <input type="text" name="surname">
+                    </div>
+                </div>
+
+                <div class="delivery-form-input-group">
+                    <div>
+                        <label for="address">Adresa:</label>
+                        <input type="text" name="address">
+                    </div>
+                    <div>
+                        <label for="post-code">Poštanski broj:</label>
+                        <input type="number" maxlength=5>
+                    </div>
+                </div>
+                <div class="delivery-form-input-group">
+                    <div>
+                        <label for="place">Mjesto:</label>
+                        <input type="text" name="place">
+                    </div>
+                    <div>
+                        <label for="phone">Telefon:</label>
+                        <input type="number">
+                    </div>
+                </div>
+
+            </form>
+            <h2>Podatci za dostavu</h2>
+            <form class="delivery-data-form">
+                <div>
+                    <div class="delivery-data-form-checkbox-box">
+                        <input onchange="show_hide_delivery_form()" id="same-delivery-chckbox" checked type="checkbox">
+                        <label for="">Podatci za dostavu su isti kao i o kupcu</label>
+                    </div>
+                    <div class="delivery-data-form-checkbox-box">
+                        <input onchange="show_hide_r1_form()" id="need-r1-chckbox" type="checkbox">
+                        <label for="">Potreban R1 račun</label>
+                    </div>
+                </div>
+
+                <div id="delivery-block-blanket" class="delivery-block-blanket">
+                    <div class="delivery-form-input-group">
+                        <div>
+                            <label for="name">Ime:</label>
+                            <input type="text" name="name">
+                        </div>
+                        <div>
+                            <label for="surname">Prezime:</label>
+                            <input type="text" name="surname">
+                        </div>
+                    </div>
+
+                    <div class="delivery-form-input-group">
+                        <div>
+                            <label for="address">Adresa:</label>
+                            <input type="text" name="address">
+                        </div>
+                        <div>
+                            <label for="post-code">Poštanski broj:</label>
+                            <input type="number" maxlength=5>
+                        </div>
+                    </div>
+                    <div class="delivery-form-input-group">
+                        <div>
+                            <label for="place">Mjesto:</label>
+                            <input type="text" name="place">
+                        </div>
+                        <div>
+                            <label for="phone">Telefon:</label>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="r1-blanket" class="delivery-block-blanket">
+                    <div class="delivery-form-input-group">
+                        <div>
+                            <label for="company">Tvrtka:</label>
+                            <input type="text" name="company">
+                        </div>
+                        <div>
+                            <label for="oib">OIB:</label>
+                            <input type="number">
+                        </div>
+                    </div>
+                    <div class="delivery-form-input-group">
+                        <div>
+                            <label for="company_place">Mjesto:</label>
+                            <input type="text" name="company_place">
+                        </div>
+                        <div>
+                            <label for="company_post_code">Poštanski broj:</label>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="delivery-form-input-group">
+                    <div class="delivery-form-notice-textarea-container">
+                        <label for="notice">Napomena:</label>
+                        <textarea name="notice" id="notice" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
 
     {% include '../footer.html' %}
 
