@@ -49,6 +49,7 @@
 
 /* Subnav end */
 
+
 .deliver-form-top-container{
 	width: 100%;
 	max-width: 1100px;
@@ -154,4 +155,21 @@
 
 .blanket-visible{
 	display: block;
+}
+
+.delivery-data-submit-btn{
+	height: 40px;
+	width: 120px;
+
+	margin-right: 25px;
+
+	border: none;
+
+	background-color: #662496;
+
+	border-radius: 5px;
+
+	color: white;
+
+	font-size: 20px;
 }
