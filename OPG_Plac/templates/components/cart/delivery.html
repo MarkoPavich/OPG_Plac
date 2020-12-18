@@ -27,32 +27,32 @@
             <form class="delivery-data-form">
 
                 <div class="delivery-form-input-group">
-                    <div>
+                    <div id="name-container">
                         <label for="name">Ime:</label>
                         <input type="text" name="name" id=name>
                     </div>
-                    <div>
+                    <div id="surname-container">
                         <label for="surname">Prezime:</label>
                         <input id="surname" type="text" name="surname">
                     </div>
                 </div>
 
                 <div class="delivery-form-input-group">
-                    <div>
+                    <div id="address-container">
                         <label for="address">Adresa:</label>
                         <input id="address" type="text" name="address">
                     </div>
-                    <div>
+                    <div id="post_code-container">
                         <label  for="post-code">Poštanski broj:</label>
                         <input id="post_code" oninput="validate_pcode_input(this)" type="text">
                     </div>
                 </div>
                 <div class="delivery-form-input-group">
-                    <div>
+                    <div id="place-container">
                         <label for="place">Mjesto:</label>
                         <input id="place" type="text" name="place">
                     </div>
-                    <div>
+                    <div id="phone-container">
                         <label for="phone">Telefon:</label>
                         <input id="phone" oninput="validate_phone_num(this)" type="text">
                     </div>
@@ -75,32 +75,32 @@
 
                 <div id="delivery-block-blanket" class="delivery-block-blanket">
                     <div class="delivery-form-input-group">
-                        <div>
+                        <div id="delivery_name-container">
                             <label for="name">Ime preuzimatelja:</label>
                             <input id="delivery_name" type="text" name="delivery_name">
                         </div>
-                        <div>
+                        <div id="delivery_surname-container">
                             <label for="surname">Prezime preuzimatelja:</label>
                             <input id="delivery_surname" type="text" name="delivery_surname">
                         </div>
                     </div>
 
                     <div class="delivery-form-input-group">
-                        <div>
+                        <div id="delivery_address-container">
                             <label for="address">Adresa dostave:</label>
                             <input id="delivery_address" type="text" name="delivery_address">
                         </div>
-                        <div>
+                        <div id="delivery_post_code-container">
                             <label for="post-code">Poštanski broj:</label>
                             <input id="delivery_post_code" oninput="validate_pcode_input(this)" type="text">
                         </div>
                     </div>
                     <div class="delivery-form-input-group">
-                        <div>
+                        <div id="delivery_place-container">
                             <label for="place">Mjesto:</label>
                             <input id="delivery_place" type="text" name="place">
                         </div>
-                        <div>
+                        <div id="delivery_phone-container">
                             <label for="phone">Telefon:</label>
                             <input id="delivery_phone" oninput="validate_phone_num(this)" type="text">
                         </div>
@@ -109,23 +109,23 @@
 
                 <div id="r1-blanket" class="delivery-block-blanket">
                     <div class="delivery-form-input-group">
-                        <div>
+                        <div id="company_name-container">
                             <label for="company">Tvrtka:</label>
-                            <input type="text" name="company">
+                            <input id="company_name" type="text" name="company">
                         </div>
-                        <div>
+                        <div id="OIB-container">
                             <label for="oib">OIB:</label>
-                            <input oninput="validate_OIB(this)" type="text">
+                            <input id="OIB" oninput="validate_OIB(this)" type="text">
                         </div>
                     </div>
                     <div class="delivery-form-input-group">
-                        <div>
+                        <div id="company_place-container">
                             <label for="company_place">Mjesto:</label>
-                            <input type="text" name="company_place">
+                            <input id="company_place" type="text" name="company_place">
                         </div>
-                        <div>
+                        <div id="company_post_code-container">
                             <label for="company_post_code">Poštanski broj:</label>
-                            <input oninput="validate_pcode_input(this)" type="text">
+                            <input id="company_post_code" oninput="validate_pcode_input(this)" type="text">
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                     <div class="delivery-data-form-checkbox-box">
                         <button onclick="pdf(event)" class="delivery-data-submit-btn">Nastavi</button>
                         <input name="remember" type="checkbox">
-                        <label for="remember">Zapamti za ubuduće</label>
+                        <label id="remember-input-chckbox" for="remember">Zapamti za ubuduće</label>
                     </div>
                 </div>
 
