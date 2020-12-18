@@ -173,3 +173,23 @@
 
 	font-size: 20px;
 }
+
+.error-tooltip{
+	position: relative;
+}
+
+.error-tooltip input{
+	border: solid 2px red;
+}
+
+.error-tooltip::after{
+	content: attr(data-tooltip);
+
+	font-size: 18px;
+	font-weight: bold;
+
+	margin-left: 5px;
+
+	color: red;
+
+}

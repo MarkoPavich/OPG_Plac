@@ -54,10 +54,15 @@ function validate_OIB(input){
 
 
 function submit_delivery_data(){
+    // Flow control
+
+    let submit = true;
+
     // Grab inputs
 
     const same_delivery = document.querySelector("#same-delivery-chckbox").checked;
     const need_r1 = document.querySelector("#need-r1-chckbox").checked;
+    const remember_input = document.querySelector("#remember-input-chckbox");
 
     const user_input = {
         name: document.querySelector("#name"),
@@ -77,10 +82,84 @@ function submit_delivery_data(){
         delivery_phone: document.querySelector("#delivery_phone")
     }
 
-    Object.keys(delivery_input).forEach(key => {
-        console.log(`${key}: ${delivery_input[key].value}`)
+    const company_input = {
+        company_name: document.querySelector("#company_name"),
+        OIB: document.querySelector("#OIB"),
+        company_place: document.querySelector("#company_place"),
+        company_post_code: document.querySelector("#company_post_code")
+    }
+
+    // verify fields not empty
+
+    Object.keys(user_input).forEach(key => {
+        if(!valide_fields(user_input, key)) submit = false;
     })
 
+    if(!same_delivery){   // Validate delivery data, if is_same unchecked
+        Object.keys(delivery_input).forEach(key => {
+            if(!valide_fields(delivery_input, key)) submit = false;
+        })
+    }
+
+    if(need_r1){  // Validate company data, if user needs r1
+        Object.keys(company_input).forEach(key => {
+            if(!valide_fields(company_input, key)) submit = false;
+        })
+    }
+
+    console.log(submit);
+    
+}
 
 
+// submit_delivery_data() helper -- Validates fields, and applies or clears tooltips and error classnames
+function valide_fields(fields, key){
+    const container = document.querySelector(`#${key}-container`);
+    let is_valid = true;
+
+    if(fields[key].value === ""){
+        is_valid = false;
+
+        container.setAttribute("data-tooltip", "Ovo polje je obavezno");
+        container.className = "error-tooltip";
+    }
+    else{
+
+        const content = validate_strict_fields(fields[key], key)
+
+        if(content.valid){
+            container.removeAttribute("data-tooltip");
+            container.className = "";
+        }
+        else{
+            is_valid = false;
+
+            container.setAttribute("data-tooltip", content.tooltip);
+            container.className = "error-tooltip";
+        }
+
+    }
+
+    return is_valid;
+}
+
+
+// submit_delivery_data() helper -- verifies OIB and post code correct length
+function validate_strict_fields(input, key){
+
+    if(key.includes("post_code")){
+        if(input.value.length != 5 || (input.value != parseInt(input.value))){
+            return {valid: false, tooltip: "Polje mora sadržavati 5 znamenaka"};
+        }
+        else return {valid: true};
+    }
+
+    else if(key.includes("OIB")){
+        if(input.value.length != 11 || (input.value != parseInt(input.value))){
+            return {valid: false, tooltip: "Polje mora sadržavati 11 znamena"};
+        }
+        else return {valid: true};
+    }
+
+    else return {valid: true};
 }
