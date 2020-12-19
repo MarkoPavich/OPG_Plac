@@ -291,9 +291,24 @@ def view_delivery(request):
     return render(request, "components/cart/delivery.html")
 
 
+@login_required(login_url="/prijava")
+def view_checkout(request):
+    user = models.User.objects.get(email=request.user)
+    cart = serialize_cart(user.cart.all())
 
+    total = float(sum([item["sum"] for item in cart]))
+    base_sum = round(total/1.25, 2)
+    vat = round(total - base_sum)
+    shipping_cost = 20
+    total_sum = total + shipping_cost
 
-
+    return render(request, "components/cart/checkout.html", {
+        "cart": cart,
+        "total": total_sum,
+        "base_sum": base_sum,
+        "vat": vat,
+        "shipping_cost": shipping_cost
+    })
 
 
 

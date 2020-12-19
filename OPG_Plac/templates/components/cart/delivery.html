@@ -2,25 +2,18 @@
 {% load static %}
 
 {% block head %}
+<title>Podatci o dostavi | OPG_Plac</title>
     <script src="{% static 'navbar.js' %}"></script>
     <script src="{% static 'subpages/cart/delivery.js' %}" ></script>
 
     <link rel="stylesheet" href="{% static 'subpages/cart/delivery.css' %}">
+    <link rel="stylesheet" href="{% static 'subpages/cart/subnav.css' %}">
 
 {% endblock %}
 
 {% block body %}
     {% include '../navbar.html' %}
-
-        <nav class="shopping-cart-order_process-nav">
-            <ul class="shopping-cart-subnav">
-                <li><a href="/košarica">Pregled Košarice</a></li>
-                <li class="cart-subnav-divider"><span>></span></li>
-                <li class="cart-subnav-active"><a href="#">Podatci za dostavu</a></li>
-                <li class="cart-subnav-divider"><span>></span></li>
-                <li><a>Potvrda narudžbe</a></li>
-            </ul>
-        </nav>
+    {% include './subnav.html' with step="delivery" %}
 
         <div class="deliver-form-top-container">
             <h2>Podatci o kupcu</h2>

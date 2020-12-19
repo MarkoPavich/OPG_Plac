@@ -90,7 +90,6 @@ function submit_delivery_data(){
     }
 
     // verify fields not empty
-
     Object.keys(user_input).forEach(key => {
         if(!valide_fields(user_input, key)) submit = false;
     })
@@ -107,7 +106,7 @@ function submit_delivery_data(){
         })
     }
 
-    console.log(submit);
+    console.log(submit)
     
 }
 
@@ -117,22 +116,22 @@ function valide_fields(fields, key){
     const container = document.querySelector(`#${key}-container`);
     let is_valid = true;
 
-    if(fields[key].value === ""){
+    if(fields[key].value === ""){ // Check if empty
         is_valid = false;
 
         container.setAttribute("data-tooltip", "Ovo polje je obavezno");
         container.className = "error-tooltip";
     }
-    else{
+    else{ // else handoff to other checks
 
         const content = validate_strict_fields(fields[key], key)
 
-        if(content.valid){
+        if(content.valid){  // If valid, remove possible tooltip and tooltip class
             container.removeAttribute("data-tooltip");
             container.className = "";
         }
         else{
-            is_valid = false;
+            is_valid = false; // If not valid, set tooltip and tooltip class
 
             container.setAttribute("data-tooltip", content.tooltip);
             container.className = "error-tooltip";
@@ -144,17 +143,17 @@ function valide_fields(fields, key){
 }
 
 
-// submit_delivery_data() helper -- verifies OIB and post code correct length
+// submit_delivery_data() helper -- verifies OIB and post code correct length, can be expanded for other checks
 function validate_strict_fields(input, key){
 
-    if(key.includes("post_code")){
+    if(key.includes("post_code")){ // Check if post_code exactly 5 nums
         if(input.value.length != 5 || (input.value != parseInt(input.value))){
             return {valid: false, tooltip: "Polje mora sadržavati 5 znamenaka"};
         }
         else return {valid: true};
     }
 
-    else if(key.includes("OIB")){
+    else if(key.includes("OIB")){  // Check if OIB exactly 11 nums
         if(input.value.length != 11 || (input.value != parseInt(input.value))){
             return {valid: false, tooltip: "Polje mora sadržavati 11 znamena"};
         }

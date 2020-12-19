@@ -1,0 +1,88 @@
+{% extends 'components/site_frame.html' %}
+{% load static %}
+
+{% block head %}
+<title>Podatci o dostavi | OPG_Plac</title>
+    <script src="{% static 'navbar.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'subpages/cart/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'subpages/cart/subnav.css' %}">
+
+{% endblock %}
+
+{% block body %}
+    {% include '../navbar.html' %}
+    {% include './subnav.html' with step="checkout" %}
+
+    <div class="checkout-top-container">
+
+        <h2>Potvrda narudžbe</h2>
+        <div class="checkout-flex-container">
+            <div class="items-overview-container">
+                <header class="item-fields-description-header">
+                    <ul>
+                        <li>Artikl</li>
+                        <li>Naziv artikla</li>
+                        <li>Cijena</li>
+                    </ul>
+                </header>
+                {% for item in cart %}
+                    <div class="shopping_cart-product_item-container">   <!-- Item unit start-->
+                        <div class="cart-item-img-box">
+                            <a href="/proizvodi/viewitem/{{ item.seo_url }}">
+                                <img src="{{ item.img.url }}" alt="product_in_cart-image">
+                            </a>   
+                        </div>
+
+                        <div class="cart-item-info-box">
+                            <span class="product-name-span">{{ item.name }}</span>
+                            <span>Cijena: <strong>{{ item.quantity }}X </strong> {{ item.price }} Kn</span>
+                            
+                        </div>
+
+                        <div class="cart-item-price_info-box">
+                            <span>Ukupno:</span>
+                            <span class="cart-product-total-cost-span"> {{ item.sum }} Kn</span>
+                        </div>
+                    </div>   <!-- Item unit End-->
+                {% endfor %}
+
+            </div>
+
+            <div class="order-summary-container">
+                <div class="summary-box">
+                    <header>
+                        <span>Podatci o narudžbi</span>
+                    </header>
+
+                    <div class="financial-summary-box">
+                        <ul>
+                            <li><span>Porezna osnovica: </span><span>{{ base_sum }} Kn</span></li>
+                            <li><span>Iznos poreza: </span><span>{{ vat }} Kn</span></li>
+                            <li><span>Trošak dostave: </span><span>{{ shipping_cost }} Kn</span></li>
+                            <li class="financial-total-li"><span>Ukupno: </span><span class="financial-total-span">{{ total }} Kn</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="delivery-summay">
+                        <div>
+                            <header>Kupac:</header>
+                            <ul>
+                                <li>Marko Pavić</li>
+                                <li>Ladislava Šabana 16</li>
+                                <li>10360 Sesvete</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% include '../footer.html' %}
+    <script>
+        load_navbar_listeners('noscroll');
+    </script>
+{% endblock %}

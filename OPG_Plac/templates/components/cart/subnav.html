@@ -1,0 +1,10 @@
+
+<nav class="shopping-cart-order_process-nav">
+    <ul class="shopping-cart-subnav">
+        <li {% if step == "cart" %}class="cart-subnav-active"{% endif %}><a href="/košarica">Pregled Košarice</a></li>
+        <li class="cart-subnav-divider"><span>></span></li>
+        <li {% if step == "delivery" %}class="cart-subnav-active"{% endif %}><a href="/dostava">Podatci za dostavu</a></li>
+        <li class="cart-subnav-divider"><span>></span></li>
+        <li {% if step == "checkout" %}class="cart-subnav-active"{% endif %}><a>Potvrda narudžbe</a></li>
+    </ul>
+</nav>

@@ -1,0 +1,173 @@
+.checkout-top-container{
+	max-width: 1200px;
+	margin: auto;
+	
+}
+
+.checkout-flex-container{
+	display: flex;
+}
+
+
+.shopping_cart-product_item-container{
+	height: 120px;
+	width: 100%;
+
+	margin-bottom: -1px;
+
+	padding-left: 15px;
+	padding-right: 15px;
+
+	border-top: solid 1px rgba(0,0,0,0.8);
+	border-bottom: solid 1px rgba(0,0,0,0.8);
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.cart-item-img-box{
+	height: 80px;
+	width: 100px;
+	min-width: 100px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cart-item-img-box img{
+	max-height: 80px;
+	max-width: 80px;
+}
+
+.cart-item-info-box{
+	width: 230px;
+
+	text-align: center;
+}
+
+.cart-item-info-box span{
+	display: block;
+}
+
+.product-name-span{
+	color: #f2360b;
+	margin-bottom: 10px;
+}
+
+.cart-item-price_info-box{
+	width: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.cart-item-price_info-box span{
+	display: block;
+}
+
+.cart-product-total-cost-span{
+	font-weight: bold;
+	font-size: 18px;
+	color: #f2360b;
+
+	margin-top: 10px;
+}
+
+.item-fields-description-header ul{
+	height: 40px;
+
+	margin-bottom: 0;
+
+	text-align: center;
+	list-style: none;
+	padding: 0;
+
+	display: flex;
+	align-items: center;
+
+	background-color: #fff;
+
+	color: rgba(0,0,0,0.7);
+
+	font-style: italic;
+}
+
+.item-fields-description-header ul li:nth-child(1){
+	width: 24%;
+}
+.item-fields-description-header ul li:nth-child(2){
+	width: 42%;
+
+	margin-left: 5%;
+}
+.item-fields-description-header ul li:nth-child(3){
+	width: 30%;
+}
+
+.items-overview-container{
+	width: 50%;
+
+	padding-right: 40px;
+	padding-bottom: 20px;
+
+	border-right: solid 2px #f2360b;
+}
+
+.order-summary-container{
+	width: 50%;
+
+	
+}
+
+.order-summary-container{
+	margin-left: 20px;
+}
+
+.summary-box{
+	margin: 20px;
+	margin-top: 0px;
+
+	padding: 20px;
+
+	height: 600px;
+	width: 500px;
+	border: solid 1px black;
+}
+
+.summary-box header{
+	font-size: 20px;
+	font-weight: bold;
+
+	color: rgba(0,0,0,0.7);
+
+	border-bottom: solid 1px rgba(0,0,0,0.7);
+
+	padding-bottom: 10px;
+
+}
+
+.financial-summary-box{
+	border-bottom: solid 1px rgba(0,0,0,0.7);
+}
+
+.financial-summary-box ul{
+	padding-left: 0px;
+}
+
+.financial-summary-box ul li{
+	display: flex;
+	justify-content: space-between;
+}
+
+.financial-total-li{
+	margin-top: 15px;
+
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.financial-total-li span:nth-child(2){
+	color: #f2360b;
+}
