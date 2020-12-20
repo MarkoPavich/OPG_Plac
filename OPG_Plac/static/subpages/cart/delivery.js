@@ -53,7 +53,8 @@ function validate_OIB(input){
 }
 
 
-function submit_delivery_data(){
+function submit_delivery_data(event){
+    event.preventDefault()
     // Flow control
 
     let submit = true;
@@ -62,7 +63,7 @@ function submit_delivery_data(){
 
     const same_delivery = document.querySelector("#same-delivery-chckbox").checked;
     const need_r1 = document.querySelector("#need-r1-chckbox").checked;
-    const remember_input = document.querySelector("#remember-input-chckbox");
+    const remember_input = document.querySelector("#remember-input-chckbox").checked;
 
     const user_input = {
         name: document.querySelector("#name"),
@@ -106,7 +107,57 @@ function submit_delivery_data(){
         })
     }
 
-    console.log(submit)
+    if(submit){
+
+        const user_info = {
+            name: user_input["name"].value,
+            surname: user_input["surname"].value,
+            address: user_input["address"].value,
+            post_code: user_input["post_code"].value,
+            place: user_input["place"].value,
+            phone: user_input["phone"].value
+        }
+
+        const delivery_info = {
+            delivery_name: delivery_input["delivery_name"].value,
+            delivery_surname: delivery_input["delivery_surname"].value,
+            delivery_address: delivery_input["delivery_address"].value,
+            delivery_post_code: delivery_input["delivery_post_code"].value,
+            delivery_place: delivery_input["delivery_place"].value,
+            delivery_phone: delivery_input["delivery_phone"].value
+        }
+
+        const company_info = {
+            company_name: company_input["company_name"].value,
+            OIB: company_input["OIB"].value,
+            company_place: company_input["company_place"].value,
+            company_post_code: company_input["company_post_code"].value
+        }
+
+        const csrf_token = document.querySelector("[name=csrfmiddlewaretoken]").value;
+
+        const request = new Request("/submit_delivery_data", 
+        {headers: {"X-CSRFtoken": csrf_token}}) 
+
+        fetch(request, {
+            method: "POST",
+            mode: "same-origin",
+            body: JSON.stringify({
+
+                user_info: user_info,
+                delivery_info: delivery_info,
+                company_info: company_info,
+                need_r1: need_r1,
+                remember: remember_input,
+                same_delivery: same_delivery
+
+            }),
+            credentials: "same-origin"
+        })
+
+        .then(response => console.log(response.status))
+
+    }
     
 }
 

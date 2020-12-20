@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
@@ -204,3 +204,13 @@ def update_cart_item_quantity(request):
     cart_item.save()
 
     return JsonResponse({"message": "cart_item quantity updated"}, status=200)
+
+
+def store_delivery_data(request):
+    if request.method != "POST" or not request.user.is_authenticated:
+        return JsonResponse({"message": "bad_request_method"}, status=400)
+
+    json_data = json.loads(request.body)
+    print("\n\n", json_data, "\n\n")
+
+    return HttpResponse("<h1>Pipeline Check</h1>")

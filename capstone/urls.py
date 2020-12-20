@@ -48,6 +48,7 @@ urlpatterns = [
     path('add_to_cart', APIs.add_to_cart),
     path('pull_cart_count', APIs.get_cart_count),
     path('remove_item_from_cart', APIs.remove_item_from_cart),
-    path('update_cart_item_quantity', APIs.update_cart_item_quantity)
+    path('update_cart_item_quantity', APIs.update_cart_item_quantity),
+    path('submit_delivery_data', APIs.store_delivery_data)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -64,6 +64,32 @@ class User(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         return self.is_admin
 
+
+class UserExtended(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=200)
+    post_code = models.CharField(max_length=5)
+    phone = models.CharField(max_length=20)
+    same_delivery = models.BooleanField(default=True)
+    has_company = models.BooleanField(default=False)
+
+
+class DifferentDelivery(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    delivery_first_name = models.CharField(max_length=100, blank=True)
+    delivery_last_name = models.CharField(max_length=150, blank=True)
+    delivery_address = models.CharField(max_length=200, blank=True)
+    delivery_post_code = models.CharField(max_length=5, blank=True)
+    delivery_phone = models.CharField(max_length=20, blank=True)
+
+
+class Company(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="company")
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    post_code = models.CharField(max_length=5)
+    OIB = models.CharField(max_length=11)
+
 ##### Blog Models ########
 
 
