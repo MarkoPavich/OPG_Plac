@@ -33,21 +33,21 @@
                 <div class="delivery-form-input-group">
                     <div id="address-container">
                         <label for="address">Adresa:</label>
-                        <input id="address" type="text" name="address">
+                        <input value="{{address}}" id="address" type="text" name="address">
                     </div>
                     <div id="post_code-container">
                         <label  for="post-code">Poštanski broj:</label>
-                        <input id="post_code" oninput="validate_pcode_input(this)" type="text">
+                        <input value="{{post_code}}" id="post_code" oninput="validate_pcode_input(this)" type="text">
                     </div>
                 </div>
                 <div class="delivery-form-input-group">
                     <div id="place-container">
                         <label for="place">Mjesto:</label>
-                        <input id="place" type="text" name="place">
+                        <input value="{{place}}" id="place" type="text" name="place">
                     </div>
                     <div id="phone-container">
                         <label for="phone">Telefon:</label>
-                        <input id="phone" oninput="validate_phone_num(this)" type="text">
+                        <input value="{{phone}}" id="phone" oninput="validate_phone_num(this)" type="text">
                     </div>
                 </div>
 
@@ -57,11 +57,11 @@
 
                 <div>
                     <div class="delivery-data-form-checkbox-box">
-                        <input name="same_delivery" onchange="show_hide_delivery_form()" id="same-delivery-chckbox" checked type="checkbox">
+                        <input {% if same_delivery == False or user_info.same_delivery == None %} {% else %} checked {% endif %} name="same_delivery" onchange="show_hide_delivery_form()" id="same-delivery-chckbox" type="checkbox">
                         <label for="same_delivery">Podatci za dostavu su isti kao i o kupcu</label>
                     </div>
                     <div class="delivery-data-form-checkbox-box">
-                        <input name="need_r1" onchange="show_hide_r1_form()" id="need-r1-chckbox" type="checkbox">
+                        <input {% if need_R1 %} checked {% endif %} name="need_r1" onchange="show_hide_r1_form()" id="need-r1-chckbox" type="checkbox">
                         <label for="need_r1">Potreban R1 račun</label>
                     </div>
                 </div>
@@ -70,32 +70,32 @@
                     <div class="delivery-form-input-group">
                         <div id="delivery_name-container">
                             <label for="name">Ime preuzimatelja:</label>
-                            <input id="delivery_name" type="text" name="delivery_name">
+                            <input value="{{delivery_first_name}}" id="delivery_name" type="text" name="delivery_name">
                         </div>
                         <div id="delivery_surname-container">
                             <label for="surname">Prezime preuzimatelja:</label>
-                            <input id="delivery_surname" type="text" name="delivery_surname">
+                            <input value="{{delivery_last_name}}" id="delivery_surname" type="text" name="delivery_surname">
                         </div>
                     </div>
 
                     <div class="delivery-form-input-group">
                         <div id="delivery_address-container">
                             <label for="address">Adresa dostave:</label>
-                            <input id="delivery_address" type="text" name="delivery_address">
+                            <input value="{{delivery_address}}" id="delivery_address" type="text" name="delivery_address">
                         </div>
                         <div id="delivery_post_code-container">
                             <label for="post-code">Poštanski broj:</label>
-                            <input id="delivery_post_code" oninput="validate_pcode_input(this)" type="text">
+                            <input value="{{delivery_post_code}}" id="delivery_post_code" oninput="validate_pcode_input(this)" type="text">
                         </div>
                     </div>
                     <div class="delivery-form-input-group">
                         <div id="delivery_place-container">
                             <label for="place">Mjesto:</label>
-                            <input id="delivery_place" type="text" name="place">
+                            <input value="{{delivery_place}}" id="delivery_place" type="text" name="place">
                         </div>
                         <div id="delivery_phone-container">
                             <label for="phone">Telefon:</label>
-                            <input id="delivery_phone" oninput="validate_phone_num(this)" type="text">
+                            <input value="{{delivery_phone}}" id="delivery_phone" oninput="validate_phone_num(this)" type="text">
                         </div>
                     </div>
                 </div>
@@ -104,21 +104,21 @@
                     <div class="delivery-form-input-group">
                         <div id="company_name-container">
                             <label for="company">Tvrtka:</label>
-                            <input id="company_name" type="text" name="company">
+                            <input value="{{company_name}}" id="company_name" type="text" name="company">
                         </div>
                         <div id="OIB-container">
                             <label for="oib">OIB:</label>
-                            <input id="OIB" oninput="validate_OIB(this)" type="text">
+                            <input value="{{OIB}}" id="OIB" oninput="validate_OIB(this)" type="text">
                         </div>
                     </div>
                     <div class="delivery-form-input-group">
-                        <div id="company_place-container">
-                            <label for="company_place">Mjesto:</label>
-                            <input id="company_place" type="text" name="company_place">
+                        <div id="company_address-container">
+                            <label for="company_address">Adresa:</label>
+                            <input value="{{company_address}}" id="company_address" type="text" name="company_address">
                         </div>
                         <div id="company_post_code-container">
                             <label for="company_post_code">Poštanski broj:</label>
-                            <input id="company_post_code" oninput="validate_pcode_input(this)" type="text">
+                            <input value="{{company_post_code}}" id="company_post_code" oninput="validate_pcode_input(this)" type="text">
                         </div>
                     </div>
                 </div>
@@ -133,8 +133,8 @@
                 <div class="delivery-form-input-group">
                     <div class="delivery-data-form-checkbox-box">
                         <button onclick="submit_delivery_data(event)" class="delivery-data-submit-btn">Nastavi</button>
-                        <input name="remember" type="checkbox">
-                        <label id="remember-input-chckbox" for="remember">Zapamti za ubuduće</label>
+                        <input id="remember-input-chckbox" name="remember" type="checkbox">
+                        <label for="remember">Zapamti za ubuduće</label>
                     </div>
                 </div>
 
@@ -147,8 +147,10 @@
     <script>
         load_navbar_listeners('noscroll');
 
-        show_hide_delivery_form();
-        show_hide_r1_form();
+        window.addEventListener("DOMContentLoaded", () => {
+            show_hide_delivery_form();
+            show_hide_r1_form();
+        })
 
     </script>
 {% endblock %}

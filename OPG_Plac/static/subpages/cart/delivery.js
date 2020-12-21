@@ -86,7 +86,7 @@ function submit_delivery_data(event){
     const company_input = {
         company_name: document.querySelector("#company_name"),
         OIB: document.querySelector("#OIB"),
-        company_place: document.querySelector("#company_place"),
+        company_address: document.querySelector("#company_address"),
         company_post_code: document.querySelector("#company_post_code")
     }
 
@@ -113,6 +113,7 @@ function submit_delivery_data(event){
             first_name: user_input["name"].value,
             last_name: user_input["surname"].value,
             address: user_input["address"].value,
+            place: user_input["place"].value,
             post_code: user_input["post_code"].value,
             place: user_input["place"].value,
             phone: user_input["phone"].value
@@ -130,7 +131,7 @@ function submit_delivery_data(event){
         const company_info = {
             company_name: company_input["company_name"].value,
             OIB: company_input["OIB"].value,
-            company_place: company_input["company_place"].value,
+            company_address: company_input["company_address"].value,
             company_post_code: company_input["company_post_code"].value
         }
 
@@ -155,7 +156,9 @@ function submit_delivery_data(event){
             credentials: "same-origin"
         })
 
-        .then(response => console.log(response.status))
+        .then(response => {
+            if(response.status === 200) window.location.href = "/checkout";
+        })
 
     }
     

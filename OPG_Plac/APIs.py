@@ -206,51 +206,89 @@ def update_cart_item_quantity(request):
     return JsonResponse({"message": "cart_item quantity updated"}, status=200)
 
 
-def store_delivery_data(request):
+# Stores Users delivery data and creates or modifies Order obj with a null status
+def store_delivery_data(request):  # This Order obj is used as a tmp info storage until user completes/confirms order
     if request.method != "POST" or not request.user.is_authenticated:
         return JsonResponse({"message": "bad_request"}, status=400)
 
     user = models.User.objects.get(email=request.user)
 
-    try:
-        order = user.orders.get(status=None)
+    try:    # Get or create Order obj
+        order = user.orders.get(status=None)            # TODO Improve server-side validation - Boolean conditions a hazard currently, if blank data received
+        print("WEEEEEEEEEEEEEEEEEEEe")
     except ObjectDoesNotExist:
         order = models.Order(user=user)
 
-    try:
-
+    try:  # Load data into obj
         json_data = json.loads(request.body)
+
         user_info = json_data["user_info"]
+        delivery_info = json_data["delivery_info"]
+        company_info = json_data["company_info"]
+
+        remember_input = json_data["remember"]
 
         same_delivery = json_data["same_delivery"]
-        need_r1 = json_data["need_r1"]
+        need_R1 = json_data["need_r1"]
+
+        order.same_delivery = same_delivery
+        order.need_R1 = need_R1
 
         order.first_name = user_info["first_name"]
         order.last_name = user_info["last_name"]
 
         order.address = user_info["address"]
+        order.place = user_info["place"]
         order.post_code = user_info["post_code"]
-        order.phone = user_info[]
+        order.phone = user_info["phone"]
 
-        order.same_delivery = json_data[]
-        order.delivery_first_name = json_data[]
-        order.delivery_last_name = json_data[]
-        order.delivery_address = json_data[]
-        order.delivery_post_code = json_data[]
-        order.delivery_phone = json_data[]
+        order.delivery_first_name = delivery_info["delivery_name"]
+        order.delivery_last_name = delivery_info["delivery_surname"]
+        order.delivery_address = delivery_info["delivery_address"]
+        order.delivery_post_code = delivery_info["delivery_post_code"]
+        order.delivery_place = delivery_info["delivery_place"]
+        order.delivery_phone = delivery_info["delivery_phone"]
 
-        order.company_name = json_data[]
-        order.company_address = json_data[]
-        order.company_post_code = json_data[]
-        order.OIB = json_data[]
+        order.company_name = company_info["company_name"]
+        order.company_address = company_info["company_address"]
+        order.company_post_code = company_info["company_post_code"]
+        order.OIB = company_info["OIB"]
 
+    except ObjectDoesNotExist:
+        return JsonResponse({"message": "bad_request"}, status=402)
 
+    order.save()
 
-    except KeyError:
-        return JsonResponse({"message": "bad_request"}, status=400)
+    # Store user data for future Orders
+    if remember_input:
+        try:
+            extended_info = user.extendeduser
+        except ObjectDoesNotExist:
+            extended_info = models.ExtendedUser(user=user)
 
+        user.first_name = user_info["first_name"]
+        user.last_name = user_info["last_name"]
 
+        extended_info.address = user_info["address"]
+        extended_info.place = user_info["place"]
+        extended_info.post_code = user_info["post_code"]
+        extended_info.phone = user_info["phone"]
 
+        extended_info.delivery_first_name = delivery_info["delivery_name"]
+        extended_info.delivery_last_name = delivery_info["delivery_surname"]
+        extended_info.delivery_address = delivery_info["delivery_address"]
+        extended_info.delivery_post_code = delivery_info["delivery_post_code"]
+        extended_info.delivery_place = delivery_info["delivery_place"]
+        extended_info.delivery_phone = delivery_info["delivery_phone"]
 
+        extended_info.company_name = company_info["company_name"]
+        extended_info.company_address = company_info["company_address"]
+        extended_info.company_post_code = company_info["company_post_code"]
+        extended_info.OIB = company_info["OIB"]
+
+        extended_info.same_delivery = same_delivery
+        extended_info.need_R1 = need_R1
+
+        extended_info.save()
 
     return JsonResponse({}, status=200)

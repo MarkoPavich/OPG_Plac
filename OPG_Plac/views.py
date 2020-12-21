@@ -12,6 +12,45 @@ from OPG_Plac import models
 
 # helpers
 
+
+def serialize_user_info(extended_user):
+    user_info = {
+        "first_name": extended_user.user.first_name,
+        "last_name": extended_user.user.last_name,
+        "address": extended_user.address,
+        "place": extended_user.place,
+        "post_code": extended_user.post_code,
+        "phone": extended_user.phone,
+        "same_delivery": extended_user.same_delivery,
+        "need_R1": extended_user.need_R1
+    }
+
+    if not extended_user.same_delivery:
+        delivery_info = {
+            "delivery_first_name": extended_user.delivery_first_name,
+            "delivery_last_name": extended_user.delivery_last_name,
+            "delivery_address": extended_user.delivery_address,
+            "delivery_place": extended_user.delivery_place,
+            "delivery_post_code": extended_user.delivery_post_code,
+            "delivery_phone": extended_user.delivery_phone
+        }
+
+        user_info.update(delivery_info)
+
+    if extended_user.need_R1:
+        company_info = {
+            "company_name": extended_user.company_name,
+            "company_address": extended_user.company_address,
+            "company_post_code": extended_user.company_post_code,
+            "OIB": extended_user.OIB
+        }
+
+        user_info.update(company_info)
+
+    print(user_info)
+    return user_info
+
+
 def serialize_previews(queryset):
     serialized_previews = []
 
@@ -299,8 +338,17 @@ def view_cart(request):
 
 @login_required(login_url="/prijava")
 def view_delivery(request):
+    user = models.User.objects.get(email=request.user)
 
-    return render(request, "components/cart/delivery.html", {})
+    try:
+        user_info = serialize_user_info(user.extendeduser)
+    except ObjectDoesNotExist:
+        user_info = {
+            "first_name": user.first_name,
+            "last_name": user.last_name
+        }
+
+    return render(request, "components/cart/delivery.html", user_info)
 
 
 @login_required(login_url="/prijava")
