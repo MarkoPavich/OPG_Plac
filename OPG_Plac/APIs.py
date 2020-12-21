@@ -208,9 +208,49 @@ def update_cart_item_quantity(request):
 
 def store_delivery_data(request):
     if request.method != "POST" or not request.user.is_authenticated:
-        return JsonResponse({"message": "bad_request_method"}, status=400)
+        return JsonResponse({"message": "bad_request"}, status=400)
 
-    json_data = json.loads(request.body)
-    print("\n\n", json_data, "\n\n")
+    user = models.User.objects.get(email=request.user)
 
-    return HttpResponse("<h1>Pipeline Check</h1>")
+    try:
+        order = user.orders.get(status=None)
+    except ObjectDoesNotExist:
+        order = models.Order(user=user)
+
+    try:
+
+        json_data = json.loads(request.body)
+        user_info = json_data["user_info"]
+
+        same_delivery = json_data["same_delivery"]
+        need_r1 = json_data["need_r1"]
+
+        order.first_name = user_info["first_name"]
+        order.last_name = user_info["last_name"]
+
+        order.address = user_info["address"]
+        order.post_code = user_info["post_code"]
+        order.phone = user_info[]
+
+        order.same_delivery = json_data[]
+        order.delivery_first_name = json_data[]
+        order.delivery_last_name = json_data[]
+        order.delivery_address = json_data[]
+        order.delivery_post_code = json_data[]
+        order.delivery_phone = json_data[]
+
+        order.company_name = json_data[]
+        order.company_address = json_data[]
+        order.company_post_code = json_data[]
+        order.OIB = json_data[]
+
+
+
+    except KeyError:
+        return JsonResponse({"message": "bad_request"}, status=400)
+
+
+
+
+
+    return JsonResponse({}, status=200)

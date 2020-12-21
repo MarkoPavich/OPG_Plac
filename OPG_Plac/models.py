@@ -231,8 +231,17 @@ class Order(models.Model):
     company_post_code = models.CharField(max_length=5, blank=True)
     OIB = models.CharField(max_length=11, blank=True)
 
+    notice = models.CharField(max_length=200, blank=True)
+
     paymentOption = models.ForeignKey(PaymentOption, on_delete=models.SET_NULL, null=True, blank=True)
     status = models.ForeignKey(OrderStatus, on_delete=models.SET_NULL, null=True)
+
+
+class OrderHistory(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="history")
+    status = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
 
 class OrderItem(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE)

@@ -110,8 +110,8 @@ function submit_delivery_data(event){
     if(submit){
 
         const user_info = {
-            name: user_input["name"].value,
-            surname: user_input["surname"].value,
+            first_name: user_input["name"].value,
+            last_name: user_input["surname"].value,
             address: user_input["address"].value,
             post_code: user_input["post_code"].value,
             place: user_input["place"].value,

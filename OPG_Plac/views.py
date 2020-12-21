@@ -299,53 +299,6 @@ def view_cart(request):
 
 @login_required(login_url="/prijava")
 def view_delivery(request):
-    user = models.User.objects.get(email=request.user)
-
-    user_info = {
-        "first_name": user.first_name,
-        "last_name": user.last_name,
-        "address": "",
-        "post_code": "",
-        "phone": "",
-        "delivery_first_name": "",
-        "delivery_last_name": "",
-        "delivery_address": "",
-        "delivery_post_code": "",
-        "delivery_phone": "",
-        "company_name": "",
-        "company_OIB": "",
-        "company_address": "",
-        "company_post_code": ""
-    }
-
-    try:
-        extended_info = models.UserExtended.objects.get(user=user)
-
-        user_info = {
-            "first_name": extended_info.first_name,
-            "last_name": extended_info.last_name,
-            "address": extended_info.address,
-            "post_code": extended_info.post_code,
-            "phone": extended_info.phone,
-            "delivery_first_name": extended_info.first_name,
-            "delivery_last_name": extended_info.delivery_last_name,
-            "delivery_address": extended_info.delivery_address,
-            "delivery_post_code": extended_info.delivery_post_code,
-            "delivery_phone": extended_info.delivery_phone,
-        }
-
-        if extended_info.has_company:
-            comapny = models.Company.objects.get(user=user)
-
-            company_info = {
-                "company_name": comapny.company_name,
-                "company_OIB": comapny.OIB,
-                "company_address": comapny.address,
-                "company_post_code": comapny.post_code,
-            }
-
-    except ObjectDoesNotExist:
-        pass
 
     return render(request, "components/cart/delivery.html", {})
 
