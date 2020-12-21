@@ -30,10 +30,16 @@ def serialize_products(products_qset):
 
     serialized_products = []
     for product in products_qset:
+
+        try:
+            image = product.product_image.url
+        except ValueError:
+            image = None
+
         serialized_products.append({
             "name": product.name,
             "seo_url": product.seo_url,
-            "image": product.product_image,
+            "image": image,
             "price": product.price,
             "short_desc": product.short_description,
             "item_id": product.item_id
@@ -228,10 +234,15 @@ def view_proizvod_artikl(request, product_url):
             "message": "Maybe try again or check spelling ?"
         })
 
+    try:
+        product_img = product_obj.product_image.url
+    except ValueError:
+        product_img = None
+
     product = {
         "product_name": product_obj.name,
         "item_id": product_obj.item_id,
-        "product_img": product_obj.product_image,
+        "product_img": product_img,
         "alt_img1": product_obj.second_image,
         "alt_img2": product_obj.third_image,
         "price": product_obj.price,

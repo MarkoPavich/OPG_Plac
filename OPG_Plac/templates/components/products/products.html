@@ -148,7 +148,7 @@
 
                         <a href="/proizvodi/viewitem/{{product.seo_url}}">
                             <div class="product-overview-item-img-box">
-                                <img src="{{product.image.url}}" alt="product_img">
+                                <img src="{% if product.image != None %}{{product.image}}{% else %}{% static 'resources/icons/no-image.png' %}{% endif %}" alt="product_img">
                             </div>
                         </a>
 

@@ -31,13 +31,13 @@
         <div class="article-view-image-social-container">
 
             <div class="article-image-big">
-                <img id="article-image-big" src="{{product_img.url}}" alt="product_img">
+                <img id="article-image-big" src="{% if product_img != None %}{{product_img}}{% else %}{% static 'resources/icons/no-image.png' %}{% endif %}" alt="product_img">
             </div>
 
             <div class="article-alternate-images-container">
 
                 <div onclick="flip_imgs(this)" class="article-alternate-image-frame">
-                    <img src="{{product_img.url}}" alt="product_img">
+                    <img src="{% if product_img != None %}{{product_img}}{% else %}{% static 'resources/icons/no-image.png' %}{% endif %}" alt="product_img">
                 </div>
 
                 {% if alt_img1 != '' %}
