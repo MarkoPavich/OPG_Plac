@@ -90,6 +90,7 @@ class Company(models.Model):
     post_code = models.CharField(max_length=5)
     OIB = models.CharField(max_length=11)
 
+
 ##### Blog Models ########
 
 
@@ -190,6 +191,65 @@ class Cart(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name="When added")
 
 
+####  Ordering system models #####
+
+
+class PaymentOption(models.Model):
+    option = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.option
+
+
+class OrderStatus(models.Model):
+    status = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.status
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
+
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=150)
+
+    address = models.CharField(max_length=200)
+    post_code = models.CharField(max_length=5)
+    phone = models.CharField(max_length=20)
+
+    same_delivery = models.BooleanField(default=True)
+    delivery_first_name = models.CharField(max_length=100, blank=True)
+    delivery_last_name = models.CharField(max_length=150, blank=True)
+    delivery_address = models.CharField(max_length=200, blank=True)
+    delivery_post_code = models.CharField(max_length=5, blank=True)
+    delivery_phone = models.CharField(max_length=20, blank=True)
+
+    need_R1 = models.BooleanField(default=False)
+    company_name = models.CharField(max_length=200, blank=True)
+    company_address = models.CharField(max_length=200, blank=True)
+    company_post_code = models.CharField(max_length=5, blank=True)
+    OIB = models.CharField(max_length=11, blank=True)
+
+    paymentOption = models.ForeignKey(PaymentOption, on_delete=models.SET_NULL, null=True, blank=True)
+    status = models.ForeignKey(OrderStatus, on_delete=models.SET_NULL, null=True)
+
+class OrderItem(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, related_name="product", null=True)
+    quantity = models.PositiveSmallIntegerField()
+
+    item_name = models.CharField(max_length=67, null=True)
+    item_seo_url = models.SlugField(null=True)
+    item_id = models.SlugField(null=True)
+    item_price = models.DecimalField(max_digits=12, decimal_places=2, null=True)
+
+
+    def archive_product(self):
+        self.item_name = self.product.name
+        self.item_seo_url = self.product.seo_url
+        self.item_id = self.product.item_id
+        self.item_price = self.product.price
 
 
 
