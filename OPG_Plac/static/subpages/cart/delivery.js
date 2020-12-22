@@ -61,9 +61,12 @@ function submit_delivery_data(event){
 
     // Grab inputs
 
+
     const same_delivery = document.querySelector("#same-delivery-chckbox").checked;
     const need_r1 = document.querySelector("#need-r1-chckbox").checked;
     const remember_input = document.querySelector("#remember-input-chckbox").checked;
+
+    const notice = document.querySelector("#notice").value;
 
     const user_input = {
         name: document.querySelector("#name"),
@@ -150,7 +153,8 @@ function submit_delivery_data(event){
                 company_info: company_info,
                 need_r1: need_r1,
                 remember: remember_input,
-                same_delivery: same_delivery
+                same_delivery: same_delivery,
+                notice: notice
 
             }),
             credentials: "same-origin"

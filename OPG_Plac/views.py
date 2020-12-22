@@ -373,12 +373,23 @@ def view_checkout(request):
     shipping_cost = 20
     total_sum = total + shipping_cost
 
+    payopts_qset = models.PaymentOption.objects.all()
+    payment_options = []
+    for option in payopts_qset:
+        payment_options.append({
+            "descriptive_name": option.descriptive_name,
+            "reference": option.reference,
+            "tooltip": option.tooltip
+        })
+
     context = {
-    "cart": cart,
-    "total": total_sum,
-    "base_sum": base_sum,
-    "vat": vat,
-    "shipping_cost": shipping_cost,
+        "cart": cart,
+        "total": total_sum,
+        "base_sum": base_sum,
+        "vat": vat,
+        "shipping_cost": shipping_cost,
+        "notice": order.notice,
+        "payment_options": payment_options
     }
 
     user_info = {

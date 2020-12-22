@@ -1,20 +1,26 @@
 
 
-function validate_inputs(){
+function submit_confirmation(event){
+    event.preventDefault()
     // Get elements
 
-    let valid = true;
+    let valid = true;;
 
-    const payment_opt_cod = document.querySelector("#payment-opt-cod");
-    const payment_opt_transfer = document.querySelector("#payment_opt_transfer");
+    const payment_options = document.getElementsByName("paymentOption");
+    let payment;
 
     const terms_accepted = document.querySelector("#accept-terms-chckbox").checked;
 
     const payment_options_container = document.querySelector("#payment-options-container");
     const accept_terms_container = document.querySelector("#accept-terms-hacky-tooltip-container");
 
-    // Handle no payment option selected
-    if(!payment_opt_cod.checked && !payment_opt_transfer.checked){
+    // get payment option
+    payment_options.forEach(option => {
+        if(option.checked) payment = option.value;
+    })
+
+    // Handle payment and no payment option selected
+    if(payment === undefined){
         valid = false;
 
         payment_options_container.setAttribute("data-tooltip", "Odaberite način plaćanja");
@@ -37,6 +43,28 @@ function validate_inputs(){
     else{
         accept_terms_container.removeAttribute("data-tooltip");
         accept_terms_container.removeAttribute("class");
+    }
+
+    if(valid){
+        const csrf_token = document.querySelector("[name=csrfmiddlewaretoken]").value;
+        
+        const request = new Request("/submit_confirmation", {
+            headers: {"X-CSRFtoken": csrf_token}
+        })
+
+        fetch(request, {
+            method: "POST",
+            mode: "same-origin",
+            body: JSON.stringify({
+
+                payment_option: payment
+
+            }),
+            credentials: "same-origin"
+        })
+
+        .then(response => console.log(response.status));
+
     }
 }
 

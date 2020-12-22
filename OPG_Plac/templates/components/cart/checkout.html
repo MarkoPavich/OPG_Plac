@@ -89,18 +89,23 @@
 
                     </div>
 
-
+                    {% if notice != "" %}
+                        <div class="notice-area-container">
+                            <header>Napomena:</header>
+                            <div>
+                                <span>{{notice}}</span>
+                            </div>
+                        </div>
+                    {% endif %}
                     <div id="payment-options-container" class="payment-options-block">
                         <span>Odaberite način plaćanja</span>
-                        <div>   
-                            <input value="cod" id="payment-opt-cod" name="paymentOption" type="radio">
-                            <label>Pouzećem po preuzimanju</label>
-                        </div>
+                        {% for option in payment_options %}
                         <div>
-                            <input id="payment_opt_transfer" name="paymentOption" type="radio">
-                            <label class="tooltip-label">Po ponudi / virmanski 
+                            <input value={{option.reference}} class="payment-option-radio" id="payment_opt_{{option.reference}}" name="paymentOption" type="radio">
+                            <label class="tooltip-label">{{option.descriptive_name}}
+                                {% if option.tooltip != "" %}
                                 <div class="tooltip-trigger">
-                                    <div class="wire-pay-tooltip">
+                                    <div data-tooltip="{{option.tooltip}}" class="payment-option-tooltip">
                                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                         viewBox="0 0 23.625 23.625" style="enable-background:new 0 0 23.625 23.625;" xml:space="preserve">
                                         <path style="fill:#030104;" d="M11.812,0C5.289,0,0,5.289,0,11.812s5.289,11.813,11.812,11.813s11.813-5.29,11.813-11.813
@@ -116,10 +121,13 @@
                                         c0-0.465,0.18-0.865,0.533-1.196c0.356-0.332,0.784-0.497,1.28-0.497c0.497,0,0.923,0.165,1.275,0.497
                                         c0.353,0.331,0.53,0.731,0.53,1.196C14.667,6.703,14.49,7.101,14.137,7.429z"/>
                                         </svg>
+
                                     </div>
                                 </div>
+                                {% endif %}
                             </label>
                         </div>
+                        {% endfor %}
                     </div>
 
 
@@ -130,7 +138,7 @@
                                 <a href="#">Prihvaćam opće uvjete korištenja</a>
                             </div>
                         </div>
-                        <button onclick="validate_inputs()">Potvrdi narudžbu</button>
+                        <button onclick="submit_confirmation(event)">Potvrdi narudžbu</button>
                     </div>
 
                 </div>
