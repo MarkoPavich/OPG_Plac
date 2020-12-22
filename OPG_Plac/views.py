@@ -353,8 +353,19 @@ def view_delivery(request):
 
 @login_required(login_url="/prijava")
 def view_checkout(request):
+
     user = models.User.objects.get(email=request.user)
+    cart = user.cart.all()
+
+    if len(cart) == 0:
+        return redirect("/košarica")
+
     cart = serialize_cart(user.cart.all())
+
+    try:
+        order = user.orders.get(status=None)
+    except ObjectDoesNotExist:
+        return redirect("/košarica")
 
     total = float(sum([item["sum"] for item in cart]))
     base_sum = round(total/1.25, 2)
@@ -362,13 +373,47 @@ def view_checkout(request):
     shipping_cost = 20
     total_sum = total + shipping_cost
 
-    return render(request, "components/cart/checkout.html", {
-        "cart": cart,
-        "total": total_sum,
-        "base_sum": base_sum,
-        "vat": vat,
-        "shipping_cost": shipping_cost
-    })
+    context = {
+    "cart": cart,
+    "total": total_sum,
+    "base_sum": base_sum,
+    "vat": vat,
+    "shipping_cost": shipping_cost,
+    }
+
+    user_info = {
+        "first_name": order.first_name,
+        "last_name": order.last_name,
+        "address": order.address,
+        "place": order.place,
+        "post_code": order.post_code,
+        "phone": order.phone
+    }
+    
+    context.update(user_info)
+
+    delivery_info = {
+        "delivery_first_name": order.delivery_first_name if not order.same_delivery else order.first_name,
+        "delivery_last_name": order.delivery_last_name if not order.same_delivery else order.last_name,
+        "delivery_address": order.delivery_address if not order.same_delivery else order.address,
+        "delivery_place": order.delivery_place if not order.same_delivery else order.place,
+        "delivery_post_code": order.delivery_post_code if not order.same_delivery else order.post_code,
+        "delivery_phone": order.delivery_phone if not order.same_delivery else order.phone
+    }
+
+    context.update(delivery_info)
+
+    company_info = {
+        "need_R1": order.need_R1,
+        "company_name": order.company_name,
+        "company_address": order.company_address,
+        "company_post_code": order.company_post_code,
+        "OIB": order.OIB
+    }
+
+    context.update(delivery_info)
+
+    return render(request, "components/cart/checkout.html", context)
 
 
 

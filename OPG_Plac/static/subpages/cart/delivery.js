@@ -158,6 +158,15 @@ function submit_delivery_data(event){
 
         .then(response => {
             if(response.status === 200) window.location.href = "/checkout";
+
+            else{
+                console.log(response.status);
+
+                response.json()
+                .then(res => {
+                    console.log(res.message);
+                })
+            }
         })
 
     }

@@ -52,12 +52,11 @@
                 </div>
 
             </form>
-            <h2>Podatci za dostavu</h2>
             <form class="delivery-data-form">
 
                 <div>
                     <div class="delivery-data-form-checkbox-box">
-                        <input {% if same_delivery == False or user_info.same_delivery == None %} {% else %} checked {% endif %} name="same_delivery" onchange="show_hide_delivery_form()" id="same-delivery-chckbox" type="checkbox">
+                        <input {% if same_delivery == False or same_delivery == None %} {% else %} checked {% endif %} name="same_delivery" onchange="show_hide_delivery_form()" id="same-delivery-chckbox" type="checkbox">
                         <label for="same_delivery">Podatci za dostavu su isti kao i o kupcu</label>
                     </div>
                     <div class="delivery-data-form-checkbox-box">
@@ -67,6 +66,7 @@
                 </div>
 
                 <div id="delivery-block-blanket" class="delivery-block-blanket">
+                	<h2>Podatci za dostavu</h2>
                     <div class="delivery-form-input-group">
                         <div id="delivery_name-container">
                             <label for="name">Ime preuzimatelja:</label>
@@ -101,6 +101,7 @@
                 </div>
 
                 <div id="r1-blanket" class="delivery-block-blanket">
+                    <h2>Podatci za R1</h2>
                     <div class="delivery-form-input-group">
                         <div id="company_name-container">
                             <label for="company">Tvrtka:</label>
@@ -134,7 +135,7 @@
                     <div class="delivery-data-form-checkbox-box">
                         <button onclick="submit_delivery_data(event)" class="delivery-data-submit-btn">Nastavi</button>
                         <input id="remember-input-chckbox" name="remember" type="checkbox">
-                        <label for="remember">Zapamti za ubuduće</label>
+                        <label for="remember">Zapamti izmjene za ubuduće</label>
                     </div>
                 </div>
 

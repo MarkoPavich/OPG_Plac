@@ -214,8 +214,7 @@ def store_delivery_data(request):  # This Order obj is used as a tmp info storag
     user = models.User.objects.get(email=request.user)
 
     try:    # Get or create Order obj
-        order = user.orders.get(status=None)            # TODO Improve server-side validation - Boolean conditions a hazard currently, if blank data received
-        print("WEEEEEEEEEEEEEEEEEEEe")
+        order = user.orders.get(status=None)            # TODO Improve server-side validation - Boolean options are hazard currently if blank data received
     except ObjectDoesNotExist:
         order = models.Order(user=user)
 
@@ -254,8 +253,8 @@ def store_delivery_data(request):  # This Order obj is used as a tmp info storag
         order.company_post_code = company_info["company_post_code"]
         order.OIB = company_info["OIB"]
 
-    except ObjectDoesNotExist:
-        return JsonResponse({"message": "bad_request"}, status=402)
+    except KeyError:
+        return JsonResponse({"message": "bad_request"}, status=400)
 
     order.save()
 

@@ -39,3 +39,5 @@ function validate_inputs(){
         accept_terms_container.removeAttribute("class");
     }
 }
+
+
