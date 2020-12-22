@@ -320,11 +320,11 @@ def view_cart(request):
 
     cart = serialize_cart(cart)
 
-    total = float(sum([item["sum"] for item in cart]))
+    total = round(float(sum([item["sum"] for item in cart])), 2)
     base_sum = round(total/1.25, 2)
     vat = round(total - base_sum)
     shipping_cost = 20
-    total_sum = total + shipping_cost
+    total_sum = round(total + shipping_cost, 2)
 
     return render(request, "components/cart/cart.html", {
         "cart": cart,
@@ -339,6 +339,10 @@ def view_cart(request):
 @login_required(login_url="/prijava")
 def view_delivery(request):
     user = models.User.objects.get(email=request.user)
+
+    # If cart is empty -- redirect to cart view ( Features empty cart notification )
+    if len(user.cart.all()) == 0:
+        return redirect("/košarica")
 
     try:
         user_info = serialize_user_info(user.extendeduser)
@@ -374,11 +378,11 @@ def view_checkout(request):
     total_sum = total + shipping_cost
 
     context = {
-    "cart": cart,
-    "total": total_sum,
-    "base_sum": base_sum,
-    "vat": vat,
-    "shipping_cost": shipping_cost,
+        "cart": cart,
+        "total": total_sum,
+        "base_sum": base_sum,
+        "vat": vat,
+        "shipping_cost": shipping_cost,
     }
 
     user_info = {

@@ -56,7 +56,7 @@
 
                 <div>
                     <div class="delivery-data-form-checkbox-box">
-                        <input {% if same_delivery == False or same_delivery == None %} {% else %} checked {% endif %} name="same_delivery" onchange="show_hide_delivery_form()" id="same-delivery-chckbox" type="checkbox">
+                        <input {% if same_delivery is False %} {% else %} checked {% endif %} name="same_delivery" onchange="show_hide_delivery_form()" id="same-delivery-chckbox" type="checkbox">
                         <label for="same_delivery">Podatci za dostavu su isti kao i o kupcu</label>
                     </div>
                     <div class="delivery-data-form-checkbox-box">
