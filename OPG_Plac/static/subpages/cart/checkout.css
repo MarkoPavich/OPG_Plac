@@ -54,8 +54,12 @@
 }
 
 .product-name-span{
-	color: #f2360b;
 	margin-bottom: 10px;
+}
+
+.product-name-span a{
+	color: #f2360b;
+	text-decoration: none;
 }
 
 .cart-item-price_info-box{
