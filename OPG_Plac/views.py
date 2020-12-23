@@ -427,6 +427,8 @@ def view_checkout(request):
     return render(request, "components/cart/checkout.html", context)
 
 
+def view_order_confirmation(request):
+    return render(request, "components/cart/order_confirmation.html")
 
 
 

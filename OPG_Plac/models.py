@@ -247,7 +247,7 @@ class OrderHistory(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, related_name="product", null=True)
     quantity = models.PositiveSmallIntegerField()
 
