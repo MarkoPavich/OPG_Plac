@@ -27,7 +27,8 @@ admin.site.register([
     models.ProductSubCategory,
     models.Product,
     models.ProductBrand,
-    models.ProductAvailability
+    models.ProductAvailability,
+    models.PaymentOption
 
 ])
 

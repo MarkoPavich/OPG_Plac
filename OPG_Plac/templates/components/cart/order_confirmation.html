@@ -1,0 +1,24 @@
+{% extends 'components/site_frame.html' %}
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'navbar.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'subpages/cart/order_confirmation.css' %}">
+
+{% endblock %}
+
+{% block body %}
+    {% include '../navbar.html' %}
+
+    <div class="order-confirmation-content-container">
+        <h2>Naručeno :)</h2>
+    </div>
+
+    {% include '../footer.html' %}
+
+    <script>
+        load_navbar_listeners('noscroll');
+    </script>
+
+{% endblock %}

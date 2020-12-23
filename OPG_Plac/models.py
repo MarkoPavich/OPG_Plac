@@ -193,10 +193,13 @@ class Cart(models.Model):
 
 
 class PaymentOption(models.Model):
-    option = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    reference = models.CharField(max_length=4, unique=True)
+    tooltip = models.CharField(max_length=150, blank=True)
+    descriptive_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.option
+        return self.name
 
 
 class OrderStatus(models.Model):
@@ -244,15 +247,14 @@ class OrderHistory(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, related_name="product", null=True)
     quantity = models.PositiveSmallIntegerField()
 
-    item_name = models.CharField(max_length=67, null=True)
-    item_seo_url = models.SlugField(null=True)
-    item_id = models.SlugField(null=True)
-    item_price = models.DecimalField(max_digits=12, decimal_places=2, null=True)
-
+    item_name = models.CharField(max_length=67)
+    item_seo_url = models.SlugField(max_length=120)
+    item_id = models.SlugField()
+    item_price = models.DecimalField(max_digits=12, decimal_places=2)
 
     def archive_product(self):
         self.item_name = self.product.name

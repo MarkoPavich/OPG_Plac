@@ -253,6 +253,8 @@ def store_delivery_data(request):  # This Order obj is used as a tmp info storag
         order.company_post_code = company_info["company_post_code"]
         order.OIB = company_info["OIB"]
 
+        order.notice = json_data["notice"].strip()  # Store notice without leading and trailing whitespaces
+
     except KeyError:
         return JsonResponse({"message": "bad_request"}, status=400)
 
@@ -291,3 +293,29 @@ def store_delivery_data(request):  # This Order obj is used as a tmp info storag
         extended_info.save()
 
     return JsonResponse({}, status=200)
+
+
+def create_order(request):
+    if request.method != "POST" or not request.user.is_authenticated:
+        return JsonResponse({"message": "bad_request"}, status=400)
+
+    user = models.User.objects.get(email=request.user)
+    cart = user.cart.all()
+
+    if len(cart) == 0:
+        return JsonResponse({"message": "Probably bad request"}, status=400)
+
+    try:
+        order = user.orders.get(status=None)
+    except ObjectDoesNotExist:
+        return JsonResponse({"message": "Probably bad request"}, status=400)
+
+    for item in cart:
+        order_item = models.OrderItem(
+            order=order,
+            product=item.product,
+            quantity=item.quantity
+        )
+        order_item.archive_product()
+        order_item.save()
+
