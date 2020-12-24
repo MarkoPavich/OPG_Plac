@@ -29,7 +29,11 @@ admin.site.register([
     models.ProductBrand,
     models.ProductAvailability,
     models.PaymentOption,
-    models.OrderStatus
+    models.OrderStatus,
+
+    models.OrderItem,
+    models.OrderHistory,
+    models.Order
 
 ])
 

@@ -64,7 +64,10 @@ function submit_confirmation(event){
         })
 
         .then(response => {
-            if(response.status === 200) location.href = "/Confirmation";
+            if(response.status === 200){
+                window.localStorage.removeItem("cart_count");
+                location.href = "/Confirmation";
+            }
             else alert("Oops, nešto ne valja");
         });
 

@@ -1,0 +1,47 @@
+{% extends 'components/site_frame.html' %}
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'navbar.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'subpages/order_history/order_history.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% include '../navbar.html' %}
+
+    <div class="order-history-top-container">
+        <h2>Pregled narudžbi</h2>
+
+        <div class="table-container">
+            <table class="order-history-table">
+
+                <thead>
+                    <tr>
+                        <th>Broj narudžbe</th>
+                        <th>Datum</th>
+                        <th>Ukupno artikala</th>
+                        <th>Status</th>
+                        <th>Iznos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>23 / 2020</td>
+                        <td>23.12.2020</td>
+                        <td>12</td>
+                        <td>Zaprimljeno</td>
+                        <td>43.76 Kn</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+    {% include '../footer.html' %}
+    <script>
+        load_navbar_listeners('noscroll');
+    </script>
+{% endblock %}

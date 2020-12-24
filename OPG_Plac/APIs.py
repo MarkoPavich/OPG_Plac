@@ -336,4 +336,6 @@ def create_order(request):
     order_history = models.OrderHistory(order=order, status=status)
     order_history.save()
 
+    order.save()  # Save order
+
     return JsonResponse({"message": "order confirmed and processed"}, status=200)

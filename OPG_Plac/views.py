@@ -436,6 +436,16 @@ def view_order_confirmation(request):
     return render(request, "components/cart/order_confirmation.html")
 
 
+@login_required(login_url="/prijava")
+def view_order_history(request):
+
+    user = models.User.objects.get(email=request.user)
+
+    orders = user.orders.all()
+
+    return render(request, "components/order_history/order_history.html")
+
+
 
 
 
