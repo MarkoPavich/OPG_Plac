@@ -299,23 +299,41 @@ def create_order(request):
     if request.method != "POST" or not request.user.is_authenticated:
         return JsonResponse({"message": "bad_request"}, status=400)
 
+    # Get user and cart -- assume authorised due to check above
     user = models.User.objects.get(email=request.user)
     cart = user.cart.all()
 
-    if len(cart) == 0:
+    if len(cart) == 0:  # If no items in cart, probably bad or malicious request
         return JsonResponse({"message": "Probably bad request"}, status=400)
 
-    try:
+    try:  # Get Order obj with status None -- Created when user submits delivery data
         order = user.orders.get(status=None)
-    except ObjectDoesNotExist:
+
+        payment_reference = json.loads(request.body)["payment_option"]
+        payment = models.PaymentOption.objects.get(reference=payment_reference)
+    except ObjectDoesNotExist:  # Not possible to reach checkout without submitting delivery data, hence creating None status Order obj
+        return JsonResponse({"message": "Probably bad request"}, status=400)
+    except KeyError:  # payment_reference must be included in json payload
         return JsonResponse({"message": "Probably bad request"}, status=400)
 
-    for item in cart:
+    for item in cart:  # Create order_item objs for every item in cart
         order_item = models.OrderItem(
             order=order,
             product=item.product,
             quantity=item.quantity
         )
-        order_item.archive_product()
-        order_item.save()
+        order_item.archive_product()  # Archive product data
+        order_item.save()      # Store order_item obj
 
+        item.delete()  # Clear processed items from cart
+
+    # Mark order as confirmed -- set initial processing status
+    status = models.OrderStatus.objects.get(status="Zaprimljeno")
+    order.status = status
+    order.payment = payment  # Set chosen payment model
+
+    # Save history
+    order_history = models.OrderHistory(order=order, status=status)
+    order_history.save()
+
+    return JsonResponse({"message": "order confirmed and processed"}, status=200)

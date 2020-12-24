@@ -426,11 +426,12 @@ def view_checkout(request):
         "OIB": order.OIB
     }
 
-    context.update(delivery_info)
+    context.update(company_info)
 
     return render(request, "components/cart/checkout.html", context)
 
 
+@login_required(login_url="/prijava")
 def view_order_confirmation(request):
     return render(request, "components/cart/order_confirmation.html")
 

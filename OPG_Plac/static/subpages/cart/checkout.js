@@ -63,7 +63,10 @@ function submit_confirmation(event){
             credentials: "same-origin"
         })
 
-        .then(response => console.log(response.status));
+        .then(response => {
+            if(response.status === 200) location.href = "/Confirmation";
+            else alert("Oops, nešto ne valja");
+        });
 
     }
 }

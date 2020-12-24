@@ -242,7 +242,7 @@ class Order(models.Model):
 
 class OrderHistory(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="history")
-    status = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    status = models.ForeignKey(OrderStatus, on_delete=models.SET_NULL, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
