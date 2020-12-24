@@ -31,7 +31,7 @@
                     <div class="shopping_cart-product_item-container">   <!-- Item unit start-->
                         <div class="cart-item-img-box">
                             <a href="/proizvodi/viewitem/{{ item.seo_url }}">
-                                <img src="{{ item.img.url }}" alt="product_in_cart-image">
+                                <img src="{% if item.img.url != None %}{{ item.img.url }}{% else %}{% static 'resources/icons/no-image.png' %}{% endif %}" alt="product_in_cart-image">
                             </a>   
                         </div>
 

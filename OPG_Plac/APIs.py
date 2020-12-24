@@ -330,7 +330,7 @@ def create_order(request):
     # Mark order as confirmed -- set initial processing status
     status = models.OrderStatus.objects.get(status="Zaprimljeno")
     order.status = status
-    order.payment = payment  # Set chosen payment model
+    order.paymentOption = payment  # Set chosen payment model
 
     # Save history
     order_history = models.OrderHistory(order=order, status=status)

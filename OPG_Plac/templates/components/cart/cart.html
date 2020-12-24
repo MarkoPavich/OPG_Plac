@@ -32,7 +32,7 @@
                             </a>
                             <div class="product_image_container">
                                 <a href="/proizvodi/viewitem/{{ item.seo_url }}">
-                                    <img src="{{ item.img.url }}" alt="product_in_cart-image">
+                                    <img src="{% if item.img.url != None %}{{ item.img.url }}{% else %}{% static 'resources/icons/no-image.png' %}{% endif %}" alt="product_in_cart-image">
                                 </a>    
                             </div>
                         </div>
