@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, EmptyPage
 from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 import math
+import datetime
 import json
 
 from OPG_Plac import models
@@ -441,20 +442,18 @@ def view_order_history(request):
 
     user = models.User.objects.get(email=request.user)
 
-    orders = user.orders.all()
+    orders_qset = user.orders.all().order_by('-id')
 
-    return render(request, "components/order_history/order_history.html")
+    orders = []
+    for order in orders_qset:
+        orders.append({
+            "id": order.id,
+            "created_on": order.history.all()[0].timestamp.strftime('%d.%m.%Y %H:%M'),
+            "items_count": sum([item.quantity for item in order.items.all()]),
+            "total": round(sum([item.item_price * item.quantity for item in order.items.all()]), 2) + 20,
+            "status": order.status
+        })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return render(request, "components/order_history/order_history.html", {
+        "orders": orders
+    })

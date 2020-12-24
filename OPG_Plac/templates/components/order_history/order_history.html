@@ -26,13 +26,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>23 / 2020</td>
-                        <td>23.12.2020</td>
-                        <td>12</td>
-                        <td>Zaprimljeno</td>
-                        <td>43.76 Kn</td>
-                    </tr>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}} / 2020</td>
+                            <td>{{order.created_on}}</td>
+                            <td>{{order.items_count}}</td>
+                            <td>{{order.status}}</td>
+                            <td>{{order.total}} Kn</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
 
             </table>
