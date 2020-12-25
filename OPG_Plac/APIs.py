@@ -1,11 +1,9 @@
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
 from OPG_Plac import models
 import json
-import datetime
-
 import time
 
 

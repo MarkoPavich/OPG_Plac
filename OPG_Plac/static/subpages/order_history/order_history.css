@@ -1,15 +1,14 @@
 
+.blog-intro-header-divider{  /* Borrowed component, will maybe refactor later */
+	margin-top: 108px;
+}
 
 .order-history-top-container{
 	max-width: 1200px;
 
 	margin: auto;
-	margin-top: 90px;
+	margin-top: 50px;
 	
-
-	
-
-	border: solid 2px black;
 }
 
 .order-history-top-container > h2{
@@ -44,4 +43,32 @@
 
 .order-history-table tbody td{
 	text-align: center;
+}
+
+.order-history-table tbody td a{
+	text-decoration: none;
+	color: black;
+}
+
+.order-history-table tbody tr{
+	border-bottom: solid 1px #dddddd;
+
+	transition: transform 0.1s ease-in;
+}
+
+.order-history-table tbody tr:nth-of-type(even){
+	background-color: #f3f3f3;
+}
+
+.order-history-table tbody tr:last-of-type{
+	border-bottom: solid 2px #081226;
+}
+
+.order-history-table tbody tr:hover{
+	transform: scale(1.05);
+	cursor: pointer;
+}
+
+.order-history-table tbody tr:hover > td a{
+	color: steelblue;
 }

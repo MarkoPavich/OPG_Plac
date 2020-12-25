@@ -9,9 +9,9 @@
 
 {% block body %}
     {% include '../navbar.html' %}
+    {% include '../divider_hr_title.html' with title="Pregled narudžbi" %}
 
     <div class="order-history-top-container">
-        <h2>Pregled narudžbi</h2>
 
         <div class="table-container">
             <table class="order-history-table">
@@ -27,12 +27,12 @@
                 </thead>
                 <tbody>
                     {% for order in orders %}
-                        <tr>
-                            <td>{{order.id}} / 2020</td>
-                            <td>{{order.created_on}}</td>
-                            <td>{{order.items_count}}</td>
-                            <td>{{order.status}}</td>
-                            <td>{{order.total}} Kn</td>
+                        <tr onclick="location.href ='/pregled_narudzbi/narudzba?id={{order.plain_id}}'">
+                                <td><a href="/pregled_narudzbi/narudzba?id={{order.plain_id}}">{{order.id}}</a></td>
+                                <td><a href="/pregled_narudzbi/narudzba?id={{order.plain_id}}">{{order.created_on}}</a></td>
+                                <td><a href="/pregled_narudzbi/narudzba?id={{order.plain_id}}">{{order.items_count}}</a></td>
+                                <td><a href="/pregled_narudzbi/narudzba?id={{order.plain_id}}">{{order.status}}</a></td>
+                                <td><a href="/pregled_narudzbi/narudzba?id={{order.plain_id}}">{{order.total}} Kn</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
