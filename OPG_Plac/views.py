@@ -382,4 +382,62 @@ def view_order_info(request):
     if order.status is None:
         return redirect("/")
 
-    return render(request, "components/order_history/order_info.html")
+    order_info = {
+        "header": f"Narudžba br.{order.id}",
+        "id": order.id,
+        "need_R1": order.need_R1,
+        "created_on": order.history.all()[0].timestamp.strftime('%d.%m.%Y.'),
+        "payment_type": order.paymentOption.descriptive_name
+    }
+
+    user_info = {    # TODO Figure out company place info, maybe abstract info acquisition
+        "first_name": order.first_name if not order.need_R1 else order.company_name,
+        "last_name": order.last_name if not order.need_R1 else "",
+        "address": order.last_name if not order.need_R1 else order.company_address,
+        "place": order.place if not order.need_R1 else order.place,
+        "post_code": order.post_code if not order.need_R1 else order.company_post_code,
+        "phone": order.phone if not order.need_R1 else "",
+        "OIB": order.OIB
+    }
+
+    order_info.update(user_info)
+
+    delivery_info = {
+        "delivery_first_name": order.delivery_first_name if not order.same_delivery else order.first_name,
+        "delivery_last_name": order.delivery_last_name if not order.same_delivery else order.last_name,
+        "delivery_address": order.delivery_address if not order.same_delivery else order.address,
+        "delivery_place": order.delivery_place if not order.same_delivery else order.place,
+        "delivery_post_code": order.delivery_post_code if not order.same_delivery else order.post_code,
+        "delivery_phone": order.delivery_phone if not order.same_delivery else order.phone
+    }
+
+    order_info.update(delivery_info)
+
+    items_qset = order.items.all()
+    items = []
+    for item in items_qset:
+        items.append({
+            "id": item.product.item_id,
+            "name": item.product.name,
+            "quantity": item.quantity,
+            "price": "{:.2f} Kn".format(item.item_price),
+            "total": "{:.2f} Kn".format(item.item_price * item.quantity)
+        })
+
+    order_info.update({"items": items})
+
+    # 20 is shipping price TODO make shipping price a configurable variable
+    grand_total = sum([item.item_price * item.quantity for item in items_qset]) + 20
+    base_price = float(grand_total) / 1.25
+    vat = float(grand_total) - base_price
+
+    price_summary = {
+        "base_price": "{:.2f}".format(base_price),
+        "vat": "{:.2f}".format(vat),
+        "shipping_cost": 20,
+        "grand_total": "{:.2f}".format(grand_total)
+    }
+
+    order_info.update(price_summary)
+
+    return render(request, "components/order_history/order_info.html", order_info)

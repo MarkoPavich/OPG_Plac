@@ -25,6 +25,7 @@
                         <th>Iznos</th>
                     </tr>
                 </thead>
+                
                 <tbody>
                     {% for order in orders %}
                         <tr onclick="location.href ='/pregled_narudzbi/narudzba?id={{order.plain_id}}'">

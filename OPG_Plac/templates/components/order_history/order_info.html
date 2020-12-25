@@ -1,1 +1,117 @@
-<h1>Pipeline</h1>
+{% extends 'components/site_frame.html' %}
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'navbar.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'subpages/order_history/order_info.css' %}">
+
+{% endblock %}
+
+{% block body %}
+    {% include '../navbar.html' %}
+    {% include '../divider_hr_title.html' with title=header %}
+
+    <div class="order-view-container">
+
+        <header class="order_view_main_header">
+            <span>OPG_Plac d.o.o.</span>
+            <span>Narudža br.{{id}}</span>
+        </header>
+        <span class="timestamp-span">Datum narudžbe: <strong>{{created_on}}</strong></span>
+        <div class="delivery-summay">
+
+            <div>
+                <ul>
+                    <li>Kupac:</li>
+                    <li>{{first_name}} {{last_name}}</li>
+                    {% if need_R1 %} <li>OIB: {{OIB}}{% endif %}</li>
+                    <li>{{address}}</li>
+                    <li>{{post_code}} {{place}}</li>
+                    {% if not need_R1 %}<li>tel: {{phone}}</li>{% endif %}
+                </ul>
+            </div>
+
+            <div>
+                <ul>
+                    <li>Isporuka:</li>
+                    <li>{{delivery_first_name}} {{delivery_last_name}}</li>
+                    <li>{{delivery_address}}</li>
+                    <li>{{delivery_post_code}} {{delivery_place}}</li>
+                    <li>tel: {{delivery_phone}}</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <header class="items-overview-header">
+            <span>Naručene stavke</span>
+        </header>
+
+        <div class="items_overview">
+
+            <table class="items-overview-table">
+                <thead>
+                    <tr>
+                        <td>Artikl</td>
+                        <td>Naziv</td>
+                        <td>Količina</td>
+                        <td>Cijena</td>
+                        <td>Ukupno</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.total}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="price-summary-barcody-container">
+
+            <div class="payment-info-container">
+                <div class="payment-info-header">
+                    <span>Model plaćanja: {{payment_type}}</span>
+                </div>
+            </div>
+            
+            <table class="price-summary-table">
+                <tr>
+                    <td><strong>Međusuma:</strong></td>
+                    <td><strong>{{base_price}} Kn</strong></td>
+                </tr>
+                <tr>
+                    <td>PDV:</td>
+                    <td>{{vat}} Kn</td>
+                </tr>
+                <tr>
+                    <td>Trošak dostave:</td>
+                    <td>{{shipping_cost}}Kn</td>
+                </tr>
+                <tr>
+                    <td class="price-summary-grand-total-header"><strong>Ukupno:</strong></td>
+                    <td class="price-summary-grand-total-sum"><strong>{{grand_total}} Kn</strong></td>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+
+    {% include '../about_info_span.html'%}
+    {% include '../footer.html' %}
+
+    <script>
+        load_navbar_listeners('noscroll');
+
+    </script>
+{% endblock %}
+
