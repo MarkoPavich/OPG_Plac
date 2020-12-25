@@ -26,6 +26,9 @@
 	font-size: 16px;
 
 	min-width: 800px;
+
+	margin-left: 15px;
+	margin-right: 15px;
 }
 
 .order-history-table thead tr{
@@ -71,4 +74,26 @@
 
 .order-history-table tbody tr:hover > td a{
 	color: steelblue;
+}
+
+@media(max-width: 900px){
+	.order-history-table{
+		min-width: 320px;
+	}
+}
+
+@media(max-width: 540px){
+	.order-history-table{
+		font-size: 12px;
+	}
+
+	.table_item_count{
+		display: none;
+	}
+}
+
+@media(max-width: 390px){
+	.order-history-table tr td{
+		padding: 5px 3px;
+	}
 }

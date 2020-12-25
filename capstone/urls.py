@@ -42,6 +42,7 @@ urlpatterns = [
     path("checkout", view_checkout, name="checkout"),
     path("Confirmation", view_order_confirmation, name="confirmation"),
     path("pregled_narudzbi", view_order_history, name="order_history"),
+    path("pregled_narudzbi/narudzba", view_order_info, name="order_info"),
 
     # API pipeline
 

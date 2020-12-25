@@ -1,10 +1,13 @@
 .order-confirmation-content-container{
-	width: 800px;
+	max-width: 800px;
 	min-height: 200px;
 
 	margin: auto;
 	margin-top: 120px;
 	margin-bottom: 200px;
+
+	padding-left: 15px;
+	padding-right: 15px;
 
 	display: flex;
 	justify-content: center;

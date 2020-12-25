@@ -343,7 +343,7 @@ def view_order_history(request):
 
     user = models.User.objects.get(email=request.user)
 
-    orders_qset = user.orders.all().order_by('-id')
+    orders_qset = user.orders.all().exclude(status=None).order_by('-id')
 
     orders = []
     for order in orders_qset:
@@ -359,3 +359,8 @@ def view_order_history(request):
     return render(request, "components/order_history/order_history.html", {
         "orders": orders
     })
+
+
+@login_required(login_url="/prijava")
+def view_order_info(request):
+    return render(request, "components/order_history/order_info.html")
