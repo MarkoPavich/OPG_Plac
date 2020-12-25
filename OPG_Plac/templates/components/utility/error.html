@@ -2,17 +2,23 @@
 {% load static %}
 
 {% block head %}
-
+    <script src="{% static 'navbar.js' %}"></script>
     <link rel="stylesheet" href="{% static 'error.css' %}">
 
 {% endblock %}
 
 {% block body %}
+    {% include '../navbar.html' %}
 
-<div class="error-msg-container">
-    <h1>{{status}}</h1>
-    <h1>{{error}}</h1>
-    <span>{{message}}</span>
-</div>
+    <div class="error-msg-container">
+        <h1>{{status}}</h1>
+        <h1>{{error}}</h1>
+        <span>{{message}}</span>
+    </div>
+
+    {% include '../footer.html' %}
+    <script>
+        load_navbar_listeners('noscroll');
+    </script>
 
 {% endblock %}

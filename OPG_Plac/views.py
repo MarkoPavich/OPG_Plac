@@ -363,4 +363,23 @@ def view_order_history(request):
 
 @login_required(login_url="/prijava")
 def view_order_info(request):
+
+    user = models.User.objects.get(email=request.user)
+
+    try:
+        order_id = request.GET["id"]
+    except KeyError:
+        return render(request, "components/utility/error.html", {
+            "error": "Nije pronađeno",
+            "status": 404,
+            "message": "Jeste li ispravno upisali link?"
+        })
+
+    try:  # Get order obj, ensure id is valid, is applicable to current user and has no None status
+        order = user.orders.get(id=order_id)
+    except ObjectDoesNotExist:
+        return redirect("/")
+    if order.status is None:
+        return redirect("/")
+
     return render(request, "components/order_history/order_info.html")

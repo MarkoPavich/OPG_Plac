@@ -6,16 +6,24 @@ body{
 
 .error-msg-container{
 	position: relative;
-	width: 100vw;
-	height: 100vh;
+
+	max-width: 100%;
+	height: 100%;
 
 	display: flex;
 	flex-direction: column;
 
+	justify-content: center;
 	align-items: center;
 
 	color: white;
 }
+
+.error-msg-container{
+	margin-top: -100px;
+}
+
+
 
 .error-msg-container::before{
 	content: "";
@@ -26,6 +34,8 @@ body{
 	left: 0;
 	right: 0;
 	bottom: 0;
+
+	height: 800px;
 
 	background-image: url("resources/images/error.jpg");
 
