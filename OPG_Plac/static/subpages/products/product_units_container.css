@@ -89,6 +89,8 @@
 @media(max-width: 520px){
 	.product-overview-unit{
 		height: 380px;
+
+		max-width: 160px;
 	}
 
 }
