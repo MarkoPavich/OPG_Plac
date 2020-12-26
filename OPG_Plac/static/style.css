@@ -1,8 +1,11 @@
+
+/* initial formating */
+
 *{
 	box-sizing: border-box;
 }
 
-body{
+body{   
     background: ghostwhite;
     margin: 0;
     padding: 0;
