@@ -75,6 +75,7 @@ function load_navbar_listeners(mode){
     const navbar = document.querySelector("#navbar");
     const search_bar = document.querySelector("#nav-search-bar");
 
+
     if(mode !== "noscroll"){
         adjust_navbar_scroll();
         window.addEventListener("scroll", adjust_navbar_scroll)
@@ -253,8 +254,12 @@ function submit_signup_form(event){  // Runs client-side form validation, and su
 
 function pull_cart_count(){
     const cart_icon_count = document.querySelector("#nav_cart_item_count");
+    const cart_icon_mobile_copy = document.querySelector("#nav_cart_item_count_mobile");
 
-    if(localStorage.getItem("cart_count") != null) cart_icon_count.innerHTML = localStorage.getItem("cart_count");
+    if(localStorage.getItem("cart_count") != null){
+        cart_icon_count.innerHTML = localStorage.getItem("cart_count");
+        cart_icon_mobile_copy.innerHTML = localStorage.getItem("cart_count");
+    }
 
     else
     {
@@ -280,6 +285,7 @@ function pull_cart_count(){
                 .then(res => {
 
                     cart_icon_count.innerHTML = res.in_cart;
+                    cart_icon_mobile_copy.innerHTML = res.in_cart;
                     window.localStorage.setItem("cart_count", res.in_cart);
 
                 })

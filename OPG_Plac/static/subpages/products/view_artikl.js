@@ -50,6 +50,7 @@ function add_to_cart(){
     const btn_txt_cn_before = btn.firstChild.className;
     
     const cart_icon_count = document.querySelector("#nav_cart_item_count");
+    const cart_icon_count_copy = document.querySelector("#nav_cart_item_count_mobile");
 
     if(input.value != parseInt(input.value)  || parseInt(input.value) === 0) validate_input_quantity();
 
@@ -91,6 +92,7 @@ function add_to_cart(){
                         btn.firstChild.className = btn_txt_cn_before;
     
                         cart_icon_count.innerHTML = res.items_in_cart;
+                        cart_icon_count_copy.innerHTML = res.items_in_cart;
                         window.localStorage.setItem("cart_count", res.items_in_cart)
     
                         btn.addEventListener("click", add_to_cart);

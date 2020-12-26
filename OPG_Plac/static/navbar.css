@@ -489,3 +489,19 @@
 
     color: #f2360b;
 }
+
+@media(max-width: 500px){
+    #nav_homepage_anchor_icon{
+        display: none;
+    }
+
+    #mobile_cart{
+        transform: translateX(12px);
+    }
+}
+
+@media(min-width: 500px){
+    #mobile_cart{
+        display: none;  
+    }
+}
