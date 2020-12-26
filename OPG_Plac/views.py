@@ -84,7 +84,7 @@ def view_blog_article(request):
             "message": "Maybe try again or check spelling ?"
         })
 
-    author = article.author.username
+    author = article.author.email
     category = article.category
     title = article.title
     content = article.Article_content
@@ -377,3 +377,4 @@ def view_order_info(request):
     order_info.update(price_summary)
 
     return render(request, "components/order_history/order_info.html", order_info)
+
