@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 import math
 
 from OPG_Plac import models
-from OPG_Plac.serializers import *
+from OPG_Plac import serializers
 
 # views
 
@@ -59,7 +59,7 @@ def view_blog_previews(request):
     except EmptyPage:
         articles = []
 
-    previews = serialize_previews(articles)
+    previews = serializers.serialize_previews(articles)
     print(category_filter)
 
     return render(request, "components/blog/blog.html", {
@@ -152,7 +152,7 @@ def view_proizvodi(request):
         products_page = []
 
     # Serialize
-    products_page = serialize_products(products_page)
+    products_page = serializers.serialize_products(products_page)
 
     return render(request, "components/products/products.html", {
         "categories": categories_dict,
@@ -220,7 +220,7 @@ def view_cart(request):
 
     cart_count = sum([item.quantity for item in cart])
 
-    cart = serialize_cart(cart)
+    cart = serializers.serialize_cart(cart)
 
     total = round(float(sum([item["sum"] for item in cart])), 2)
     base_sum = round(total/1.25, 2)
@@ -247,7 +247,7 @@ def view_delivery(request):
         return redirect("/košarica")
 
     try:
-        user_info = serialize_user_info(user.extendeduser)
+        user_info = serializers.serialize_user_info(user.extendeduser)
     except ObjectDoesNotExist:
         user_info = {
             "first_name": user.first_name,
@@ -266,7 +266,7 @@ def view_checkout(request):
     if len(cart) == 0:
         return redirect("/košarica")
 
-    cart = serialize_cart(user.cart.all())
+    cart = serializers.serialize_cart(user.cart.all())
 
     try:
         order = user.orders.get(status=None)
@@ -294,41 +294,11 @@ def view_checkout(request):
         "base_sum": base_sum,
         "vat": vat,
         "shipping_cost": shipping_cost,
-        "notice": order.notice,
         "payment_options": payment_options
     }
 
-    user_info = {
-        "first_name": order.first_name,
-        "last_name": order.last_name,
-        "address": order.address,
-        "place": order.place,
-        "post_code": order.post_code,
-        "phone": order.phone
-    }
-    
-    context.update(user_info)
-
-    delivery_info = {
-        "delivery_first_name": order.delivery_first_name if not order.same_delivery else order.first_name,
-        "delivery_last_name": order.delivery_last_name if not order.same_delivery else order.last_name,
-        "delivery_address": order.delivery_address if not order.same_delivery else order.address,
-        "delivery_place": order.delivery_place if not order.same_delivery else order.place,
-        "delivery_post_code": order.delivery_post_code if not order.same_delivery else order.post_code,
-        "delivery_phone": order.delivery_phone if not order.same_delivery else order.phone
-    }
-
-    context.update(delivery_info)
-
-    company_info = {
-        "need_R1": order.need_R1,
-        "company_name": order.company_name,
-        "company_address": order.company_address,
-        "company_post_code": order.company_post_code,
-        "OIB": order.OIB
-    }
-
-    context.update(company_info)
+    # provide order_information to context
+    context.update(serializers.serialize_order_info(order))
 
     return render(request, "components/cart/checkout.html", context)
 
@@ -384,47 +354,13 @@ def view_order_info(request):
 
     order_info = {
         "header": f"Narudžba br.{order.id}",
-        "id": order.id,
-        "need_R1": order.need_R1,
         "created_on": order.history.all()[0].timestamp.strftime('%d.%m.%Y.'),
         "payment_type": order.paymentOption.descriptive_name
     }
 
-    user_info = {    # TODO Figure out company place info, maybe abstract info acquisition
-        "first_name": order.first_name if not order.need_R1 else order.company_name,
-        "last_name": order.last_name if not order.need_R1 else "",
-        "address": order.last_name if not order.need_R1 else order.company_address,
-        "place": order.place if not order.need_R1 else order.place,
-        "post_code": order.post_code if not order.need_R1 else order.company_post_code,
-        "phone": order.phone if not order.need_R1 else "",
-        "OIB": order.OIB
-    }
-
-    order_info.update(user_info)
-
-    delivery_info = {
-        "delivery_first_name": order.delivery_first_name if not order.same_delivery else order.first_name,
-        "delivery_last_name": order.delivery_last_name if not order.same_delivery else order.last_name,
-        "delivery_address": order.delivery_address if not order.same_delivery else order.address,
-        "delivery_place": order.delivery_place if not order.same_delivery else order.place,
-        "delivery_post_code": order.delivery_post_code if not order.same_delivery else order.post_code,
-        "delivery_phone": order.delivery_phone if not order.same_delivery else order.phone
-    }
-
-    order_info.update(delivery_info)
+    order_info.update(serializers.serialize_order_info(order))
 
     items_qset = order.items.all()
-    items = []
-    for item in items_qset:
-        items.append({
-            "id": item.product.item_id,
-            "name": item.product.name,
-            "quantity": item.quantity,
-            "price": "{:.2f} Kn".format(item.item_price),
-            "total": "{:.2f} Kn".format(item.item_price * item.quantity)
-        })
-
-    order_info.update({"items": items})
 
     # 20 is shipping price TODO make shipping price a configurable variable
     grand_total = sum([item.item_price * item.quantity for item in items_qset]) + 20

@@ -94,3 +94,51 @@ def serialize_cart(cart_qset):
             item.delete()  # Delete item if quantity is 0
 
     return serialized_cart
+
+
+def serialize_order_info(order):
+    order_info = {
+        "id": order.id,
+        "need_R1": order.need_R1,
+    }
+
+    user_info = {
+        "first_name": order.first_name if not order.need_R1 else order.company_name,
+        "last_name": order.last_name if not order.need_R1 else "",
+        "address": order.address if not order.need_R1 else order.company_address,
+        "place": order.place if not order.need_R1 else order.place,
+        "post_code": order.post_code if not order.need_R1 else order.company_post_code,
+        "phone": order.phone if not order.need_R1 else "",
+        "OIB": order.OIB,
+        "notice": order.notice
+    }
+
+    order_info.update(user_info)
+
+    delivery_info = {
+        "delivery_first_name": order.delivery_first_name if not order.same_delivery else order.first_name,
+        "delivery_last_name": order.delivery_last_name if not order.same_delivery else order.last_name,
+        "delivery_address": order.delivery_address if not order.same_delivery else order.address,
+        "delivery_place": order.delivery_place if not order.same_delivery else order.place,
+        "delivery_post_code": order.delivery_post_code if not order.same_delivery else order.post_code,
+        "delivery_phone": order.delivery_phone if not order.same_delivery else order.phone
+    }
+
+    order_info.update(delivery_info)
+
+    if order.status is not None:
+        items_qset = order.items.all()
+
+        items = []
+        for item in items_qset:
+            items.append({
+                "id": item.product.item_id,
+                "name": item.product.name,
+                "quantity": item.quantity,
+                "price": "{:.2f} Kn".format(item.item_price),
+                "total": "{:.2f} Kn".format(item.item_price * item.quantity)
+            })
+
+        order_info.update({"items": items})
+
+    return order_info

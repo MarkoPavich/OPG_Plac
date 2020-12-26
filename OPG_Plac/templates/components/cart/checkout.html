@@ -71,9 +71,10 @@
                             <ul>
                                 <li>Kupac:</li>
                                 <li>{{first_name}} {{last_name}}</li>
+                                {% if need_R1 %} <li>OIB: {{OIB}}{% endif %}</li>
                                 <li>{{address}}</li>
                                 <li>{{post_code}} {{place}}</li>
-                                <li>tel: {{phone}}</li>
+                                {% if not need_R1 %}<li>tel: {{phone}}</li>{% endif %}
                             </ul>
                         </div>
 
