@@ -94,6 +94,7 @@ function add_to_cart(){
                         window.localStorage.setItem("cart_count", res.items_in_cart)
     
                         btn.addEventListener("click", add_to_cart);
+                        alert_banner_show();
 
                     })
                     break;

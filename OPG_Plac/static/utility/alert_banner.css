@@ -1,18 +1,20 @@
 .alert-banner{  
-	position: absolute;
+	position: fixed;
 
 	right: 0px;
 	top: 90px;
 
 	border-radius: 4px;
-	border-left: 8px solid #ffa502;
+	border-left: 8px solid darkgreen;
 
 	padding: 20px 40px;
-	min-width: 420px;
+	min-width: 370px;
 	
-	background: #ffdb9b;
+	background: lightgreen;
 
 	overflow: hidden;
+
+	z-index: 9999;
 }
 	/* Used subclass targeting to avodid potential conflicts */
 .alert-banner .fa-check-circle{
@@ -20,14 +22,14 @@
 	left: 20px;
 	top: 50%;
 	transform: translateY(-50%);
-	color: #ce8500;
+	color: black;
 	font-size: 30px;
 }
 
 .alert-banner .alert-banner-msg{
 	padding: 0 20px;
 	font-size: 18px;
-	color: #ce8500;
+	color: black;
 }
 
 .alert-banner .alert-dismiss-btn{
@@ -38,25 +40,31 @@
 
 	transform: translateY(-50%);
 
-	background: #ffd080;
+	background: #57e557;
 	padding: 20px 18px;
 }
 
 .alert-banner .alert-dismiss-btn:hover{
-	background: #ffc766;
+	background: #3CB371;
 
 	cursor: pointer;
 }
 
 .alert-banner .alert-dismiss-btn .fa-times{
-	color: #ce8500;
+	color: black;
 	font-size: 22px;
 
 	line-height: 40px;
 }
 
 .alert-banner.alert-show{
-	animation: show_slide 0.7s ease forwards;
+	animation: show_slide 0.6s ease forwards;
+}
+
+@media(max-width: 440px){
+	.alert-banner{
+		min-width: 270px;
+	}
 }
 
 @keyframes show_slide{
@@ -77,6 +85,21 @@
 	}
 }
 
+.alert-banner.alert-goaway{
+	animation: disappear 0.3s ease-out;
+}
+
+@keyframes disappear{
+	0%{
+		transform: translateX(0%)
+	}
+
+	100%{
+		transform: translateX(500px)
+	}
+}
+
 .alert-banner.alert-hide{
 	display: none;
 }
+

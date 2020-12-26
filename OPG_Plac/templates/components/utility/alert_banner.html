@@ -1,8 +1,15 @@
-<div class="alert-banner alert-show">
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'utility/alert_banner.css' %}">
+    <script src="{% static 'utility/alert_banner.js' %}" ></script>
+{% endblock %}
+
+<div id="alert-banner" class="alert-banner alert-hide">
     <span class="fas fa-check-circle"></span>
     <span class="alert-banner-msg">Dodano u košaricu</span>
     <span class="fas fa-check-circle"></span>
-    <span class="alert-dismiss-btn">
+    <span onclick="alert_banner_dismiss()" class="alert-dismiss-btn">
         <span class="fas fa-times"></span>
     </span>
 </div>
