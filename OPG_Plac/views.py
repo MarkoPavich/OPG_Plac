@@ -290,7 +290,7 @@ def view_checkout(request):
 
     context = {
         "cart": cart,
-        "total": total_sum,
+        "total": "{:.2f}".format(total_sum),
         "base_sum": base_sum,
         "vat": vat,
         "shipping_cost": shipping_cost,

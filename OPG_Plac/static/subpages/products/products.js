@@ -82,10 +82,10 @@ function do_pagination(total_pages, current_page, active_filter, active_subfilte
 
     // Handle previous - next buttons
 
-    if(current_page == 1) option_previous.className = "hide";
+    if(current_page === 1) option_previous.className = "hide";
     else option_previous.firstElementChild.setAttribute("href", `${href_slug}${parseInt(current_page) - 1}`);
 
-    if(current_page == total_pages) option_next.className = "hide";
+    if(current_page === total_pages || total_pages === 0) option_next.className = "hide";
     else option_next.firstElementChild.setAttribute("href", `${href_slug}${parseInt(current_page) + 1}`);
 
 }
