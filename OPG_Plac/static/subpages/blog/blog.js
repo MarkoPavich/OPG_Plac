@@ -47,7 +47,6 @@ function do_pagination(total_pages, current_page, active_filter){  // Handles 'n
 
     if(current_page === 1 || total_pages === 0) option_previous.className = "hide";
     else option_previous.firstElementChild.setAttribute("href", `${href_slug}${parseInt(current_page) - 1}`);
-    console.log(current_page, total_pages)
     if(current_page === total_pages || total_pages === 0) option_next.className = "hide";
     else option_next.firstElementChild.setAttribute("href", `${href_slug}${parseInt(current_page) + 1}`);
 }
