@@ -11,7 +11,7 @@
             <div onclick="window.location.href='/proizvodi/filter?category={{category.name}}'" class="main-category-option-container">
 
                 <div class="category-option-img-box">
-                    <img src="{{category.image.url}}" alt="product_img">
+                    <img src="{% if category.image.url != None %}{{category.image.url}}{% else %}{% static 'resources/icons/no-image.png' %}{% endif %}" alt="product_img">
                 </div>
 
                 <div class="category-option-footer">
