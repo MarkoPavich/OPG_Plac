@@ -18,7 +18,9 @@
             <span>OPG_Plac d.o.o.</span>
             <span>Narudža br.{{id}}</span>
         </header>
-        <span class="timestamp-span">Datum narudžbe: <strong>{{created_on}}</strong></span>
+        <div class="timestamp-span-container">
+            <span class="timestamp-span">Datum narudžbe: <strong>{{created_on}}</strong></span>
+        </div>
         <div class="delivery-summay">
 
             <div>
@@ -33,6 +35,7 @@
             </div>
 
             <div>
+                <span></span>
                 <ul>
                     <li>Isporuka:</li>
                     <li>{{delivery_first_name}} {{delivery_last_name}}</li>
@@ -81,6 +84,11 @@
                 <div class="payment-info-header">
                     <span>Model plaćanja: {{payment_type}}</span>
                 </div>
+                {% if payment_reference == "WIRE" %}
+                <div class="payment-barcode-container">
+                    <img src="https://raw.githubusercontent.com/mosquito/pdf417/master/images/1_basic.jpg" alt="payment_barcode">
+                </div>
+                {% endif %}
             </div>
             
             <table class="price-summary-table">

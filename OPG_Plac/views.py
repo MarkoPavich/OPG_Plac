@@ -355,7 +355,8 @@ def view_order_info(request):
     order_info = {
         "header": f"Narudžba br.{order.id}",
         "created_on": order.history.all()[0].timestamp.strftime('%d.%m.%Y.'),
-        "payment_type": order.paymentOption.descriptive_name
+        "payment_type": order.paymentOption.descriptive_name,
+        "payment_reference": order.paymentOption.reference
     }
 
     order_info.update(serializers.serialize_order_info(order))
