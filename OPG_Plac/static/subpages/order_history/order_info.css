@@ -236,6 +236,11 @@
 	margin-top: 10px;
 }
 
+.order_view_main_header{
+	display: flex;
+	justify-content: space-between;
+}
+
 @media(max-width: 460px){
 	.order_view_main_header span:nth-child(1){
 		display: none;
