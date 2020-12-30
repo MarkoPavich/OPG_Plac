@@ -110,3 +110,65 @@
 
 	font-style: italic !important;
 }
+
+@media(max-width: 540px){
+	.modal-signup-form-item{
+		flex-direction: column;
+		width: 90%;
+	}
+
+	.modal-signup-form-item input{
+		width: 100%;
+		height: 30px;
+	}
+
+	.modal-signup-form-container{
+		height: 500px;
+	}
+
+	.modal-signup-form-body{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.modal-signup-form-body form{
+		width: 100%;
+		
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.modal-signup-form-container{
+		width: 100%;
+		max-width: 100%;
+		height: 550px;
+		margin-left: 15px;
+		margin-right: 15px;
+
+	}
+
+	.modal-signup-form-controls-box{
+		height: 80px;
+
+		align-items: center;
+	}
+
+	.modal-signup-buttons-box{
+		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+	}
+	.modal-signup-confirm-btn{
+		height: 40px;
+	}
+
+	.modal-signup-already-registered-not{
+		font-size: 13px;
+	}
+}
