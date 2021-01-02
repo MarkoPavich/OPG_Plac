@@ -35,7 +35,6 @@ def serialize_user_info(extended_user):
 
         user_info.update(company_info)
 
-    print(user_info)
     return user_info
 
 

@@ -274,8 +274,3 @@ class OrderItem(models.Model):
 
 
 
-
-
-
-
-

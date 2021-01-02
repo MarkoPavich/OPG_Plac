@@ -60,7 +60,6 @@ def view_blog_previews(request):
         articles = []
 
     previews = serializers.serialize_previews(articles)
-    print(category_filter)
 
     return render(request, "components/blog/blog.html", {
         "categories": categories,

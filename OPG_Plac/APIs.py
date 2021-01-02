@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.db import IntegrityError
+from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
 from OPG_Plac import models
@@ -338,3 +339,36 @@ def create_order(request):
     order.save()  # Save order
 
     return JsonResponse({"message": "order confirmed and processed"}, status=200)
+
+
+def product_search_results(request):
+    if request.method != "GET":
+        return JsonResponse({"message": "bad_request"}, status=400)
+
+    search_query = request.GET.get("query", "")
+    print(search_query)
+
+    if search_query == "":  # Handle empty query - Avoid hitting db
+        return JsonResponse({"results": []}, status=200)
+
+    results_qset = models.Product.objects.filter(
+        Q(name__icontains=search_query) | Q(item_id=search_query) | Q(brand__name__icontains=search_query)
+    )[:5]
+
+    results = []
+    for product in results_qset:
+        try:
+            image = product.product_image.url
+        except ValueError:
+            image = "/static/resources/icons/no-image.png"
+
+        results.append({
+            "img": image,
+            "name": product.name,
+            "price": "{:.02f}".format(product.price),
+            "seo_url": product.seo_url
+        })
+
+    return JsonResponse({
+        "results": results
+    }, status=200)

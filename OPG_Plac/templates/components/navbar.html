@@ -43,11 +43,16 @@
         </div>
 
         <div id="nav-search-bar" class="hide">
-            <input placeholder="Pretraži proizvode" id="nav_search_bar_input" class="search-bar-input" type="text" name="search_bar_input">
+            <input autocomplete="off" placeholder="Pretraži proizvode" id="nav_search_bar_input" class="search-bar-input" type="text" name="search_bar_input">
 
             <button class="search-icon-button">
                     <img src="{% static 'resources/icons/magnifier_icon.svg' %}" alt="magnifier_icon" height=15 width=15>
             </button>
+
+            <div id="nav-search-bar-search-filters-container" class="nav-search-bar-search-filters-container hide-filters-box">
+
+            </div>
+            
         </div>
 
     </div>

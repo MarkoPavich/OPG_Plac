@@ -136,6 +136,8 @@
 }
 
 .nav-search-bar{
+    position: relative;
+    
     display: inline-flex;
     align-items: center;
     margin-left: 14px;
