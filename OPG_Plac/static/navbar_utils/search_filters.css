@@ -97,3 +97,42 @@
 
 	justify-content: center;
 }
+
+@media(max-width: 740px){
+	.search-result-info-container{
+		flex-direction: column;
+	}
+
+	.search-result-price-container{
+		width: 100%;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		margin-bottom: 10px;
+
+	}
+
+	.search-result-price-container a{
+		font-size: 14px !important;
+	}
+
+	.search-result-info-container > a{
+		font-size: 12px !important;
+		margin-top: 10px;
+	}
+
+	.search-result-info-container{
+		align-items: flex-start;
+	}
+}
+
+@media(max-width: 640px){
+	.search-result-img-container{
+		width: 50px;
+	}
+
+	.search-result-img-container img{
+		max-width: 50px;
+		max-height: 50px;
+	}
+}

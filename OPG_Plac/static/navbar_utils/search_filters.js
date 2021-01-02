@@ -97,7 +97,6 @@ function render_search_results(filters_box, results){
 			            </div>
 		        </div>
 		`
-
 		filters_box.innerHTML = filters_box.innerHTML + result_render;
 	})
 }
