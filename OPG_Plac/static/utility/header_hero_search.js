@@ -7,15 +7,15 @@ function do_search(e, query){
 
 window.addEventListener("DOMContentLoaded", () => {   // Do after DOM loaded
 	// Get elements
-	const nav_search_bar = document.querySelector("#nav_search_bar_input");  
-	const search_filters_box = document.querySelector("#nav-search-bar-search-filters-container");
+	const search_bar = document.querySelector("#search_bar_input");  
+	const search_filters_box = document.querySelector("#search-bar-search-filters-container");
 
-	nav_search_bar.addEventListener("keypress", (e) => do_search(e, nav_search_bar.value))
+	search_bar.addEventListener("keypress", (e) => do_search(e, search_bar.value))
 
 	// Active classnames -- show or hide search results box
 	const classNames = {
-		show: "nav-search-bar-search-filters-container",
-		hide: "nav-search-bar-search-filters-container hide-filters-box"
+		show: "search-bar-search-filters-container",
+		hide: "search-bar-search-filters-container hide-filters-box"
 	}
 
 	let search_delay;  // Used to bind timeOut triggered search_fn
@@ -25,24 +25,24 @@ window.addEventListener("DOMContentLoaded", () => {   // Do after DOM loaded
 		clearTimeout(search_delay); // Make sure not to call req for previous (most probably incomplete) input
 
 		search_delay = setTimeout(() => { 
-			get_search_results(search_filters_box, nav_search_bar.value);
+			get_search_results(search_filters_box, search_bar.value);
 		}, 300)	// Allow some time for user to maybe add to query, before firing req
 	}
 
 	// Listen for searchbar focus
-	nav_search_bar.addEventListener("focus", () => {
+	search_bar.addEventListener("focus", () => {
 		search_filters_box.className = classNames.show; // enable results box
 
-		nav_search_bar.addEventListener("keyup", link_search);  // add keyup listener
+		search_bar.addEventListener("keyup", link_search);  // add keyup listener
 	})
 
 	// listen for loss of focus on input
-	nav_search_bar.addEventListener("blur", () => {
+	search_bar.addEventListener("blur", () => {
 		clearTimeout(search_delay); // prevent further req
 
 		setTimeout(() => {
 			search_filters_box.className = classNames.hide; // Remove results_box
-			nav_search_bar.removeEventListener("keyup", link_search);  // remove input keyup listener - prevent stacking and memory leaks
+			search_bar.removeEventListener("keyup", link_search);  // remove input keyup listener - prevent stacking and memory leaks
 			search_filters_box.innerHTML = ""; // Clear previous results
 		}, 200)  // Allow some time to process click events
 	})

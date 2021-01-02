@@ -45,6 +45,8 @@
 }
 
 .search-box{
+    position: relative;
+
     height: 58px;
     width: 100%;
     background-color: white;
@@ -95,4 +97,27 @@
     font-size: 16px;
     opacity: 0.85;
     font-weight: 200;
+}
+
+/* Search css */
+
+.search-bar-search-filters-container{
+	position: absolute;
+	
+	width: 100%;
+
+	background: white;
+
+	top: 80%;
+
+	border-radius: 5px;
+
+	z-index: 5;
+
+	overflow: hidden;
+
+}
+
+.search-bar-search-filters-container.hide-filters-box{
+	display: none;
 }
