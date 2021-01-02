@@ -17,14 +17,18 @@
     
     <nav class="secondary-nav-location-bar">
         <a href="/proizvodi">Svi Proizvodi</a>
-
-        {% if active_category is not none %}
+        {% if search_query == "%None%" %}
+            {% if active_category is not none %}
+                <span>/</span>
+                <a href="/proizvodi/filter?category={{active_category}}">{{active_category}}</a>
+            {% endif %}
+            {% if active_subcategory is not none %}
             <span>/</span>
-            <a href="/proizvodi/filter?category={{active_category}}">{{active_category}}</a>
-        {% endif %}
-        {% if active_subcategory is not none %}
-        <span>/</span>
-        <span>{{active_subcategory}}</span>
+            <span>{{active_subcategory}}</span>
+            {% endif %}
+        {% else %}
+            <span>/</span>
+            <span>Pretraga: {{search_query}}</span>
         {% endif %}
 
     </nav>
@@ -130,7 +134,7 @@
         <div class="products-units-top-container">
 
             <div class="product-units-container-header">
-                <span>Broj rezultata: {{products|length}}</span>
+                <span>Broj rezultata: {{total_results}}</span>
                 <div>
                     <label for="sort_filter">Sortiraj po: </label>
                     <select name="sort_filter" id="product-results-sort_filter">
@@ -196,7 +200,7 @@
         load_navbar_listeners('noscroll');
 
 
-        do_pagination({{total_pages}}, {{current_page}}, "{{active_category}}", "{{active_subcategory}}")
+        do_pagination({{total_pages}}, {{current_page}}, "{{active_category}}", "{{active_subcategory}}", "{{search_query}}")
         
     </script>
 {% endblock %}

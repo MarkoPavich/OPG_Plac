@@ -48,7 +48,7 @@ function populate_submenu(subcategories_array, elem_id, parent_id, parent_catego
     }
 }
 
-function do_pagination(total_pages, current_page, active_filter, active_subfilter){  // Handles 'next' 'previous' and pagination page_numbers
+function do_pagination(total_pages, current_page, active_filter, active_subfilter, search_query){  // Handles 'next' 'previous' and pagination page_numbers
     const max_page_nums = 6  // Controls the max number of page_num buttons per range
     const page_range = ((Math.ceil(current_page / max_page_nums) - 1) * max_page_nums) + 1;  // Calculates the first element of current page_range
 
@@ -59,9 +59,17 @@ function do_pagination(total_pages, current_page, active_filter, active_subfilte
     let href_slug  // Init request slug variable
 
     // Create appropriate request slug
+    switch(search_query === "%None%"){
+        case false:
+            href_slug = `/proizvodi/filter?searchq=${search_query}&page=`;
+            document.querySelector("#nav_search_bar_input").value = search_query; // Add query to input -- user expirience
+            break;
+        
+        default:
+            if(active_filter === "None") href_slug = "/proizvodi/filter?page=";  // Creates the request slug based on current filters set by user
+            else href_slug = active_subfilter === "None" ? `/proizvodi/filter?category=${active_filter}&page=` : `/proizvodi/filter?category=${active_filter}&subcategory=${active_subfilter}&page=`;
+    }
 
-    if(active_filter === "None") href_slug = "/proizvodi/filter?page=";  // Creates the request slug based on current filters set by user
-    else href_slug = active_subfilter === "None" ? `/proizvodi/filter?category=${active_filter}&page=` : `/proizvodi/filter?category=${active_filter}&subcategory=${active_subfilter}&page=`;
     
 
     // Generate numerated page links

@@ -1,10 +1,17 @@
-/* Handles navbar search_bar result previews */
+/* Handles navbar search_bar search fn and result previews */
 
-window.addEventListener("DOMContentLoaded", () => {   // Listen content loaded
+function do_search(e, query){
+	if(e.key === "Enter") window.location.href = `/proizvodi/filter?searchq=${query}`;
+}
+
+
+window.addEventListener("DOMContentLoaded", () => {   // Do after DOM loaded
 	// Get elements
 	const nav_search_bar = document.querySelector("#nav_search_bar_input");  
 	const search_filters_box = document.querySelector("#nav-search-bar-search-filters-container");
 	const search_bar = document.querySelector("#nav_search_bar_input");
+
+	search_bar.addEventListener("keypress", (e) => do_search(e, search_bar.value))
 
 	// Active classnames -- show or hide search results box
 	const classNames = {
@@ -14,13 +21,13 @@ window.addEventListener("DOMContentLoaded", () => {   // Listen content loaded
 
 	let search_delay;  // Used to bind timeOut triggered search_fn
 
-	// Bound fn that links keyup listener to do_search fns. Makes possible for easy removeListener statement
+	// Bound fn that links keyup listener to search previews fns. Makes possible for easy removeListener statement
 	const link_search = function(){
 		clearTimeout(search_delay); // Make sure not to call req for previous (most probably incomplete) input
 
 		search_delay = setTimeout(() => { 
 			get_search_results(search_filters_box, search_bar.value);
-		}, 500)	// Allow some time for user to maybe add to query, before firing req
+		}, 300)	// Allow some time for user to maybe add to query, before firing req
 	}
 
 	// Listen for searchbar focus

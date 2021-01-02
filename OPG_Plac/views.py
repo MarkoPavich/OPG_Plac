@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 import math
 
 from OPG_Plac import models
@@ -109,6 +110,7 @@ def view_proizvodi(request):
 
     category_filter = request.GET.get("category", None)
     subcategory_filter = request.GET.get("subcategory", None)
+    search_query = request.GET.get("searchq", "%None%")
 
     page_num = request.GET.get("page", 1)
 
@@ -125,23 +127,32 @@ def view_proizvodi(request):
         categories_dict[category.category] = subcategories
 
     # Get products_qset
-    if category_filter is None:
-        products = models.Product.objects.all()
-        subcategory_filter = None  # ensure no active subfilter if main_category filter is None
-
-    else:
-        category_obj = models.ProductCategory.objects.get(category=category_filter)
-
-        if subcategory_filter is not None:
-            subcategory_obj = models.ProductSubCategory.objects.get(subcategory=subcategory_filter)
-
-            products = models.Product.objects.filter(category=category_obj, subcategory=subcategory_obj)
+    if search_query == "%None%":
+        if category_filter is None:
+            products = models.Product.objects.all()
+            subcategory_filter = None  # ensure no active subfilter if main_category filter is None
 
         else:
-            products = models.Product.objects.filter(category=category_obj)
+            category_obj = models.ProductCategory.objects.get(category=category_filter)
+
+            if subcategory_filter is not None:
+                subcategory_obj = models.ProductSubCategory.objects.get(subcategory=subcategory_filter)
+
+                products = models.Product.objects.filter(category=category_obj, subcategory=subcategory_obj)
+
+            else:
+                products = models.Product.objects.filter(category=category_obj)
+    else:  # Handle search
+        products = models.Product.objects.filter(
+            Q(name__icontains=search_query) | Q(item_id__iexact=search_query) |
+            Q(brand__name__icontains=search_query) | Q(category__category__icontains=search_query) |
+            Q(subcategory__subcategory__icontains=search_query)
+
+        )
 
     # Calculate total pages
-    total_pages = math.ceil(len(products) / results_per_page)
+    product_count = products.count()
+    total_pages = math.ceil(product_count / results_per_page)
 
     # Paginate
     try:
@@ -159,7 +170,9 @@ def view_proizvodi(request):
         "active_category": category_filter,
         "active_subcategory": subcategory_filter,
         "total_pages": total_pages,
-        "current_page": page_num
+        "total_results": product_count,
+        "current_page": page_num,
+        "search_query": search_query
     })
 
 

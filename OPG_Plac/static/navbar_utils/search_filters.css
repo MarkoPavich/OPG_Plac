@@ -11,6 +11,8 @@
 
 	z-index: -1;
 
+	overflow: hidden;
+
 }
 
 .nav-search-bar-search-filters-container.hide-filters-box{
@@ -31,6 +33,9 @@
 
 .search-result-container:first-of-type{
 	margin-top: 10px;
+
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
 }
 
 .search-result-container:last-of-type{
@@ -38,7 +43,7 @@
 }
 
 .search-result-container:hover{
-	background-color: #DCDCDC;
+	background-color: #E0E0E0;
 }
 
 .search-result-container a{
