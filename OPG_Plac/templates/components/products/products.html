@@ -1,6 +1,19 @@
 {% extends 'components/site_frame.html' %}
 {% load static %}
 
+{% block title %}
+
+    {% if search_query == "%None%" %}
+
+        {% if active_category is not none %}
+            {% if active_subcategory is not none %}{{active_subcategory}}{% else %}{{active_category}}{% endif %}
+
+        {% else %}Proivodi{% endif %}
+
+    {% else %}Pretraga - {{search_query}}{% endif %}
+
+{% endblock %}
+
 {% block head %}
     <script src="{% static 'navbar.js' %}"></script>
     <script src="{% static 'subpages/products/products.js' %}"></script>
