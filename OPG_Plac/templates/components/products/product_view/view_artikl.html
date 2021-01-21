@@ -19,13 +19,13 @@
 
     <nav class="secondary-nav-location-bar">
         <a href="/proizvodi">Svi Proizvodi</a>
-        <span>/</span>
+        <span class="secondary-nav-items-divider">/</span>
         <a href="/proizvodi/filter?category={{category}}">{{category}}</a>
         {% if subcategory is not none %}
-        <span>/</span>
+        <span class="secondary-nav-items-divider">/</span>
         <a href="/proizvodi/filter?category={{category}}&subcategory={{subcategory}}">{{subcategory}}</a>
         {% endif %}
-        <span>/</span>
+        <span class="secondary-nav-items-divider">/</span>
         <span>{{product_name}}</span>
     </nav>
 

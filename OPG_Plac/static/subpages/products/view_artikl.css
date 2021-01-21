@@ -17,6 +17,22 @@
 	margin-right: 5px;
 }
 
+@media(max-width: 850px){
+	.secondary-nav-location-bar{
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.secondary-nav-items-divider{
+		display: none;
+	}
+
+	.secondary-nav-location-bar > *{
+		margin-bottom: 5px;
+	}
+}
+
 .article-view-top-frame{
 	width: 100%;
 	max-width: 1100px;

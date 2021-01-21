@@ -6,6 +6,8 @@
 
 .secondary-nav-location-bar{
 	margin-top: 80px;
+	margin-left: 15px;
+	margin-right: 15px;
 
 	display: flex;
 	justify-content: center;
@@ -16,6 +18,23 @@
 
 .secondary-nav-location-bar > *{
 	margin-right: 5px;
+}
+
+@media(max-width: 600px){
+	.secondary-nav-location-bar{
+		display: flex;
+		flex-direction: column;
+
+		text-align: center;
+	}
+
+	.secondary-nav-divider{
+		display: none;
+	}
+
+	.secondary-nav-location-bar > *{
+		margin-bottom: 5px;
+	}
 }
 
 .blog-article-header{
