@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, Count
 import math
 
 from OPG_Plac import models
@@ -24,8 +24,28 @@ def index(request):
             "image": category.category_img
         })
 
+    # Get most frequently ordered items
+    top_picks_qset = models.OrderItem.objects \
+        .annotate(count=Count('product')).order_by('-count')
+
+    # Extract five top Product objs
+    top_picks = []
+    i = 0
+    while len(top_picks) < 5 and i < len(top_picks_qset):
+        already_exists = False
+        for product in top_picks:
+            if product == top_picks_qset[i].product:
+                already_exists = True
+        if not already_exists:
+            top_picks.append(top_picks_qset[i].product)
+        i = i + 1
+
+    # Serialize for view
+    top_picks = serializers.serialize_products(top_picks)
+
     return render(request, "index.html", {
-        "categories": categories_list
+        "categories": categories_list,
+        "top_picks": top_picks
     })
 
 

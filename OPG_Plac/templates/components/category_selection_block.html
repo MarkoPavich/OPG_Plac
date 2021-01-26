@@ -30,68 +30,30 @@
             <span>Najpopularnije:</span>
         </div>
 
-        <div class="top-picks-group-container">
+    <div class="top-picks-inner-container">
+            <div class="top-picks-group-container">
 
-            <div class="top-pick-unit-container">
+                {% for product in top_picks %}
+                    <a href="/proizvodi/viewitem/{{product.seo_url}}" class="top-pick-unit-container">
+                        <div class="top-pick-unit-img">
+                            <img src="{{product.image}}" alt="product_image">
+                        </div>
 
-                <div class="top-pick-unit-img">
-                    <img src="{% static 'resources/images/products/Honey-Pie-Recipe-Image-735x735.jpg' %}" alt="product_image">
-                </div>
+                        <div class="top-picks-unit-text-container">
 
-                <div class="top-picks-unit-text-container">
+                            <div class="top-picks-product-name">
+                                <span>{{product.name}}</span>
+                            </div>
 
-                    <div class="top-picks-product-name">
-                        <span>Medena pita s domaćim vrhnjem</span>
-                    </div>
+                            <div class="top-picks-product-description">
+                                <span>{{product.name}}</span>
+                            </div>
 
-                    <div class="top-picks-product-description">
-                        <span>Prirodna domaća pita od vrhnja s karamel preljevom</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="top-pick-unit-container">
-
-                <div class="top-pick-unit-img">
-                    <img src="{% static 'resources/images/products/Honey-Pie-Recipe-Image-735x735.jpg' %}" alt="product_image">
-                </div>
-
-                <div class="top-picks-unit-text-container">
-
-                    <div class="top-picks-product-name">
-                        <span>Medena pita s domaćim vrhnjem</span>
-                    </div>
-
-                    <div class="top-picks-product-description">
-                        <span>Prirodna domaća pita od vrhnja s karamel preljevom</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="top-pick-unit-container">
-
-                <div class="top-pick-unit-img">
-                    <img src="{% static 'resources/images/products/Honey-Pie-Recipe-Image-735x735.jpg' %}" alt="product_image">
-                </div>
-
-                <div class="top-picks-unit-text-container">
-
-                    <div class="top-picks-product-name">
-                        <span>Medena pita s domaćim vrhnjem</span>
-                    </div>
-
-                    <div class="top-picks-product-description">
-                        <span>Prirodna domaća pita od vrhnja s karamel preljevom</span>
-                    </div>
-
-                </div>
+                        </div>
+                    </a>
+                {% endfor %}
 
             </div>
         </div>
     </div>
-
 </div>
