@@ -34,23 +34,28 @@
             <div class="top-picks-group-container">
 
                 {% for product in top_picks %}
-                    <a href="/proizvodi/viewitem/{{product.seo_url}}" class="top-pick-unit-container">
+                    <div onclick='location.href="/proizvodi/viewitem/{{product.seo_url}}"' class="top-pick-unit-container">
                         <div class="top-pick-unit-img">
-                            <img src="{{product.image}}" alt="product_image">
+                            <a href="/proizvodi/viewitem/{{product.seo_url}}">
+                                <img src="{% if product.image != None %}{{product.image}}{% else %}{% static 'resources/icons/no-image.png' %}{% endif %}" 
+                                alt="product_image">
+                            </a>
                         </div>
 
                         <div class="top-picks-unit-text-container">
 
                             <div class="top-picks-product-name">
-                                <span>{{product.name}}</span>
+                                <a href="/proizvodi/viewitem/{{product.seo_url}}">
+                                    <span>{{product.name}}</span>
+                                </a>
                             </div>
 
                             <div class="top-picks-product-description">
-                                <span>{{product.name}}</span>
+                                <span>{{product.short_desc}}</span>
                             </div>
 
                         </div>
-                    </a>
+                    </div>
                 {% endfor %}
 
             </div>

@@ -31,17 +31,23 @@ def index(request):
     # Extract five top Product objs
     top_picks = []
     i = 0
-    while len(top_picks) < 5 and i < len(top_picks_qset):
+    while len(top_picks) < 5 and i < len(top_picks_qset):  # Stop at 5, ensure no overrun
         already_exists = False
-        for product in top_picks:
+        for product in top_picks:  # Get only unique products
             if product == top_picks_qset[i].product:
                 already_exists = True
         if not already_exists:
             top_picks.append(top_picks_qset[i].product)
         i = i + 1
 
-    # Serialize for view
+    # Serialize top_picks for view
     top_picks = serializers.serialize_products(top_picks)
+
+    for serialized_product in top_picks:  # Shorten name and description if required
+        if len(serialized_product["short_desc"]) > 35:
+            serialized_product["short_desc"] = serialized_product["short_desc"][:35] + "..."
+        if len(serialized_product["name"]) > 35:
+            serialized_product["name"] = serialized_product["name"][:35] + "..."
 
     return render(request, "index.html", {
         "categories": categories_list,
@@ -167,7 +173,6 @@ def view_proizvodi(request):
             Q(name__icontains=search_query) | Q(item_id__iexact=search_query) |
             Q(brand__name__icontains=search_query) | Q(category__category__icontains=search_query) |
             Q(subcategory__subcategory__icontains=search_query)
-
         )
 
     # Calculate total pages
