@@ -1,7 +1,7 @@
 /* Handles navbar search_bar search fn and result previews */
 
 function do_search(e, query){
-	if(e.key === "Enter") window.location.href = `/proizvodi/filter?searchq=${query}`;
+	if(e.key === "Enter") window.location.href = `/proizvodi?searchq=${query}`;
 }
 
 

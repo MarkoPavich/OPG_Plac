@@ -68,7 +68,7 @@
         
                             <li class="category-filter-collapsable">
                                 <div id="sidebar-category-option-{{ forloop.counter }}" class="product-category-option-container{% if category == active_category %} product-filter-active submenu-open{% endif %}">
-                                    <a href="/proizvodi/filter?category={{category}}">{{category}}</a>
+                                    <a href="/proizvodi?category={{category}}">{{category}}</a>
         
                                     <svg onclick="open_close_category_submenu({{ forloop.counter }}, true)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                     width="552.611px" height="552.611px" viewBox="0 0 552.611 552.611" style="enable-background:new 0 0 552.611 552.611;"
@@ -118,7 +118,7 @@
 
                     <li class="category-filter-collapsable">
                         <div id="category-option-{{ forloop.counter }}" class="product-category-option-container{% if category == active_category %} product-filter-active submenu-open{% endif %}">
-                            <a href="/proizvodi/filter?category={{category}}">{{category}}</a>
+                            <a href="/proizvodi?category={{category}}">{{category}}</a>
 
                             <svg onclick="open_close_category_submenu({{ forloop.counter }}, false)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                             width="552.611px" height="552.611px" viewBox="0 0 552.611 552.611" style="enable-background:new 0 0 552.611 552.611;"

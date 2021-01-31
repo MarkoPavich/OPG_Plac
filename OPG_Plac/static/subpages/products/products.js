@@ -40,7 +40,7 @@ function populate_submenu(subcategories_array, elem_id, parent_id, parent_catego
             elem.firstElementChild.innerHTML = elem.firstElementChild.innerHTML + `
             
             <li>
-            <a ${className} href="/proizvodi/filter?category=${parent_category}&subcategory=${subcategory}">${subcategory}</a>
+            <a ${className} href="/proizvodi?category=${parent_category}&subcategory=${subcategory}">${subcategory}</a>
             </li>
 
             `
@@ -56,20 +56,11 @@ function do_pagination(total_pages, current_page, active_filter, active_subfilte
     const option_previous = document.querySelector("#pagination-previous");  // Get the 'next and previous' options DOM elements
     const option_next = document.querySelector("#pagination-next");
 
-    let href_slug  // Init request slug variable
+    let page_param = window.location.search.replace(/&?page=\w*&?/, "");  // RegExp page param from location search
+    if(page_param.length > 1) page_param = page_param + "&page=";  // Reformat search slug
+    else page_param = page_param + "page=";
 
-    // Create appropriate request slug
-    switch(search_query === "%None%"){
-        case false:
-            href_slug = `/proizvodi/filter?searchq=${search_query}&page=`;
-            document.querySelector("#nav_search_bar_input").value = search_query; // Add query to input -- user expirience
-            break;
-        
-        default:
-            if(active_filter === "None") href_slug = "/proizvodi/filter?page=";  // Creates the request slug based on current filters set by user
-            else href_slug = active_subfilter === "None" ? `/proizvodi/filter?category=${active_filter}&page=` : `/proizvodi/filter?category=${active_filter}&subcategory=${active_subfilter}&page=`;
-    }
-
+    const href_slug = window.location.pathname + page_param;
     
 
     // Generate numerated page links
