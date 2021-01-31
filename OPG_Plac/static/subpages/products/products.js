@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector("#product-results-sort_filter").addEventListener("change", applySortFilter);
+    selectAppliedSortOption();
+})
 
 function open_close_category_submenu(id, is_sidebar){  // Flips submenu_options classnames - shows or hides the menu
 
@@ -97,10 +101,51 @@ function open_side_filter_menu(){
         sidebar_background.className = "active-close-background";
 }
 
+
 function close_side_filter_menu(){
     const sidebar = document.querySelector("#category-filter-mobile-side-menu-container");
     const sidebar_background = document.querySelector("#sidebar-active-background");
 
     sidebar.className = "category-filter-mobile-side-menu-container";
     sidebar_background.className = "";
+}
+
+
+function applySortFilter(event){
+    const sort_filter = event.target.value;
+
+    let search_slug = window.location.search.replace(/&?sort=\w+&?/, "");  // RegExp remove sort_slug
+    search_slug = search_slug.replace(/&?page=\w+&?/, "");  // RegExp remove page_slug
+
+    // Cleanup and reformat search_slug
+    if(search_slug.length > 1) search_slug = search_slug + `&sort=${sort_filter}`;
+    else{
+        search_slug = search_slug.replace("?", "");
+        search_slug = search_slug + `?sort=${sort_filter}`;
+    }
+
+    location.href = location.pathname + search_slug;
+}
+
+
+function selectAppliedSortOption(){
+    const sort_filter = window.location.search.match(/&?sort=(\w+)&?/);  // RegExp capture active sort filter
+    const dropdown = document.querySelector("#product-results-sort_filter");
+
+    let option_applied = false;  // flow control
+    
+    if(sort_filter){
+        Object.keys(dropdown.options).forEach(key => {
+            if(dropdown.options[key].value === sort_filter[1]){
+                dropdown.options[key].setAttribute("selected", "selected");
+                option_applied = true;
+            } 
+        })
+    }
+
+    if(!option_applied){  // Fallback
+        Object.keys(dropdown.options).forEach(key => {
+            if(dropdown.options[key].value === "name_asc") dropdown.options[key].setAttribute("selected", "selected");
+        })
+    }
 }

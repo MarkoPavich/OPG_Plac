@@ -137,6 +137,19 @@ def view_proizvodi(request):
     category_filter = request.GET.get("category", None)
     subcategory_filter = request.GET.get("subcategory", None)
     search_query = request.GET.get("searchq", "%None%")
+    sort_filter = request.GET.get("sort", None)
+
+    # Define sort filters
+    if sort_filter == "name_asc":
+        sort_filter = "name"
+    elif sort_filter == "name_desc":
+        sort_filter = "-name"
+    elif sort_filter == "price_asc":
+        sort_filter = "price"
+    elif sort_filter == "price_desc":
+        sort_filter = "-price"
+    else:
+        sort_filter = "name"
 
     page_num = request.GET.get("page", 1)
 
@@ -155,7 +168,7 @@ def view_proizvodi(request):
     # Get products_qset
     if search_query == "%None%":
         if category_filter is None:
-            products = models.Product.objects.all()
+            products = models.Product.objects.all().order_by(sort_filter)
             subcategory_filter = None  # ensure no active subfilter if main_category filter is None
 
         else:
