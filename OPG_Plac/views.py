@@ -139,7 +139,7 @@ def view_proizvodi(request):
     search_query = request.GET.get("searchq", "%None%")
     sort_filter = request.GET.get("sort", None)
 
-    # Define sort filters
+    # Map sort filters
     if sort_filter == "name_asc":
         sort_filter = "name"
     elif sort_filter == "name_desc":
@@ -186,7 +186,7 @@ def view_proizvodi(request):
             Q(name__icontains=search_query) | Q(item_id__iexact=search_query) |
             Q(brand__name__icontains=search_query) | Q(category__category__icontains=search_query) |
             Q(subcategory__subcategory__icontains=search_query)
-        )
+        ).order_by(sort_filter)
 
     # Calculate total pages
     product_count = products.count()
