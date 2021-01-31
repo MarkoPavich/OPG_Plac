@@ -188,7 +188,7 @@ def view_proizvodi(request):
             Q(subcategory__subcategory__icontains=search_query)
         )
 
-    products = products.order_by(sort_filter)
+    products = products.order_by(sort_filter)  # apply sort_filter
 
     # Calculate total pages
     product_count = products.count()

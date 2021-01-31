@@ -8,7 +8,7 @@
 
         {% for category in categories %}
 
-            <div onclick="window.location.href='/proizvodi/filter?category={{category.name}}'" class="main-category-option-container">
+            <div onclick="window.location.href='/proizvodi?category={{category.name}}'" class="main-category-option-container">
 
                 <div class="category-option-img-box">
                     <img src="{% if category.image.url != None %}{{category.image.url}}{% else %}{% static 'resources/icons/no-image.png' %}{% endif %}" alt="product_img">
