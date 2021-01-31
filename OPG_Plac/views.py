@@ -168,7 +168,7 @@ def view_proizvodi(request):
     # Get products_qset
     if search_query == "%None%":
         if category_filter is None:
-            products = models.Product.objects.all().order_by(sort_filter)
+            products = models.Product.objects.all()
             subcategory_filter = None  # ensure no active subfilter if main_category filter is None
 
         else:
@@ -186,7 +186,9 @@ def view_proizvodi(request):
             Q(name__icontains=search_query) | Q(item_id__iexact=search_query) |
             Q(brand__name__icontains=search_query) | Q(category__category__icontains=search_query) |
             Q(subcategory__subcategory__icontains=search_query)
-        ).order_by(sort_filter)
+        )
+
+    products = products.order_by(sort_filter)
 
     # Calculate total pages
     product_count = products.count()
