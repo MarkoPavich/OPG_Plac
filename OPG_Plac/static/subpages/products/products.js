@@ -60,7 +60,9 @@ function do_pagination(total_pages, current_page, active_filter, active_subfilte
     const option_previous = document.querySelector("#pagination-previous");  // Get the 'next and previous' options DOM elements
     const option_next = document.querySelector("#pagination-next");
 
-    let page_param = window.location.search.replace(/&?page=\w*&?/, "");  // RegExp page param from location search
+    let page_param = window.location.search.replace(/[&\?]page=\w*&?/, "");  // RegExp page param from location search
+    if(page_param[0] !== "?") page_param = "?" + page_param; // Add '?' to the beginning of the slug if regex removed it 
+
     if(page_param.length > 1) page_param = page_param + "&page=";  // Reformat search slug
     else page_param = page_param + "page=";
 
@@ -114,8 +116,10 @@ function close_side_filter_menu(){
 function applySortFilter(event){
     const sort_filter = event.target.value;
 
-    let search_slug = window.location.search.replace(/&?sort=\w+&?/, "");  // RegExp remove sort_slug
-    search_slug = search_slug.replace(/&?page=\w+&?/, "");  // RegExp remove page_slug
+    let search_slug = window.location.search.replace(/[&\?]sort=\w+&?/, "");  // RegExp remove sort_slug
+    search_slug = search_slug.replace(/[&\?]?page=\w+&?/, "");  // RegExp remove page_slug
+
+    console.log(search_slug)
 
     // Cleanup and reformat search_slug
     if(search_slug.length > 1) search_slug = search_slug + `&sort=${sort_filter}`;
@@ -124,12 +128,14 @@ function applySortFilter(event){
         search_slug = search_slug + `?sort=${sort_filter}`;
     }
 
+    if(search_slug[0] !== "?") search_slug = "?" + search_slug;
+
     location.href = location.pathname + search_slug;
 }
 
 
 function selectAppliedSortOption(){
-    const sort_filter = window.location.search.match(/&?sort=(\w+)&?/);  // RegExp capture active sort filter
+    const sort_filter = window.location.search.match(/[&\?]sort=(\w+)&?/);  // RegExp capture active sort filter
     const dropdown = document.querySelector("#product-results-sort_filter");
 
     let option_applied = false;  // flow control
